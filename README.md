@@ -37,7 +37,31 @@ The home page whilst a user is logged in, will display the library of public rec
 ## UX - User Experience
 
 ### User stories
-#### 
+#### New Visitor
+- Upon reaching the website I want to understand what the site does
+- I want to see some content before registering
+- I want to easily navigate the site to register or find social media links
+- I want to easily sign up and start using the site
+
+#### Registered User
+- I want to login and logout easily
+- I want to be able to delete my account
+- I want to be able to reset my password should I forget it
+- I want to be able to create/edit/delete my recipes
+- I want to be able to create/edit/delete my comments on recipes
+- I want to be able to create/edit/delete my rating on recipes
+- I want to be able to add and remove a recipes from my favourites
+- I want to be able to review comments and ratings from other user on my recipes
+- I want to be able to easily copy an existing recipe to make my own tweaks to it
+- I want to be able to submit new food items for approval should they not exist in the database
+
+#### All Users
+- I want to be able to easily navigate the site regardless of display size
+- I want to get feedback on actions taken on the website
+- I want to be able to contact the site admin
+- I want to see recipe details when I click on it
+- I want to be advised if a page I navigated to no longer exists and easily return to the site
+
 
 <!-- ### Flowchart
 To plan and illustrate how the game will run, I have generated this flowchart.
