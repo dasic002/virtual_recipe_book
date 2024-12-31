@@ -27,6 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-dasic002-virtualrecipeb-8r0waajl78a.ws.codeinstitute-ide.net',
+    '.herokuapp.com',
 ]
 
 
