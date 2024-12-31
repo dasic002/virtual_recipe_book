@@ -73,7 +73,7 @@ class Comment(models.Model):
         related_name="commenter"
     )
     body = models.TextField()
-    approved = models.BooleanField(default=False)
+    approved = models.IntegerField(choices=STATUS, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -81,3 +81,35 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+
+
+class Rating(models.Model):
+    """
+    Stores a single Recipe rating entry related to 
+    :model:`recipe_book.Recipe`.
+    :model:`auth.User`.
+    """
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE,
+        related_name="ratings"
+    )
+    score = models.IntegerField(
+        default=0,
+        choices=((i,i) for i in range(1, 6))
+    )
+    review = models.CharField(max_length=250, blank=True)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="reviewer"
+    )
+    approved = models.IntegerField(choices=STATUS, default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
+    
+    def __str__(self):
+        return f"{self.recipe.title} - rated by {self.author}"
