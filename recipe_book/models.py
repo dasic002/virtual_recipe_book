@@ -113,3 +113,27 @@ class Rating(models.Model):
     
     def __str__(self):
         return f"{self.recipe.title} - rated by {self.author}"
+
+
+class Favourite(models.Model):
+    """
+    Stores a single saved Recipe entry for the given user related to 
+    :model:`recipe_book.Recipe`.
+    :model:`auth.User`.
+    """
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE,
+        related_name="saved_recipe"
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="collector"
+    )
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-added_on"]
+    
+    def __str__(self):
+        return f"{self.recipe.title} - saved by {self.author}"
