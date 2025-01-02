@@ -124,12 +124,12 @@ class Favourite(models.Model):
     """
     recipe = models.ForeignKey(
         Recipe, on_delete=models.CASCADE,
-        related_name="saved_recipe"
+        related_name="saved_by"
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="collector"
+        related_name="saved_recipes"
     )
     added_on = models.DateTimeField(auto_now_add=True)
 
@@ -168,7 +168,7 @@ class Ingredient(models.Model):
 
     recipe = models.ForeignKey(
         Recipe, on_delete=models.CASCADE,
-        related_name="recipe_used_in"
+        related_name="ingredients_needed"
     )
     food_item = models.CharField()
     quantity = models.DecimalField(max_digits=5, decimal_places=2)
