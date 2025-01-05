@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-# from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import loader
 # from django.views import generic
 from .models import Recipe
@@ -16,7 +16,7 @@ from .models import Recipe
 def RecipeLibrary(request):
     recipe_list = Recipe.objects.filter(approved=2)
     sample_list = Recipe.objects.filter(approved=2).filter(author=1)
-    template = loader.get_template('index.html')
+    template = loader.get_template('recipe_book/index.html')
 
     paginator = Paginator(recipe_list, 6)
     page = request.GET.get('page')
@@ -29,3 +29,27 @@ def RecipeLibrary(request):
     }
     
     return HttpResponse(template.render(context, request))
+
+
+def recipe_detail(request, slug):
+    """
+    Display an individual :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+
+    **Template:**
+
+    :template:`recipe_book/recipe_detail.html`
+    """
+
+    queryset = Recipe.objects.all()
+    recipe = get_object_or_404(queryset, slug=slug)
+
+    return render(
+        request,
+        "recipe_book/recipe_detail.html",
+        {"recipe": recipe},
+    )

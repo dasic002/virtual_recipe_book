@@ -25,10 +25,10 @@
 
 </head>
 
-<body class="d-flex flex-column h-100 main-bg">
+<body class="d-flex flex-column h-100">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-dark dark-bg">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">chefs on the net</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -43,14 +43,14 @@
                     </li>
 
                 </ul>
-                <span class="navbar-text text-muted">
+                <span class="text-muted">
                     for the modern cooks out there!
                 </span>
             </div>
         </div>
     </nav>
 
-    <main class="flex-shrink-0 main-bg">
+    <main class="flex-shrink-0">
 
         {% block content %}
         <!-- Content Goes here -->
