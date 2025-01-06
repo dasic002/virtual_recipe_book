@@ -124,12 +124,12 @@ class Favourite(models.Model):
     """
     recipe = models.ForeignKey(
         Recipe, on_delete=models.CASCADE,
-        related_name="saved_by"
+        related_name="saves"
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="saved_recipes"
+        related_name="collector"
     )
     added_on = models.DateTimeField(auto_now_add=True)
 

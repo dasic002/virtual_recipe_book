@@ -5,13 +5,23 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-12 col-md-8 col-lg-6 masthead-image">
+                <div class="favourited">
+                    {% if user == faved.0.author %}
+                    <button class="btn btn-save"><i class="fa-solid fa-heart"></i></button>
+                    {% else %}
+                    <button class="btn btn-save"><i class="fa-regular fa-heart"></i></button>
+                    {% endif %}
+                </div>
+                <div class="rating">
+                    <p>{{ score|default:" - " }}&nbsp;<i class="fa-solid fa-star"></i></p>
+                </div>
                 <img src="{% static 'images/placeholder.png' %}" class="scale" alt="placeholder">
             </div>
             <div class="col-12 col-md-4 col-lg-6 masthead-text dark-bg">
                 <!-- Recipe title goes in these h1 tags -->
                 <h1 class="recipe-title">{{ recipe.title }}</h1>
                 <!-- Recipe author goes before the | the recipe's created date goes after -->
-                <p class="recipe-subtitle text-muted">{{ recipe.author }} | {{ recipe.created_on }}</p>
+                <p class="recipe-subtitle">{{ recipe.author }} | {{ recipe.created_on }}</p>
             </div>
         </div>
     </div>

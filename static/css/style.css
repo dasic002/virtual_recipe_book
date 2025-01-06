@@ -2,6 +2,7 @@ body {
     background: rgb(2, 0, 36);
     background: linear-gradient(105deg, rgb(39 10 25) 0%, rgba(2, 0, 36, 1) 50%, rgb(0 40 49) 100%);
     color: whitesmoke;
+    background-attachment: fixed;
 }
 
 .brand {
@@ -51,6 +52,17 @@ body {
 .scale {
     width: 100%;
     height: auto;
+}
+
+.favourited {
+    position: absolute;
+    padding: 1rem;
+}
+
+.rating {
+    position: absolute;
+    padding: 1rem;
+    right: 0;
 }
 
 .author {
@@ -138,10 +150,11 @@ body {
     text-decoration: underline;
 }
 
-.btn-like {
-    color: #E84610;
+.btn-save {
+    color: inherit;
     border: none;
     background: transparent;
+    padding: 0;
 }
 
 .btn-delete {
@@ -149,8 +162,8 @@ body {
     background: #E84610;
 }
 
-.btn-like:hover,
-.btn-like:active {
+.btn-save:hover,
+.btn-save:active {
     color: #E84610;
     background: transparent;
     border: none;
