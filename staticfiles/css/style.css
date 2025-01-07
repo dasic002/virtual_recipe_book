@@ -5,6 +5,19 @@ body {
     background-attachment: fixed;
 }
 
+summary {
+    padding: 0.5em;
+    list-style-type: 'Expand ';
+}
+
+details[open]>summary {
+    list-style-type: 'Collapse ';
+}
+
+details[open] summary {
+    margin-bottom: 0.5em;
+}
+
 .brand {
     font-family: Lato, sans-serif;
     font-size: 1.4rem;
@@ -133,14 +146,17 @@ body {
 
 .btn-signup,
 .btn-edit {
-    background-color: #188181;
-    color: #fff;
+    background-color: transparent;
+    color: #01ebfe;
+    border: 1px solid #01ebfe;
 }
 
 .btn-signup:hover,
-.btn-signup:active {
-    background-color: #fff;
-    color: #23BBBB;
+.btn-signup:active,
+.btn-edit:hover {
+    background-color: #01ebfe;
+    color: #fff;
+    border: 1px solid transparent;
 }
 
 .link {
@@ -162,8 +178,9 @@ body {
 }
 
 .btn-delete {
-    color: #fff;
-    background: #E84610;
+    color: #F53FA0;
+    background: transparent;
+    border: 1px solid #F53FA0;
 }
 
 .btn-save:hover,
@@ -171,6 +188,16 @@ body {
     color: #E84610;
     background: transparent;
     border: none;
+}
+
+.btn-delete:hover {
+    color: #fff;
+    background: #F53FA0;
+    border: 1px solid transparent;
+}
+
+.comments .btn {
+    margin-right: 0.5rem;
 }
 
 .faded {

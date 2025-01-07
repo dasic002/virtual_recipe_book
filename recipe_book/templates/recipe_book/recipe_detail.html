@@ -52,8 +52,102 @@
                 </tr>
                 {% endfor %}
             </table>
-            <p class="card-text">
-            </p>
+        </div>
+    </div>
+</div>
+<!-- Recipes reviews and comments -->
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-12 card">
+            <!-- Recipe reviews -->
+            <h3 class="recipe-subtitle">Ratings</h3>
+            <div class="text-center {% if user.is_anonymous %}dark-bg {% else %}pt-0 {% endif %}p-3">
+                {% if user.is_anonymous %}
+                <p><a href="#">Log in</a> or Sign Up to add a review</p>
+                <button type="button" class="btn btn-lg btn--cta btn-signup" data-toggle="modal"
+                    data-target="#signUpModal">Sign Up</button>
+                {% else %}
+                <p class="card-text">Your review:</p>
+                {% with n='*****' %}
+                {% for star in n %}
+                {% if forloop.counter <= user_rating.score %} <button class="btn btn-save"><i
+                        class="fa-solid fa-star"></i></button>
+                    {% else %}
+                    <button class="btn btn-save"><i class="fa-regular fa-star"></i></button>
+                    {% endif %}
+                    {% endfor %}
+                    {% endwith %}
+                    {% endif %}
+                    <p class="card-text">{{ user_rating.review }}</p>
+            </div>
+            {% if ratings|length != 0 %}
+            <details>
+                <summary>for other user's reviews</summary>
+                <table class="table table-dark table-striped">
+                    {% for line in ratings %}
+                    {% if line.author != user %}
+                    <tr>
+                        <td class="card-text">{{ line.author }}</td>
+                        <td class="card-text">
+                            {% with n='*****' %}
+                            {% for star in n %}
+                            {% if forloop.counter <= line.score %} <span><i class="fa-solid fa-star"></i></span>
+                                {% else %}
+                                <span><i class="fa-regular fa-star"></i></span>
+                                {% endif %}
+                                {% endfor %}
+                                {% endwith %}
+                        </td>
+                        <td class="card-text">{{ line.review }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </details>
+            {% endif %}
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12 card">
+                <!-- The recipe comments. -->
+                <h3 class="recipe-subtitle">Comments</h3>
+                <div class="card-body">
+                    {% for comment in comments %}
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="p-2 comments
+                    {% if not comment.approved and comment.author == user %}
+                    faded
+                    {% elif not comment.approved %} d-none{% endif %}">
+                            <p class="font-weight-bold">
+                                {{ comment.author }}
+                                <span class="font-weight-normal">
+                                    {{ comment.created_on }}
+                                </span> wrote:
+                            </p>
+                            <div id="comment{{ comment.id }}">
+                                {{ comment.body | linebreaks }}
+                                {% if user.is_authenticated and comment.author == user %}
+                                <span>
+                                    <button class="btn btn-edit" data-comment_id="{{ comment.id }}"><i
+                                            class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-delete" data-comment_id="{{ comment.id }}"><i
+                                            class="fa-solid fa-trash"></i></button>
+                                </span>
+                                {% endif %}
+                            </div>
+                            {% if not comment.approved and comment.author == user %}
+                            <p class="approval">
+                                This comment is awaiting approval
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Our for loop ends here -->
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

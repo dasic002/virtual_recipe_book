@@ -41,9 +41,18 @@ def recipe_detail(request, slug):
     ``recipe``
         An instance of :model:`recipe_book.Recipe`.
 
-    ``rating``
-        A set of instances related to current recipe from :model:`recipe_book.Rating`.
+    ``ratings``
+        A set of instances related to current recipe from
+        :model:`recipe_book.Rating`.
     
+    ``user_rating``
+        First instance of request.user.id and related recipe from
+        :model:`recipe_book.Rating`.
+    
+    ``comments``
+        A set of instances related to current Recipe from 
+        :model:`recipe_book.Comment`.
+
     ``faved``
         First instance of request.user.id and related recipe from :model:`recipe_book.Favourite`.  
 
@@ -53,7 +62,9 @@ def recipe_detail(request, slug):
     """  
     queryset = Recipe.objects.all()
     recipe = get_object_or_404(queryset, slug=slug)
-    rating = recipe.ratings.filter(approved=2)
+    ratings = recipe.ratings.filter(approved=2)
+    user_rating = ratings.filter(author=request.user.id).first()
+    comments = recipe.comments.all().order_by("-created_on")
     faved = recipe.saves.filter(author=request.user.id).first()
 
 
@@ -62,7 +73,9 @@ def recipe_detail(request, slug):
         "recipe_book/recipe_detail.html",
         {
             "recipe": recipe,
-            "rating": rating,
+            "ratings": ratings,
+            "user_rating": user_rating,
+            "comments": comments,
             "faved": faved,
         },
     )
