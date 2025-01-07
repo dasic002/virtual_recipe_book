@@ -6,14 +6,14 @@
         <div class="row g-0">
             <div class="col-12 col-md-8 col-lg-6 masthead-image">
                 <div class="favourited">
-                    {% if user == faved.0.author %}
+                    {% if user == faved.author %}
                     <button class="btn btn-save"><i class="fa-solid fa-heart"></i></button>
                     {% else %}
                     <button class="btn btn-save"><i class="fa-regular fa-heart"></i></button>
                     {% endif %}
                 </div>
                 <div class="rating">
-                    <p>{{ score|default:" - " }}&nbsp;<i class="fa-solid fa-star"></i></p>
+                    <p>{{ recipe.average_score|default:" - " }}&nbsp;<i class="fa-solid fa-star"></i></p>
                 </div>
                 <img src="{% static 'images/placeholder.png' %}" class="scale" alt="placeholder">
             </div>
@@ -29,14 +29,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
-            <div class="card-body">
-                <!-- The recipe content goes inside the card-text. -->
-                <!-- Use the | safe filter inside the template tags -->
-                <p class="card-text">
-                    {{ recipe.method }}
-                </p>
-            </div>
+        <div class="col-12 col-sm-6 col-md-4 card">
+            <!-- The recipe ingredients goes inside the table. -->
+            <h2 class="recipe-subtitle">Ingredients</h2>
+            <table class="table table-dark table-striped">
+                {% for item in recipe.ingredients %}
+                <tr>
+                    <td>{{ item.food_item }}</td>
+                    <td>{{ item.quantity }}&nbsp;{{ item.unit }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col card">
+            <!-- The recipe steps goes inside the table. -->
+            <h2 class="recipe-subtitle">Steps</h2>
+            <table class="table table-dark">
+                {% for item in recipe.steps %}
+                <tr>
+                    <td>{{ item.0 }}</td>
+                    <td>{{ item.1 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <p class="card-text">
+            </p>
         </div>
     </div>
 </div>

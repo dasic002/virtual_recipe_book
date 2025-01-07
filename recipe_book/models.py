@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+import statistics
 
 LIST_TYPE = (
     (0, "DRAFT"),
@@ -54,6 +55,29 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+    
+    @property
+    def average_score(self):
+        list_score = self.ratings.values_list('score', flat=True)
+        
+        if len(list_score) > 0:
+            list_score = round(statistics.mean(list_score), 1)
+        else:
+            list_score = None
+
+        return list_score
+    
+    @property
+    def ingredients(self):
+        list_ingredients = self.ingredients_needed.all()
+        for line in list_ingredients:
+            line.quantity = line.quantity.normalize()
+            line.unit = line.Unit.__call__(line.unit).label
+        return list_ingredients
+    
+    @property
+    def steps(self):
+        return self.method.items()
 
 
 class Comment(models.Model):
@@ -178,8 +202,5 @@ class Ingredient(models.Model):
     )
 
     def __str__(self):
-        unit_str = ""
-        for x in self.Unit:
-            if self.unit == x:
-                unit_str = x.label
-        return f"{self.quantity}{unit_str} {self.food_item} used in {self.recipe.title}"
+        self.unit = self.Unit.__call__(self.unit)
+        return f"{self.quantity}{self.unit.label} {self.food_item} used in {self.recipe.title}"

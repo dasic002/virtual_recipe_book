@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 # from django.views import generic
 from .models import Recipe, Comment, Rating, Favourite, Ingredient
-import statistics
+import enum
 
 
 # Create your views here.
@@ -41,31 +41,21 @@ def recipe_detail(request, slug):
     ``recipe``
         An instance of :model:`recipe_book.Recipe`.
 
+    ``rating``
+        A set of instances related to current recipe from :model:`recipe_book.Rating`.
+    
+    ``faved``
+        First instance of request.user.id and related recipe from :model:`recipe_book.Favourite`.  
+
     **Template:**
 
     :template:`recipe_book/recipe_detail.html`
-    """
-
-    def average_score(data):
-        list_score = []
-        for x in data:
-            list_score.append(x.score)
-        
-        if len(list_score) > 0:
-            list_score = statistics.mean(list_score)
-        else:
-            list_score = None
-
-        return list_score
-    
-
+    """  
     queryset = Recipe.objects.all()
     recipe = get_object_or_404(queryset, slug=slug)
     rating = recipe.ratings.filter(approved=2)
-    score = average_score(rating)
-    faved = recipe.saves.filter(author=request.user.id)
-    # faved = recipe.saves.values_list('author', flat=True)
-    
+    faved = recipe.saves.filter(author=request.user.id).first()
+
 
     return render(
         request,
@@ -73,7 +63,6 @@ def recipe_detail(request, slug):
         {
             "recipe": recipe,
             "rating": rating,
-            "score": score,
             "faved": faved,
         },
     )
