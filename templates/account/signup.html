@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mt-3 offset-md-2">
+      <h3>{% trans "Sign Up" %}</h3>
+      <p>{% blocktrans %}Welcome! Let's get cooking!{% endblocktrans %}</p>
+      <form class="signup" id="signup_form" method="POST" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {% for item in form %}
+        {% if forloop.counter0 == 2 %}
+        <div class="d-block d-md-none">
+        <details>
+          <summary class="link">Password guidelines</summary>
+          <span class="helptext">
+            <ul>
+              <li>Your password can’t be too similar to your other personal information.</li>
+              <li>Your password must contain at least 8 characters.</li>
+              <li>Your password can’t be a commonly used password.</li>
+              <li>Your password can’t be entirely numeric.</li>
+            </ul>
+          </span>
+        </details>
+      </div>
+        {% endif %}
+        <p>{{ item.label }}
+          <br>
+          {{ item }}
+        </p>
+        {% endfor %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="btn btn-signup right" type="submit">{% trans "Sign Up" %}</button>
+      </form>
+    </div>
+    <div class="d-none d-md-block mt-3 vl">
+    </div>
+    <div class="col-md-4 mt-3 position-relative sideline">
+      <div class="d-md-none">
+        <p>Already have an account?</p>
+        <p>Then please <a href="{{ login_url }}" class="link">sign in</a>.</p>
+      </div>
+      <p>Sign up to gain access to shared recipes, compile your own, comment and more.</p>
+      <div class="d-none d-md-block">
+        <details>
+          <summary class="link">Password guidelines</summary>
+          <span class="helptext">
+            <ul>
+              <li>Your password can’t be too similar to your other personal information.</li>
+              <li>Your password must contain at least 8 characters.</li>
+              <li>Your password can’t be a commonly used password.</li>
+              <li>Your password can’t be entirely numeric.</li>
+            </ul>
+          </span>
+        </details>
+      </div>
+      <div class="d-none d-md-block position-absolute bottom-0">
+        <p>Already have an account?</p>
+        <p>Then please <a href="{{ login_url }}" class="link">sign in</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

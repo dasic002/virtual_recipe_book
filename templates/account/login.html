@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- <div class="col-md-4 mt-3 offset-md-2">
+            </div> -->
+        <div class="col-md-4 mt-3 offset-md-2">
+            <h3>{% trans "Sign In" %}</h3>
+            <p>{% blocktrans %}Welcome back Chef!.{% endblocktrans %}</p>
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
+            </form>
+        </div>
+        <div class="d-none d-md-block mt-3 vl">
+
+        </div>
+        <div class="col-md-4 mt-3 position-relative sideline">
+            <div class="d-md-none">
+                <p>No account?</p>
+                <p>Create one <a class="link" href="{{ signup_url }}">here</a>.</p>
+            </div>
+            <p>Sign in to gain access to shared recipes, compile your own, comment and more.</p>
+            <div class="d-none d-md-block position-absolute bottom-0">
+                <p>No account?</p>
+                <p>Create one <a class="link" href="{{ signup_url }}">here</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

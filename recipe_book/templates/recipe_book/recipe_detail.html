@@ -13,7 +13,8 @@
                     {% endif %}
                 </div>
                 <div class="rating">
-                    <p>{{ recipe.average_score|default:" - " }}&nbsp;<i class="fa-solid fa-star"></i></p>
+                    <a href="#ratings" class="btn btn-rate">{{ recipe.average_score|default:" - " }}&nbsp;<i class="fa-solid fa-star"></i></a>
+                    <!-- <p><i class=""></i></p> -->
                 </div>
                 <img src="{% static 'images/placeholder.png' %}" class="scale" alt="placeholder">
             </div>
@@ -59,14 +60,13 @@
 <div class="container">
     <hr>
     <div class="row">
-        <div class="col-12 card">
+        <div class="col-12 card" id="ratings">
             <!-- Recipe reviews -->
             <h3 class="recipe-subtitle">Ratings</h3>
             <div class="text-center {% if user.is_anonymous %}dark-bg {% else %}pt-0 {% endif %}p-3">
                 {% if user.is_anonymous %}
-                <p><a href="#">Log in</a> or Sign Up to add a review</p>
-                <button type="button" class="btn btn-lg btn--cta btn-signup" data-toggle="modal"
-                    data-target="#signUpModal">Sign Up</button>
+                <p><a href="{% url 'account_login' %}" class="link">Log in</a> or Sign Up to add a review</p>
+                <p><a href="{% url 'account_signup' %}" class="btn btn-lg btn--cta btn-signup">Sign Up</a></p>
                 {% else %}
                 <p class="card-text">Your review:</p>
                 {% with n='*****' %}
