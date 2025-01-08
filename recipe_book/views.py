@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
 # from django.views import generic
+from django.contrib import messages
 from .models import Recipe, Comment, Rating, Favourite, Ingredient
+from .forms import CommentForm
 import enum
 
 
@@ -65,8 +67,21 @@ def recipe_detail(request, slug):
     ratings = recipe.ratings.filter(approved=2)
     user_rating = ratings.filter(author=request.user.id).first()
     comments = recipe.comments.all().order_by("-created_on")
+    comment_form = CommentForm()
     faved = recipe.saves.filter(author=request.user.id).first()
 
+        
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.recipe = recipe
+            comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
 
     return render(
         request,
@@ -76,6 +91,7 @@ def recipe_detail(request, slug):
             "ratings": ratings,
             "user_rating": user_rating,
             "comments": comments,
+            "comment_form": comment_form,
             "faved": faved,
         },
     )

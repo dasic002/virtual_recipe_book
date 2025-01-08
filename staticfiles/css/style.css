@@ -71,6 +71,16 @@ input {
     position: relative;
 }
 
+.alert {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.alert-dismissible .btn-close {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
 .image-flash {
     position: absolute;
     bottom: 5%;
