@@ -1,6 +1,5 @@
-from .models import Comment
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Row, Column
+from django.forms import inlineformset_factory, ModelForm, modelformset_factory, Textarea
+from .models import Comment, Recipe, Ingredient
 from django import forms
 
 
@@ -8,15 +7,61 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+        widgets = {
+            "body": Textarea(attrs={
+                "rows": 5,
+                "class": 'dark-bg'}),
+        }
+        
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'POST'
-        self.helper.layout = Layout(
-            Row(Column('body', css_class='form-group col-12')),
+class RecipeForm(forms.ModelForm):
+
+    class Meta:
+        model = Recipe
+        fields = (
+            'title',
+            'description',
+            'prep_time',
+            'cook_time',
+            'servings',
+            'method',
+            'listing_type',
+            'source',
+            'source_url',
         )
-        self.fields['body'].widget.attrs = {
-            'rows': 5,
-            'class': 'dark-bg'
-            }
+        
+
+# RecipeFormset = modelformset_factory(
+#     Recipe,
+#     fields = (
+#             'title',
+#             'description',
+#             'prep_time',
+#             'cook_time',
+#             'servings',
+#             'method',
+#             'listing_type',
+#             'source',
+#             'source_url',
+#         )
+# )
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = (
+            'food_item',
+            'quantity',
+            'unit',
+        )
+
+
+IngredientFormSet = inlineformset_factory(
+    Recipe,
+    Ingredient,
+    form=IngredientForm,
+    min_num=2,
+    extra=1,
+    can_delete=True
+)

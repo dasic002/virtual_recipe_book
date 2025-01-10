@@ -4,9 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 # from django.views import generic
 from django.contrib import messages
-from .models import Recipe, Comment, Rating, Favourite, Ingredient
-from .forms import CommentForm
-import enum
+from .models import Recipe
+from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
 # Create your views here.
@@ -93,5 +92,44 @@ def recipe_detail(request, slug):
             "comments": comments,
             "comment_form": comment_form,
             "faved": faved,
+        },
+    )
+
+
+# @login_required
+def recipe_create(request):
+    recipe_form = RecipeForm()
+    ingredient_form = IngredientFormSet()
+        
+    if request.method == "POST":
+        recipe_form = RecipeForm(data=request.POST)
+        ingredient_form = IngredientFormSet(data=request.POST)
+
+        if recipe_form.is_valid() and ingredient_form.is_valid():
+            recipe = recipe_form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+            ingredients = ingredient_form.save(commit=False)
+            print("recipe", recipe)
+            for ingredient in ingredients:
+                print(ingredient)
+                ingredient.recipe = recipe
+                print(ingredient)
+                ingredient.save()
+
+            
+
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Recipe saved! If you have set the recipe public it will be awaiting approval'
+            )
+
+
+    return render(
+        request,
+        "recipe_book/recipe_editor.html",
+        {
+            "recipe_form": recipe_form,
+            "ingredient_form": ingredient_form,
         },
     )

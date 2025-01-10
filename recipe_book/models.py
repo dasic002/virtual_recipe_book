@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 import statistics
 
@@ -23,7 +24,7 @@ class Recipe(models.Model):
     Stores a single recipe entry related to :model:`auth.User`.
     """
     title = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, null=False, unique=True)
     author = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -33,10 +34,10 @@ class Recipe(models.Model):
     )
     # feature_image =
     description = models.TextField()
-    prep_time = models.PositiveIntegerField()
-    cook_time = models.PositiveIntegerField()
-    servings = models.PositiveIntegerField()
-    method = models.JSONField(null=False)
+    prep_time = models.PositiveIntegerField(default=1)
+    cook_time = models.PositiveIntegerField(default=1)
+    servings = models.PositiveIntegerField(default=1)
+    method = models.JSONField(blank=True, null=True)
     listing_type = models.IntegerField(choices=LIST_TYPE, default=0)
     approved = models.IntegerField(choices=STATUS, default=0)
     origin = models.ForeignKey(
@@ -46,7 +47,8 @@ class Recipe(models.Model):
         null=True,
         related_name="remixes"
     )
-    source_url = models.URLField(max_length=250)
+    source = models.CharField(max_length=250, blank=True)
+    source_url = models.URLField(max_length=250, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -56,6 +58,11 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author}"
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
     @property
     def average_score(self):
         list_score = self.ratings.values_list('score', flat=True)
