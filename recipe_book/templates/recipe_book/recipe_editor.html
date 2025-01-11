@@ -17,9 +17,8 @@
                 <form id="new_recipe_form" method="post" style="margin-top: 1.3em;">
                     {{ ingredient_form.management_data }}
                     {{ recipe_form | crispy }}
-                    <div id="ingredient_form">
+                    <div id="ingredients_form">
                         {{ ingredient_form | crispy }}
-                        <button class="remove-form" id="btn-ingredients_needed-0-delete" type="button">Remove ingredient</button>
                     </div>
                     <div id="ingredient-field-control">
                         <button id="add-form" type="button">Add ingredient</button>
