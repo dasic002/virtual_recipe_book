@@ -42,12 +42,10 @@ function addForm(e) {
 function removeForm(e) {
     // get number of field and set hidden
     console.log(e);
-    // recipeForm[e].hidden = true;
-    recipeForm[e].getElementsByClassName('.checkboxinput')[0].checked = true;
+    recipeForm[e].hidden = true;
 
     // set delete checkbox to true
-
-
+    recipeForm[e].querySelectorAll('.checkboxinput')[0].checked = true;
 }
 
 
@@ -87,5 +85,4 @@ function renderRemBtns() {
 
         counter++;
     }
-
 }
