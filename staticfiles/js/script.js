@@ -9,7 +9,7 @@ let formNum = recipeForm.length - 1;
 
 addBtn.addEventListener('click', addForm);
 
-container.onload = renderRemBtns();
+container.onload = form_onload();
 
 
 function addForm(e) {
@@ -85,4 +85,23 @@ function renderRemBtns() {
 
         counter++;
     }
+}
+
+// iterate through ingredient forms, if empty, render them as deleted
+// makes for a cleaner form that doesn't render fields the user had selected to delete
+function delEmptyIngredients() {
+    for (let [index, form] of recipeForm.entries()){
+        let fields = form.querySelectorAll('input');
+        // let i = Object.keys(recipeForm).indexOf(form);
+        if (fields[0].value == '' && fields[1].value == ''){
+            removeForm(index);
+        }
+    }
+}
+
+
+// compilation for onload call
+function form_onload () {
+    renderRemBtns();
+    delEmptyIngredients();
 }
