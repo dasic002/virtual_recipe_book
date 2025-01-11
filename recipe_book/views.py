@@ -1,10 +1,11 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
 # from django.views import generic
 from django.contrib import messages
-from .models import Recipe
+from django.http import HttpResponseRedirect
+from .models import Recipe, User
 from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
@@ -16,6 +17,23 @@ from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
 def RecipeLibrary(request):
+    """
+    Displays published recipe instances from :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipe_list``
+        A set of instances of published recipes from
+        :model:`recipe_book.Recipe`.
+
+    ``sample_list``
+        A set of instances of published recipes from first author from
+        :model:`recipe_book.Recipe` to use as examples for new visitors.
+
+    **Template:**
+
+    :template:`recipe_book/index.html`
+    """  
     recipe_list = Recipe.objects.filter(approved=2)
     sample_list = Recipe.objects.filter(approved=2).filter(author=1)
     template = loader.get_template('recipe_book/index.html')
@@ -110,20 +128,87 @@ def recipe_create(request):
             recipe.author = request.user
             recipe.save()
             ingredients = ingredient_form.save(commit=False)
-            print("recipe", recipe)
             for ingredient in ingredients:
-                print(ingredient)
                 ingredient.recipe = recipe
-                print(ingredient)
                 ingredient.save()
-
-            
 
             messages.add_message(
                 request, messages.SUCCESS,
                 'Recipe saved! If you have set the recipe public it will be awaiting approval'
             )
 
+
+    return render(
+        request,
+        "recipe_book/recipe_editor.html",
+        {
+            "recipe_form": recipe_form,
+            "ingredient_form": ingredient_form,
+        },
+    )
+
+
+def user_library(request, author):
+    """
+    Display user's collection of recipes :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipes_created``
+        A set of instances related to user as author from
+        :model:`recipe_book.Recipe`.
+
+    **Template:**
+
+    :template:`recipe_book/recipe_detail.html`
+    """  
+    author = get_object_or_404(User, username=author)
+    recipes_created = Recipe.objects.filter(author=author).order_by("-created_on")
+    template = loader.get_template('recipe_book/user_library.html')
+
+    paginator = Paginator(recipes_created, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'recipes_created': recipes_created,
+        'page_obj': page_obj,
+        'author': author,
+    }
+    
+    return HttpResponse(template.render(context, request))
+
+
+    
+# @login_required
+def recipe_edit(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
+    ingredients = recipe.ingredients_needed.first()
+    ingredient_form = IngredientFormSet()
+
+    if request.method == "POST":
+        recipe_form = RecipeForm(data=request.POST, instance=recipe)
+        ingredient_form = IngredientFormSet(data=request.POST, instance=recipe)
+
+        if recipe_form.is_valid() and ingredient_form.is_valid() and request.user == recipe.author:
+            recipe = recipe_form.save(commit=False)
+            recipe.approved = 0
+            recipe.save()
+            ingredients = ingredient_form.save(commit=False)
+            for obj in ingredient_form.deleted_objects:
+                obj.delete()
+            for ingredient in ingredients:
+                ingredient.recipe = recipe
+                ingredient.save()
+
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Recipe updated! If you have set the recipe public it will be awaiting approval'
+            )
+    
+    else:
+        recipe_form = RecipeForm(instance=recipe)
+        ingredient_form = IngredientFormSet(instance=recipe)
 
     return render(
         request,
