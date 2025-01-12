@@ -1,0 +1,39 @@
+{% load static %}
+<div class="col-md-4">
+    <div class="card mb-4">
+        <div class="card-body dark-bg rounded-3">
+            <div class="image-container">
+                {# if "placeholder" in recipe.featured_image.url #}
+                {% if not recipe.featured_image.url %}
+                <img class="card-img-top" src="{% static 'images/placeholder.png' %}" alt="placeholder image">
+                {% else %}
+                <img class="card-img-top" src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}">
+                {% endif %}
+            </div>
+            <div class="card-url pt-1">
+                <a href="{% url 'recipe_detail' recipe.slug %}" class="recipe-link">
+                    <h2 class="card-title">{{ recipe.title }}</h2>
+                    <p>{{ recipe.description }}</p>
+                </a>
+            </div>
+            <hr />
+            <div class="card-text text-muted h6">
+                <p><a href="{% url 'user_library' recipe.author.username %}" class="link">{{ recipe.author }}</a> added
+                    on:</p>
+                <p>{{ recipe.created_on}}</p>
+            </div>
+            {% if user == author %}
+            <div class="recipe-tools">
+                <span>
+                    <a href="{% url 'recipe_edit' recipe.slug %}" class="btn btn-edit"><i
+                            class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="btn btn-delete" recipe_id="{{ recipe.id }}"><i class="fa-solid fa-trash"></i>
+                        <a href="{% url 'recipe_delete' recipe.id %}" disabled id="recipe_{( recipe.id )}"></a>
+                    </button>
+                </span>
+            </div>
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+</div>

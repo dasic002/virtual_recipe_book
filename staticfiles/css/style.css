@@ -71,6 +71,12 @@ input {
     position: relative;
 }
 
+.card-url {
+    height: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .alert {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;

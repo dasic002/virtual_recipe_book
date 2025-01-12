@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
@@ -44,6 +45,7 @@ def RecipeLibrary(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def recipe_detail(request, slug):
     """
     Display an individual :model:`recipe_book.Recipe`.
@@ -107,7 +109,7 @@ def recipe_detail(request, slug):
     )
 
 
-# @login_required
+@login_required
 def recipe_create(request):
     """
     Add new recipe to :model:`recipe_book.Recipe`.
@@ -159,6 +161,7 @@ def recipe_create(request):
     )
 
 
+@login_required
 def user_library(request, author):
     """
     Display user's collection of recipes :model:`recipe_book.Recipe`.
@@ -191,7 +194,7 @@ def user_library(request, author):
 
 
     
-# @login_required
+@login_required
 def recipe_edit(request, slug):
     """
     Edits user's existing recipe from :model:`recipe_book.Recipe`.
@@ -250,6 +253,7 @@ def recipe_edit(request, slug):
     )
 
 
+@login_required
 def recipe_delete(request, id):
     """
     Deletes user's existing recipe from :model:`recipe_book.Recipe`.
@@ -279,6 +283,7 @@ def recipe_delete(request, id):
     return redirect('user_library', username)
 
 
+@login_required
 def comment_edit(request, slug, comment_id):
     """
     view to edit comments
@@ -301,7 +306,7 @@ def comment_edit(request, slug, comment_id):
     return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
-
+@login_required
 def comment_delete(request, slug, comment_id):
     """
     view to delete comment

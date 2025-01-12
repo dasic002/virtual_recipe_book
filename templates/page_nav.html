@@ -1,0 +1,20 @@
+{% load static %}
+<nav class="" aria-label="Page navigation">
+
+    <div class="pagination current justify-content-center">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </div>
+
+    <ul class="pagination justify-content-center step-links">
+        {% if page_obj.has_previous %}
+        <li><a href="?page=1" class="btn btn-signup right m-1">&laquo; FIRST</a></li>
+        <li><a href="?page={{ page_obj.prev_page_number }}" class="btn btn-signup right m-1">PREV</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-signup right m-1"> NEXT</a></li>
+        <li><a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-signup right m-1">LAST &raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
