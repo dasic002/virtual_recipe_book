@@ -11,7 +11,7 @@
                 {% endif %}
             </div>
             <div class="card-url pt-1">
-                <a href="{% url 'recipe_detail' recipe.slug %}" class="recipe-link">
+                <a href="{% if user.is_authenticated %}{% url 'recipe_detail' recipe.slug %}{% else %}{% url 'sample_recipe_detail' recipe.slug %}{% endif %}" class="recipe-link">
                     <h2 class="card-title">{{ recipe.title }}</h2>
                     <p>{{ recipe.description }}</p>
                 </a>

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
@@ -29,7 +30,9 @@ def RecipeLibrary(request):
     :template:`recipe_book/index.html`
     """  
     recipe_list = Recipe.objects.filter(approved=2)
-    sample_list = Recipe.objects.filter(approved=2).filter(author=1)
+
+    sample_list = Recipe.objects.all().filter(approved=2).order_by('created_on')[:3]
+
     template = loader.get_template('recipe_book/index.html')
 
     paginator = Paginator(recipe_list, 6)
@@ -43,6 +46,64 @@ def RecipeLibrary(request):
     }
     
     return HttpResponse(template.render(context, request))
+
+
+def sample_recipe_detail(request, slug):
+    """
+    Display an individual recipe from a sample set of 3 instances of :model:`recipe_book.Recipe`.
+    Otherwise throw error 403 Forbidden
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+
+    ``ratings``
+        A set of instances related to current recipe from
+        :model:`recipe_book.Rating`.
+    
+    ``user_rating``
+        First instance of request.user.id and related recipe from
+        :model:`recipe_book.Rating`.
+    
+    ``comments``
+        A set of instances related to current Recipe from 
+        :model:`recipe_book.Comment`.
+
+    ``faved``
+        First instance of request.user.id and related recipe from :model:`recipe_book.Favourite`.  
+
+    **Template:**
+
+    :template:`recipe_book/recipe_detail.html`
+    """  
+    sample_list = Recipe.objects.all().filter(approved=2).order_by('created_on')[:3]
+    requested_obj = Recipe.objects.filter(slug=slug).first()
+
+    if requested_obj in sample_list:
+        recipe = get_object_or_404(Recipe.objects.all(), slug=slug)
+    else:
+        raise PermissionDenied
+
+    ratings = recipe.ratings.filter(approved=2)
+    user_rating = ratings.filter(author=request.user.id).first()
+    comments = recipe.comments.all().order_by("-created_on")
+    comment_form = CommentForm()
+    faved = recipe.saves.filter(author=request.user.id).first()
+
+
+    return render(
+        request,
+        "recipe_book/recipe_detail.html",
+        {
+            "recipe": recipe,
+            "ratings": ratings,
+            "user_rating": user_rating,
+            "comments": comments,
+            "comment_form": comment_form,
+            "faved": faved,
+        },
+    )
 
 
 @login_required
