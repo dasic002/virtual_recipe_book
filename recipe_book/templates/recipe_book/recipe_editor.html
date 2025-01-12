@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Recipe Editor{% endblock title %}
 
 {% block content %}
-{% load static %}
 {% load crispy_forms_tags %}
 
 <div class="container">
@@ -37,5 +37,5 @@
 {% endblock content %}
 
 {% block extras %}
-<script src="{% static 'js/recipes.js' %}"></script>
+<script src="{% static 'js/recipe-editor.js' %}"></script>
 {% endblock %}

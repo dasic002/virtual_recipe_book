@@ -116,6 +116,22 @@ def recipe_detail(request, slug):
 
 # @login_required
 def recipe_create(request):
+    """
+    Add new recipe to :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipe_form``
+        Form modelled from :model:`recipe_book.Recipe`.
+
+    ``ingredient_form``
+        Formset linked to :model:`recipe_book.Recipe`
+        linked via the foregin key of recipe.
+    
+    **Template:**
+
+    :template:`recipe_book/recipe_editor.html`
+    """  
     recipe_form = RecipeForm()
     ingredient_form = IngredientFormSet()
         
@@ -134,8 +150,10 @@ def recipe_create(request):
 
             messages.add_message(
                 request, messages.SUCCESS,
-                'Recipe saved! If you have set the recipe public it will be awaiting approval'
+                f'Recipe {recipe.title} saved! If you have set the recipe public it will be awaiting approval'
             )
+
+            return redirect('user_library', recipe.author.username)
 
 
     return render(
@@ -182,6 +200,22 @@ def user_library(request, author):
     
 # @login_required
 def recipe_edit(request, slug):
+    """
+    Edits user's existing recipe from :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipe_form``
+        Form modelled from :model:`recipe_book.Recipe`.
+
+    ``ingredient_form``
+        Formset linked to :model:`recipe_book.Recipe`
+        linked via the foregin key of recipe.
+    
+    **Template:**
+
+    :template:`recipe_book/recipe_editor.html`
+    """  
     recipe = Recipe.objects.get(slug=slug)
     ingredients = recipe.ingredients_needed.first()
     ingredient_form = IngredientFormSet()
@@ -203,8 +237,11 @@ def recipe_edit(request, slug):
 
             messages.add_message(
                 request, messages.SUCCESS,
-                'Recipe updated! If you have set the recipe public it will be awaiting approval'
+                f'Recipe {recipe.title} updated! If you have set the recipe public it will be awaiting approval'
             )
+
+            return redirect('user_library', recipe.author.username)
+
     
     else:
         recipe_form = RecipeForm(instance=recipe)
@@ -218,3 +255,49 @@ def recipe_edit(request, slug):
             "ingredient_form": ingredient_form,
         },
     )
+
+
+def recipe_delete(request, id):
+    """
+    Deletes user's existing recipe from :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``recipe_form``
+        Form modelled from :model:`recipe_book.Recipe`.
+
+    ``ingredient_form``
+        Formset linked to :model:`recipe_book.Recipe`
+        linked via the foregin key of recipe.
+    
+    **Template:**
+
+    :template:`recipe_book/user_library.html`
+    """ 
+    recipe = Recipe.objects.get(id=id)
+    username = recipe.author.username
+
+    if recipe.author == request.user:
+        recipe.delete()
+        messages.add_message(request, messages.SUCCESS, f'Recipe {recipe.title} deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'You can only delete your own recipes!')
+
+    return redirect('user_library', username)
+
+
+# def comment_delete(request, slug, comment_id):
+#     """
+#     view to delete comment
+#     """
+#     queryset = Post.objects.filter(status=1)
+#     post = get_object_or_404(queryset, slug=slug)
+#     comment = get_object_or_404(Comment, pk=comment_id)
+
+#     if comment.author == request.user:
+#         comment.delete()
+#         messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+#     else:
+#         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+
+#     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
