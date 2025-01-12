@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
@@ -29,9 +30,9 @@ def RecipeLibrary(request):
 
     :template:`recipe_book/index.html`
     """  
-    recipe_list = Recipe.objects.filter(approved=2)
+    recipe_list = Recipe.objects.filter(approved=2).filter(listing_type=3)
 
-    sample_list = Recipe.objects.all().filter(approved=2).order_by('created_on')[:3]
+    sample_list = recipe_list.order_by('created_on')[:3]
 
     template = loader.get_template('recipe_book/index.html')
 
@@ -135,7 +136,8 @@ def recipe_detail(request, slug):
 
     :template:`recipe_book/recipe_detail.html`
     """  
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.filter(Q(listing_type='2') | Q(listing_type='3') | Q(author=request.user))
+    
     recipe = get_object_or_404(queryset, slug=slug)
     ratings = recipe.ratings.filter(approved=2)
     user_rating = ratings.filter(author=request.user.id).first()
@@ -225,20 +227,29 @@ def recipe_create(request):
 @login_required
 def user_library(request, author):
     """
-    Display user's collection of recipes :model:`recipe_book.Recipe`.
+    Display users' collection of recipes :model:`recipe_book.Recipe`.
 
     **Context**
 
     ``recipes_created``
-        A set of instances related to user as author from
-        :model:`recipe_book.Recipe`.
+        A set of instances related to author from
+        :model:`recipe_book.Recipe`. Conditionally
+        filtered, if user is the author of queryset
+        they will see all, regardless of approved state.
+        Otherwise, if viewing another user's library, 
+        the request use can only view the approved and 
+        published or unlisted recipes.
 
     **Template:**
 
     :template:`recipe_book/recipe_detail.html`
     """  
     author = get_object_or_404(User, username=author)
-    recipes_created = Recipe.objects.filter(author=author).order_by("-created_on")
+    if request.user == author:
+        recipes_created = Recipe.objects.filter(author=author).order_by("-created_on")
+    else:
+        recipes_created = Recipe.objects.filter(author=author).filter(approved=2).filter(listing_type=3).order_by("-created_on")
+
     template = loader.get_template('recipe_book/user_library.html')
 
     paginator = Paginator(recipes_created, 6)
