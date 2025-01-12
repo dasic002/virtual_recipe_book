@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 import statistics
@@ -32,7 +33,7 @@ class Recipe(models.Model):
         null=True,
         related_name="own_recipes"
     )
-    # feature_image =
+    featured_image = CloudinaryField('image', default='placeholder')
     description = models.TextField()
     prep_time = models.PositiveIntegerField(default=1)
     cook_time = models.PositiveIntegerField(default=1)

@@ -3,8 +3,7 @@
     <div class="card mb-4">
         <div class="card-body dark-bg rounded-3">
             <div class="image-container">
-                {# if "placeholder" in recipe.featured_image.url #}
-                {% if not recipe.featured_image.url %}
+                {% if "placeholder" in recipe.featured_image.url %}
                 <img class="card-img-top" src="{% static 'images/placeholder.png' %}" alt="placeholder image">
                 {% else %}
                 <img class="card-img-top" src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}">
