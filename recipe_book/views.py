@@ -2,7 +2,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
-# from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Comment, Recipe, User
@@ -10,12 +9,6 @@ from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
 # Create your views here.
-# class RecipeLibrary(generic.ListView):
-#     queryset = Recipe.objects.filter(approved=2)
-#     template_name = "index.html"
-#     paginate_by = 6
-
-
 def RecipeLibrary(request):
     """
     Displays published recipe instances from :model:`recipe_book.Recipe`.
@@ -299,8 +292,7 @@ def comment_edit(request, slug, comment_id):
 
         if comment_form.is_valid() and comment.author == request.user:
             comment = comment_form.save(commit=False)
-            comment.recipe = recipe
-            comment.approved = False
+            comment.approved = 0
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
         else:
