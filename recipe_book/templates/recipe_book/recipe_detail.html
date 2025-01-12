@@ -22,7 +22,11 @@
                             class="fa-solid fa-star"></i></a>
                     <!-- <p><i class=""></i></p> -->
                 </div>
-                <img src="{% static 'images/placeholder.png' %}" class="scale" alt="placeholder">
+                {% if "placeholder" in recipe.featured_image.url %}
+                <img class="scale" src="{% static 'images/placeholder.png' %}" alt="placeholder image">
+                {% else %}
+                <img class="scale" src=" {{ recipe.featured_image.url }}" alt="{{ recipe.title }}">
+                {% endif %}
             </div>
             <div class="col-12 col-md-4 col-lg-6 masthead-text dark-bg">
                 <!-- Recipe title goes in these h1 tags -->
