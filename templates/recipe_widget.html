@@ -15,7 +15,7 @@
                     <p>{{ recipe.description }}</p>
                 </a>
             </div>
-            <hr />
+            <hr>
             <div class="card-text text-muted h6">
                 <p><a href="{% url 'user_library' recipe.author.username %}" class="link">{{ recipe.author }}</a> added
                     on:</p>
@@ -26,9 +26,8 @@
                 <span>
                     <a href="{% url 'recipe_edit' recipe.slug %}" class="btn btn-edit"><i
                             class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="btn btn-delete" recipe_id="{{ recipe.id }}"><i class="fa-solid fa-trash"></i>
-                        <a href="{% url 'recipe_delete' recipe.id %}" disabled id="recipe_{( recipe.id )}"></a>
-                    </button>
+                    <button class="btn btn-delete"><i class="fa-solid fa-trash"></i></button>
+                    <a href="{% url 'recipe_delete' recipe.id %}" hidden></a>
                 </span>
             </div>
             {% else %}

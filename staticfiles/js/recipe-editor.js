@@ -1,7 +1,6 @@
 let recipeForm = document.querySelectorAll(".multiField");
 let container = document.querySelector("#ingredients_form");
 let addBtn = document.querySelector("#add-form");
-let removeBtns = document.querySelectorAll(".remove-form");
 let totalForms = document.querySelector("#id_ingredients_needed-TOTAL_FORMS");
 
 let formNum = recipeForm.length - 1;

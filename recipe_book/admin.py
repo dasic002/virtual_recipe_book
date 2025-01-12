@@ -23,7 +23,7 @@ class PostAdmin(SummernoteModelAdmin):
 @admin.register(Comment)
 class PostAdmin(SummernoteModelAdmin):
 
-    list_display = ('body', 'recipe', 'author', 'approved')
+    list_display = ('id', 'body', 'recipe', 'author', 'approved')
     search_fields = ['recipe', 'author', 'body']
     list_filter = ('recipe', 'author',  'created_on')
 

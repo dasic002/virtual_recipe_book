@@ -1,6 +1,6 @@
-from django.forms import inlineformset_factory, ModelForm, modelformset_factory, Textarea
-from .models import Comment, Recipe, Ingredient
+from django.forms import inlineformset_factory, Textarea
 from django import forms
+from .models import Comment, Recipe, Ingredient
 
 
 class CommentForm(forms.ModelForm):
@@ -28,24 +28,9 @@ class RecipeForm(forms.ModelForm):
             'listing_type',
             'source',
             'source_url',
+            'featured_image',
         )
         
-
-# RecipeFormset = modelformset_factory(
-#     Recipe,
-#     fields = (
-#             'title',
-#             'description',
-#             'prep_time',
-#             'cook_time',
-#             'servings',
-#             'method',
-#             'listing_type',
-#             'source',
-#             'source_url',
-#         )
-# )
-
 
 class IngredientForm(forms.ModelForm):
     class Meta:
