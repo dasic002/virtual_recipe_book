@@ -95,6 +95,11 @@ input {
     background-color: #13795B;
 }
 
+.error-icon {
+    font-size: 10rem;
+    color: #01ebfe;
+}
+
 .scale {
     width: 100%;
     height: auto;
@@ -127,7 +132,6 @@ input {
 }
 
 .masthead-text {
-    /* background-color: #13795B; */
     color: #01ebfe;
     position: relative;
 }
@@ -181,6 +185,7 @@ input {
     text-decoration: none;
 }
 
+.btn-action,
 .btn-signup,
 .btn-edit {
     background-color: transparent;
@@ -208,6 +213,7 @@ input {
     text-decoration: underline;
 }
 
+.btn-delete,
 .btn-save,
 .btn-rate {
     color: #F53FA0;
@@ -216,8 +222,6 @@ input {
 }
 
 .btn-delete {
-    color: #F53FA0;
-    background: transparent;
     border: 1px solid #F53FA0;
 }
 
