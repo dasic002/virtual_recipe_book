@@ -1,5 +1,5 @@
 # Chefs on the net
-For my fourth portfolio project with Code Institute, I built a full stack application of digital recipe book using Django's framework.
+For my fourth portfolio project with Code Institute, I built a full stack application of a digital recipe book using Django's framework.
 
 Chefs on the net caters for the self made chefs that want to move their recipe books to a digital platform where users can collate their recipes for personal use and/or share with other users on our website. Create a community where users can can comment, rate and even personalise the recipes with their own twist. 
 
@@ -10,9 +10,11 @@ Recipes require approval from the superuser to listing the recipe for general vi
 The home page whilst a user is logged in, will display the library of public recipes available, whilst in "My recipes" page, users can view their own recipes and more easily review comments and ratings on their recipes.
 
 
-<!-- [View the deployed webapp here]() -->
+[View the deployed webapp here](https://chefs-on-the-net-08c612a798ef.herokuapp.com/)
 
-<!-- ![Responsive design mock-up](documentation/responsive-design.PNG) -->
+[View the Agile project here](https://github.com/users/dasic002/projects/6)
+
+![Responsive design mock-up](docs/images/responsive-design.PNG)
 
 ***
 
@@ -63,42 +65,68 @@ The home page whilst a user is logged in, will display the library of public rec
 - I want to be advised if a page I navigated to no longer exists and easily return to the site
 
 
-<!-- ### Flowchart
-To plan and illustrate how the game will run, I have generated this flowchart.
-![Wordle flowchart](documentation/PP3-Wordle_flowchart_rev0-0.png) -->
+### Strategy
+Start with an MVP and build on desirable features, to create a simple and cool website the users will want to visit time and time again.
 
-<!-- ### Strategy
-
-Start with an MVP and build on desirable features, to create a simplistic, fun and addictive version of the wordle game that is easy to follow on a CLI display. -->
-<!-- 
 ### Scope
+This Project was created using the Agile methodology. It allowed me to focus on the **MUST HAVE** features before working on the following graded by the [MoSCoW Method](https://en.wikipedia.org/wiki/MoSCoW_method).
+
+These features were planned as User stories in GitHub Issues and displayed using a [Kanban](https://en.wikipedia.org/wiki/Kanban_(development)) board template in GitHub Projects.
+
+Each issue expands on the user intent, our Acceptance Criteatia and Tasks to build the feature.
+
+![Kanban board in Project](docs/images/kanban_board.PNG)
 
 __Must have features:__
-- Word bank of 5-letter words in US English.
-- Randomly select the word to guess.
-- Allow player to enter up to 6 guess and provide basic feedback on letters correctly guessed, differentiating placement from inclusion.
-- Reveal the selected word in case the player has not guessed the word.
-- Validation on player input, that the input is:
-  - 5 characters long.
-  - all letters.
-  - a word present in the dictionary.
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/8)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/9)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/1)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/2)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/22)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/4)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/5)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/3)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/6)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/7)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/23)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/24)
 
 __Should have:__
-- Tracking of scores in the session to feedback to player.
-- Invite the player to play another game.
-- Clean GUI, using colours rather than symbols for feedback on guesses. Selecting colours that are as accessible for colour blind users too.
-- Rules explaining how to play the game. 
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/13)
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/15)
+- IN PROGRESS - [](https://github.com/dasic002/virtual_recipe_book/issues/14)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/11)
 
 __Could have:__
-- Save session scores in a database to provide feedback to user on how they compare against other players.
-- Provide an optional breakdown of the player's scores.
-- Resume sessions, the game could be made to allow the user to enter their given ID to resume winning streak count.
-- Praise from the game matching that of wordle, which depends on how many guesses made before finding the selected word.
+- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/17)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/10)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/12)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/16)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/18)
 
 __Won't have:__
-- Mobile phone or tablet access, the CLI does not seem to accept text entered on these devices and any solutions online don't seem straightforward or universal. -->
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/19)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/20)
+- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/21)
 
-### Skeleton
+
+### Structure
+A multi page including Account Management and Blog like pages to navigate and manage Recipes. The page is composed of the following sections:
+- **Header** - Contains title of the page.
+
+- **Menu** - Navigation links included in the header, but collapse into the hamburger/bars icon on smaller displays, either are always visible in the header.
+
+- **Home** - The first page any visitor lands on, includes a banner section welcoming the visitor and inviting them to sign up, should the visitor not be logged in. The page includes 3 recipes the anonymous user is free to browse. Once the user is signed up and logged in, the same page turns into the Library of published recipes the user is able to browse. Includes Recipe widgets and Page navigation widget.
+
+  - **Recipe widget** - Reusable section containing image, Clickable Title, description and Clickable Author name.
+
+  - **Page navigation widget** - Reusable section containing the pagination buttons to navigate libraries of recipes.
+
+- **My recipes** - Another Library view for recipes the current user has created. Includes Recipe widgets, Page navigation widget, Add recipe button to link the user to a Create recipe form, Edit and delete buttons within the recipe widget to allow the user to edit the recipe or delete it. Deletion of recipe requires confirmation via a modal before execution.
+
+- **User Library** - Accessible when the user click on the author's username on the recipe widget. It forwards the user to the same view as **My Recipes** filtering with the given Author's recipes, but excludes any Add/Edit/Delete Recipe buttons.
+
+### Wireframes
 - [Landing page](docs/wireframes/01_landing_page.jpg)
 - [Navbar and footer](docs/wireframes/02_navbar_and_footer.jpg)
 - [Login page](docs/wireframes/03_login.jpg)
@@ -109,27 +137,11 @@ __Won't have:__
 - [Recipe details page](docs/wireframes/08_recipe_details.jpg)
 - [New recipe page](docs/wireframes/09_new_recipe.jpg)
 
-<!-- ### Surface
+### Surface
 #### Colour theme
-Considering the limitations in the CLI for colour and formatting, I followed the appearance of wordle in dark mode with some consideration for accessibility for colour blind users.
+Considering the theme of Chefs gone digital, was inspired too use a sort of Neon/Cyberpunk colour theme.
 
-Originally, the chosen colours were green for correctly guessed letters, dark purple for wrong placement of letters and grey for not existent. This provided an optimum contrast between any colour when run through a simulator.
-
-However, the chosen colours, used an 8-bit configuration in the ANSI escape code, once the code was deployed to Heroku, the terminal did not display any of this formatting.
-
-![Original colour selection](documentation/Adobe-color-original-colours.PNG)
-
-Being constricted to 3-bit and 4-bit palette, it took a few deployments to test the colour the CLI would output. 
-
-Firstly, attempted using the closest colours available, which unfortunately meant the purple/magenta available was too close to the grey being used and produced a low contrast. 
-
-![Deployment with the available green and purple colours](documentation/purple-lacks-contrast.PNG)<br>
-![Using Adobe Colour blindness tool](documentation/purple-lacks-contrast_adobe-sim.PNG)
-
-Eventually, a version of the code was deployed that printed out all colours available so we could pick the RGB values and use Adobe Colour to see which might work best for the various types of colour blindness. It was found that the bright yellow, standard green and a darker grey was most suitable.
-
-![Deployment printing all library colours available](documentation/testing-colour-selection.PNG)<br>
-![Using Adobe Colour blindness tool](documentation/colour-selection-adobe-sim.PNG) -->
+![Original colour selection](docs/images/colour-scheme.PNG)
 
 ## Features 
 
