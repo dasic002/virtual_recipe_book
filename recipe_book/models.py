@@ -58,7 +58,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -67,14 +67,14 @@ class Recipe(models.Model):
     @property
     def average_score(self):
         list_score = self.ratings.values_list('score', flat=True)
-        
+
         if len(list_score) > 0:
             list_score = round(statistics.mean(list_score), 1)
         else:
             list_score = None
 
         return list_score
-    
+
     @property
     def ingredients(self):
         list_ingredients = self.ingredients_needed.all()
@@ -82,7 +82,7 @@ class Recipe(models.Model):
             line.quantity = line.quantity.normalize()
             line.unit = line.Unit.__call__(line.unit).label
         return list_ingredients
-    
+
     @property
     def steps(self):
         # redundant whilst method is stored as text rather than JSON
@@ -91,7 +91,7 @@ class Recipe(models.Model):
 
 class Comment(models.Model):
     """
-    Stores a single Recipe comment entry related to 
+    Stores a single Recipe comment entry related to
     :model:`recipe_book.Recipe`.
     :model:`auth.User`.
     """
@@ -119,7 +119,7 @@ class Comment(models.Model):
 
 class Rating(models.Model):
     """
-    Stores a single Recipe rating entry related to 
+    Stores a single Recipe rating entry related to
     :model:`recipe_book.Recipe`.
     :model:`auth.User`.
     """
@@ -151,7 +151,7 @@ class Rating(models.Model):
 
 class Favourite(models.Model):
     """
-    Stores a single saved Recipe entry for the given user related to 
+    Stores a single saved Recipe entry for the given user related to
     :model:`recipe_book.Recipe`.
     :model:`auth.User`.
     """
@@ -176,8 +176,7 @@ class Favourite(models.Model):
 class Ingredient(models.Model):
     """
     Stores a single ingredient and quantity entry for a given Recipe
-    related to 
-    :model:`recipe_book.Recipe`.
+    related to :model:`recipe_book.Recipe`.
     """
 
     class Unit(models.IntegerChoices):
@@ -212,4 +211,5 @@ class Ingredient(models.Model):
 
     def __str__(self):
         self.unit = self.Unit.__call__(self.unit)
-        return f"{self.quantity}{self.unit.label} {self.food_item} used in {self.recipe.title}"
+        return (f"{self.quantity}{self.unit.label} {self.food_item}" +
+                f"used in {self.recipe.title}")

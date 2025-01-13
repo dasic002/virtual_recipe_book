@@ -13,7 +13,7 @@ class CommentForm(forms.ModelForm):
                 "rows": 5,
                 "class": 'dark-bg'}),
         }
-        
+
 
 class RecipeForm(forms.ModelForm):
     # featured_image = CloudinaryFileField()
@@ -32,7 +32,7 @@ class RecipeForm(forms.ModelForm):
             'source_url',
             # 'featured_image',
         )
-        
+
 
 class IngredientForm(forms.ModelForm):
     class Meta:

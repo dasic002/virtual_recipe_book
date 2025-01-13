@@ -143,6 +143,11 @@ Considering the theme of Chefs gone digital, was inspired too use a sort of Neon
 
 ![Original colour selection](docs/images/colour-scheme.PNG)
 
+#### Typography
+Google Fonts included:
+- Roboto
+- Lato
+
 ## Features 
 
 <!-- ### Existing Features
@@ -225,10 +230,12 @@ Should the player need to be reminded of the rules, the player can enter "help!"
 ![Rules display](documentation/feat_rules.PNG) -->
 
 ### Data Models
+Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
 
 #### Entity Relationship Diagram
 
 ![Entity Relationship Diagram](docs/images/RecipeBook_ERD.jpg)
+
 
 <!-- ### Features Left to Implement
 These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
@@ -279,29 +286,49 @@ The most feasible way I can think of is to either:
 
 
 ## Technologies
-<!-- - Languages used:
+- Languages used:
+  - [HTML5](https://en.wikipedia.org/wiki/HTML5)
+  - [CSS3](https://en.wikipedia.org/wiki/CSS)
+  - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
   - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-- [Google Cloud APIs](https://console.cloud.google.com/) - to read and write data to a google sheets worksheet.
-- [Google sheets](https://docs.google.com/spreadsheets/create) - to create our worksheet for our database.
+  - [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+  - [Django](https://docs.djangoproject.com/en/5.0/)
 - [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
 - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
 - [GitHub](https://github.com/) - to store and publish the project.
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
-- [Adobe Color](https://color.adobe.com/create/color-wheel) - to generate the colour palette and Accessibility tools checking for contrast for legibility and colour-blind viewing.
 - [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
 - [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code. 
 - [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
-- [Pilestone - Color Blind Vision Simulator](https://pilestone.com/pages/color-blindness-simulator-1) -->
 
 ## Testing 
 
 ### Validator Testing 
 
-<!-- - [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code. 
-- Accessibility:
-  - Adobe colour - [colour blindness](https://color.adobe.com/create/color-accessibility) - No conflicts found.<br>
-  ![adobe colour - full swatch check](documentation/full-swatch-adobe-sim.PNG)
-  - [Pilestone - Color Blind Vision Simulator](https://pilestone.com/pages/color-blindness-simulator-1) - visual check, seems distinguishable still - [simulated colour blind viewing images here](documentation/simulated_colourblind/) -->
+- HTML
+  - No errors were returned when passing through the official, just warnings on use of aria-labels on span elements. These span elements are the cards in the first step of the "How To Play" breaking down the value each card has, aria labels were added to make the site more accessible with the ability to describe the value of the card. [W3C validator](https://validator.w3.org/nu/)<br>
+  ![HTML valid screenshot](docs/images/html-validation.PNG)
+- CSS
+  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/)<br>
+  ![CSS valid screenshot](docs/images/css-validation.PNG) 
+- JavaScript
+  - No errors were found when passing through [JS hint error checker](https://jshint.com/)<br>
+  ![JS error free screenshot](docs/images/js-validation.PNG)
+- Python
+  - No errors were found [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code.<br>
+  ![Python error free screenshot](docs/images/pi-linter.PNG)
+
+- Accessibility
+  - Running the site through lighthouse analysis does show some issues with some insuficient colour contrast and performance suggests I should minimise my JS files for faster loading. Otherwise still rates above 90 on accessibility:
+    - Mobile:<br>
+  ![Lighthouse mobile analysis](docs/images/lighthouse-test-mobile.PNG)
+ 
+    - Desktop:<br>
+  ![Lighthouse desktop analysis](docs/images/lighthouse-test.PNG)
+
+  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/GameOfKings/index.html) showed no obvious errors after some improvements were made.<br>
+  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
+
 
 
 ### Manual Testing
