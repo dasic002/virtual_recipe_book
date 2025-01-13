@@ -1,5 +1,6 @@
 from django.forms import inlineformset_factory, Textarea
 from django import forms
+from cloudinary.forms import CloudinaryFileField
 from .models import Comment, Recipe, Ingredient
 
 
@@ -15,6 +16,7 @@ class CommentForm(forms.ModelForm):
         
 
 class RecipeForm(forms.ModelForm):
+    # featured_image = CloudinaryFileField()
 
     class Meta:
         model = Recipe
@@ -28,7 +30,7 @@ class RecipeForm(forms.ModelForm):
             'listing_type',
             'source',
             'source_url',
-            'featured_image',
+            # 'featured_image',
         )
         
 

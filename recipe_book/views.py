@@ -194,6 +194,7 @@ def recipe_create(request):
     ingredient_form = IngredientFormSet()
         
     if request.method == "POST":
+        # recipe_form = RecipeForm(request.POST, request.FILES)
         recipe_form = RecipeForm(data=request.POST)
         ingredient_form = IngredientFormSet(data=request.POST)
 
