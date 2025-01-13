@@ -55,14 +55,7 @@
         <div class="col card">
             <!-- The recipe steps goes inside the table. -->
             <h2 class="recipe-subtitle">Steps</h2>
-            <table class="table table-dark">
-                {% for item in recipe.steps %}
-                <tr>
-                    <td>{{ item.0 }}</td>
-                    <td>{{ item.1 }}</td>
-                </tr>
-                {% endfor %}
-            </table>
+            {{ recipe.method | linebreaks }}
         </div>
     </div>
 </div>

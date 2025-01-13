@@ -38,7 +38,7 @@ class Recipe(models.Model):
     prep_time = models.PositiveIntegerField(default=1)
     cook_time = models.PositiveIntegerField(default=1)
     servings = models.PositiveIntegerField(default=1)
-    method = models.JSONField(blank=True, null=True)
+    method = models.TextField(blank=True)
     listing_type = models.IntegerField(choices=LIST_TYPE, default=0)
     approved = models.IntegerField(choices=STATUS, default=0)
     origin = models.ForeignKey(
@@ -85,6 +85,7 @@ class Recipe(models.Model):
     
     @property
     def steps(self):
+        # redundant whilst method is stored as text rather than JSON
         return self.method.items()
 
 
