@@ -334,39 +334,43 @@ The most feasible way I can think of is to either:
 ### Manual Testing
 
 #### Devices and browsers used
-<!-- - iPhone 12 Pro and iPad Pro (12.9 inch - 4th Gen)
-  - IGNORED: given the CLI terminal via the web browser on these devices did not accept any keyboard entries.
+- iPhone 12 Pro - iOS 18.1.1
+  - Safari (v18.1.1)
+  - Chrome (v131)
+
+- iPad Pro (12.9 inch - 4th Gen) - iPadOS 18.1.1
+  - Safari (v18.1.1)
+  - Chrome (v131)
 
 - Dell Precision 3510 laptop - Windows 10 Pro (2H22)
-  - Chrome (v128)
-  - Firefox (v129)
-  - Microsoft Edge (v128) -->
+  - Chrome (v131)
 
 #### Manual testing checklist
-<!-- 
+
 | Feature | Action | Expected Behaviour | Pass/Fail | Notes |
 |-|-|-|-|-|
-|Heroku App loads with no errors|Open web app|CLI loads to the welcome page, prompting user for name|PASS|
-|Automatic name given|Press enter without typing a name|Game prints out "Welcome Player-1"|PASS|
-|Player name is registered|Enter a name on welcome page|See player name repeated back in "Welcome {player name}"|PASS|
-|Player data is created and recorded in worksheet|Enter a name on welcome page|See player name and data added on new line in the worksheet|PASS|
-|Game play - 1st view|Loading after name input|Terminal prints: Welcome message, including how to access rules. Blank lines for missing guesses are rendered. Prompt asking for a guess.|PASS|
-|Game play - clues on guesses|Loading after guess input|Prints the last guess in one of the previously blank lines and renders any correctly guess letters: Bright Yellow if exists but not in the correct place. Green if it matches place as well.|PASS|
-|Game play - display after a guess|Loading after guess input|Terminal prints: Same welcome message, including how to access rules. Prints the last guess in one of the lines and renders with clues. Blank lines for missing guesses are rendered.|PASS|
-|Game play - display after a wrong guess|Loading after guess input|Prints a message advising the guess was incorrect, how many chances there are left and prompts player for another guess.|PASS|
-|Game play - display after a correct guess|Loading after guess input|Prints a message advising the guess was Correct. Prints current game data and prompts player for another game.|PASS|
-|Game play - display after running out of guesses|Loading after 6 incorrect guess inputs|Prints a message advising the game is over and what was the word selected. Resets the current streak to 0, whilst longuest streak remains as the longest achieved in this session. Prints current game data and prompts player for another game.|PASS|
-|Game play - INVALID guess input - not 5 characters|Loading after a guess input either shorter or longer than 5 characters|Prints message error message advising the guess must be 5 chars long and length entered. Ignoring any leading or following spaces around the word.|PASS|
-|Game play - INVALID guess input - not all alphabetic characters|Loading after a guess input has either numeric or special/punctuation characters|Prints message error message advising the guess must contain letters only. Ignoring any leading or following spaces around the word.|PASS|
-|Game play - INVALID guess input - not a word in the dictionary|Loading after a guess input is not a word in the dictionary used|Prints message error message advising the guess must match a word in the dictionary. Ignoring any leading or following spaces around the word.|PASS|
-|Rules of the game - opening|Enter "help!" as a guess|Terminal prints out the rules and waits for the enter key to be pressed to return back to the game.|PASS|
-|Rules of the game - closing|Press the enter key|Terminal prints to display the game again as it was left.|PASS|
-|Scoring - tracks current streak|On winning rounds|increments current streak|PASS|
-|Scoring - tracks high score correctly|on winning and losing rounds|it retains the highest number of winning streaks in the session|PASS|
-|Scoring - calculates average correctly|on winning rounds|calculates the average number of guesses taken in winning rounds|PASS|
-|Prompt to play another game - play again|Press the enter key|Terminal print a new game, back to displaying the 6 blank lines ready to guess a new word.|PASS|
-|Prompt to play another game - exit the game|Input "n" or "N" and press the enter key|Terminal prints a goodbye message to the player|PASS| -->
-
+|Google fonts|Loading the page|Google fonts load|PASS|
+|Font awesome icons|Loading the page|Icons appear as intended|PASS|
+|Images|Loading the page|images appear as intended|PASS|
+|content text |Loading the page|text appears as intended|PASS|
+|Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays|PASS|
+|Nav Button - hamburger icon|Click Hamburger icon|hamburger icon toggles to reveal and collapse nav menu|PASS|
+|Nav button - Register|Click button "Register" just after loading the site|Loads sign up page|PASS|
+|Nav button - Login|Click button "Login" just after loading the site|Loads login page|PASS|
+|Nav button - Logout|Click button "Logout" after starting a game|Loads logout confirmation page|PASS|
+|Nav Button - Logout|Click button "Sign out"|Confirms logging out and returns to Home page|PASS|
+|Nav Button - Home|Click button "Home"|Loads to Home as either welcome or library dependant on login status|PASS|
+|Nav Button - My Recipes|Click button "My Recipes"|Loads Logged in user's recipe library to view and manage their recipes|PASS|
+|Page scaling - mobile|Viewing the page on mobile display in portrait|Font size is legible and the page does not require scrolling on timed buttons. No overlapping text or images.|PASS|
+|Page scaling - mobile|Viewing the page on mobile display in landscape|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|Error 403 page|Enter existing url user is not allowed to access for the site|Calls up custom 403.html|PASS|
+|Error 403 page|Click on the Home button|Brings viewer back to main page|PASS|
+|Error 404 page|Enter non-existing url for the site|Calls up custom 404.html|PASS|
+|Error 404 page|Click on the Home button|Brings viewer back to main page|PASS|
+|Error 500 page|Browse site when a function in view has been disabled|Calls up custom 500.html|PASS|
+|Error 500 page|Click on the Home button|Brings viewer back to main page|PASS|
 
 
 
@@ -380,108 +384,120 @@ This character appeared on words that should have ended with an accented e (é),
 
 
 ## Deployment
-<!-- ### Source and format the word bank (dictionary)
-To provide the game with a database of 5 letter words in US English, the search online provided a few results. [GWICKS dictionaries](http://www.gwicks.net/dictionaries.htm) was one of 2 that provide the list in a editable file format, i.e.: text or CSV or other easily editable in excel or google sheets.
+### Local Development
 
-Chose GWICKS only because it had the longest list of 5-letter words.
+#### Forking the Repository
 
-__Process to filter and compile list for the game__
-  1) Download "USA ENGLISH - 77,000 words" text file and open with notepad.
-  1) Copy the whole list and paste into Microsoft Excel, leaving at least a row above to add a header of "Words".
-  1) Select the entire list of cells, from the header to the last word. The easiest way to do this is to select the header and hold CTRL+SHFT+ARROW_DOWN.
-  1) Whilst the cells are selected, press CTRL+T to create a table, in the dialog box, tick "My table has headers" and press "OK".
-  1) With the table created, the values can be filtered, expand the drowndown menu on the header, expand "Text Filters" and select "Equals...".
-  1) In the dialog box that opens, enter into field to the right of "equals", 5 question marks `?????`. This will filter all words that have precisely 5 letters.
-  1) Using the same keyboard shortcut earlier, select the first word listed in the table (not the header), CTRL+SHFT+ARROW_DOWN to select the whole list, there should be 5000+ words.
-  1) Copy (CTRL+C) and paste (CTRL+V) into a new text file and save the file ready to upload to the repository.
+- Log in to GitHub.
+- Go to the repository for this project (<https://github.com/dasic002/virtual_recipe_book>).
+- In the top-right corner of the page, click "Fork".
+- Under "Owner", select an owner for the repository from the dropdown menu.
+- Optionally, in the "Description" field, type a description of your fork.
+- To copy the main branch only, select the "Copy the main branch only" check box. If you do not select this option, all branches will be copied into the new fork.
+- Click "Create fork"
 
-  Once the file is uploaded, it is available to open, read and close by out Python code. Our dictionary file can be found [here](en-us-dict.txt).
+#### Cloning Your Forked Repository
 
+- Log-in to GitHub.com, navigate to your fork of the repository.
+- Above the list of files, click Code.
+- Copy the URL for the repository.
+  - To clone the repository using HTTPS, under "Clone with HTTPS", click the "Copy" icon.
+  - To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click SSH, then click the "Copy" icon.
+  - To clone a repository using GitHub CLI, click Use GitHub CLI, then click the "Copy" icon.
+- Open Git Bash
+- Change the current working directory to the location where you want the cloned directory.
+- Type git clone, and then paste the URL you copied earlier.
+- Press Enter. Your local clone will be created.
 
-### Create and connect player data database
-The game stores and accesses game sessions data to update the current session and offer comparison for other sessions on how well the current player is doing. As seen [here](#scores).
+For more details about forking and cloning a repository, please refer to [GitHub documentation](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
-__Create the worksheet__
-  1) Navigate to Google.com and login to or signup for your Google account.
-  2) Then click on the grid icon button on the top right corner of the browser to reveal other google apps, scroll down and click on sheets.
-  3) Create a new spreadsheet and give it a meaningful title i.e.: "Wordle-game".
-  4) A single sheet for this game will do, rename it "scores".
-  5) Add the meaningful headings on the first row. In this project they were ( User_ID / Player_name / Current_streak / Longest_Streak / 1 / 2 / 3 / 4 / 5 / 6 / average_num ).
+#### Install Dependencies
 
-__Setup API__
-  1) Navigate to [Google Cloud Platform](https://cloud.google.com/) and login with your google account used for your worksheet above.
-  1) Click on "Console" on the top right corner.
-  1) Here you will see a dropdown list along the top of the page named "Select a project", click it and in the new dialogue page, click "NEW PROJECT".
-  1) Give it a unique project name and proceed. It may take a moment whilst google creates the project.
-  1) Once created, navigate back to the top of the page to "Select a project", click it and select the project name to open it.
-  1) Next we need to add the APIs we will use. Expand the menu on the top left corner and click on "APIs and Services".
-  1) At the top of the page, click " + ENABLE APIS AND SERVICES " and on the next page, search for "Google drive API", select it and click "ENABLE". 
-  1) Click on "APIs and services" again, and click on " + ENABLE APIS AND SERVICES " again, on the next page search for "Google sheets API", click it it to open and click "Enable".
-  1) On the next page, click on "Create credentials".
-     * Step 1: Credential Type, select "Application data" and click next.
-     * Step 2: Service account details, enter a name and click "Create and continue", then select the role of "owner" and click continue.
-     * Step 3: we can skip this step and click "Done".
-  1) Click "Credentials", on the list on the left and select the account you have created under "Service Accounts". On the next page, click "KEYS" at the top of the page and then click "ADD KEY" and select "Create new key".
-  1) Select "JSON" and click create. This will generate and automatically download a .json file. 
-  1) Upload the file to your github project, __but__ before pushing to the repository, add the file name "creds.json" as a line in the ".gitignore" file so this piece of sensitive data is not exposed to the public.
-  1) Rename this file to "creds.json", open it and copy the "client email". 
-  1) Navigate back to the Google Sheets worksheet created, click the "Share" button on the top right corner, paste the email address copied from the JSON file, select the role of editor in the dropdown list, disable "Notify people" checkbox and click "Share".
+Use the `pip install -r requirements.txt` command to install all of the Python modules and packages listed in your requirements.txt file.
 
-__Enable API from the IDE (GitPod or other)__  
-  1) In your IDE of choice, enter in the terminal "pip install gspread googl-auth".
-  1) You can now import this library to your code, at the top of the Python file add:
-    ```
-    import gspread
-    from google.oauth2.service_account import Credentials
-    ```
-  1) Next add the constants (below are specific to our game):
-    ```
-    SCOPE = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-        "https://www.googleapis.com/auth/drive"
-        ]
+#### Create your env.py
 
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('Wordle-game')
-    ```
+- In your project workspace, create a file called env.py and make sure this file is included in the .gitignore file.
+- Add the following code:
 
+```python
+import os
 
-### To the Heroku app
-1) Login to Heroku.
-2) Once on the dashboard, click _"New"_ and select _"Create new app"_ from dropdown list.
-3) Select the applicable region for your app. In our case, it's _Europe_.
-4) Give the app a name. _NOTE:_ the form will advise if the name is unique and therefore available.
-5) Once a suitable name has been given, click _"Create app"_.
-6) You should be directed to the __"Deploy"__ tab of the app. Here you'll see a __"Deployment method"__ section, select __"GitHub"__.
-7) Another section should reveal __"Connect to GitHub"__, if you have connected your GitHub account, you should see your account listed and search bar to find the repository to deploy from. Click __"Search"__ and click __"Connect"__ on the correct repository listed below.
-8) Before we proceed with deployment further, we need to navigate to the __"Settings"__ tab.
-9) Expand Config Vars by clicking __"Reveal Config Vars"__ and add a key of `PORT` with a value of `8000`.
-10) If your project contains credentials to access secure data, you'll need to add another Config Var, add a key of `CREDS` and paste the JSON content as the value.
-11) Next, we need to add two buildpacks, note the order is __important__, select and add buildpack as follows:
+os.environ["DATABASE_URL"]='<copiedURL>'
+os.environ['SECRET_KEY'] = '<ADD YOUR SECRET KEY HERE>'
+os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 
-1. `heroku/python`
-2. `heroku/nodejs`
+```
 
-12) Navigate back to the __"Deploy"__ tab, scroll down to __"Manual deploy"__, select the appropriate branch and click __"Deploy Branch"__. This step takes a short while for the server to compile the code and dependencies for the app.
+- Replace `<ADD YOUR SECRET KEY HERE>` in the SECRET_KEY environment variable with your own secret key.
+- Save the file.
 
-To view the deployed app, scroll to the top and click "Open app".
+#### Create a Database
 
-The deployed app can be found [here.](https://wordle-dasic002-367fb61feaeb.herokuapp.com/)
+- Create an account and log in with ElephantSQL.com.
+- From the dashboard click “Create New Instance”.
+- Set up your plan
+  - Give your plan a Name
+  - Select a plan tier
+  - You can leave the Tags field blank
+- Select “Select Region”
+- Select a data center near you
+- Then click “Review”
+- Check your details are correct and then click “Create instance”
+- Return to the ElephantSQL dashboard and click on the database instance name for this project
+- In the URL section, click the copy icon to copy the database URL
+- In your env.py file replace `<copiedURL>` in the DATABASE_URL environment variable with the copied URL.
+- Save the file.
 
-#### Constraints
+#### Set Up Cloudinary
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line. -->
+- Create an account and log in with Cloudinary.com.
+- In the dashboard copy your API Environment variable.
+- In your env.py file replace `<API ENVIRONEMENT VARIABLE>` in the CLOUDINARY_URL environment variable with the copied API Environment variable.
+- Save the file.
+
+### Deployment
+
+- The requirements.txt file in the project was updated to include details on the project dependencies. Steps to do this are :
+  - Enter the following command at the terminal prompt : "pip3 freeze > requirements.txt"
+  - Commit changes to requirements.txt and push to GitHub.
+- In `setting.py`, add Heroku Hostname to ALLOWED_HOSTS.
+
+```python
+ALLOWED_HOSTS = ["PROJECT_NAME.herokuapp.com", "YOUR_HOSTNAME"]
+```
+
+- Make surea file named Procfile exists on the top level directory which contans the following code:
+
+```python
+web: gunicorn PROJECT_NAME.wsgi
+```
+
+- Commit changes and push to GitHub.
+- Log in to Heroku, create an account if necessary.
+- From the Heroku dashboard, click "Create new app". For a new account a button will be displayed on screen, if you already have one or more apps created a link to this function is located in the "New" dropdown menu at the top right of the screen.
+- On the Create New App page, enter a unique name for the application and select region. Then click Create app.
+- Select the "settings" tab and click the "Reveal Config Vars" button.
+- Enter the following values into the specified fields and click "Add":
+
+    | KEY | VALUE |
+    |-----|-------|
+    | CLOUDINARY_URL | paste your API Environment variable copied from the Cloudinary dashboard |
+    | DATABASE_URL | paste the URL copied from ElephantSQL dashboard |
+    | SECRET_KEY | paste your secret key |
+
+- Select the "Deploy" tab.
+- Select GitHub as the Deployment Method and click "Connect to GitHub".
+- Enter the name of your GitHub repository in the search bar and click "Search".
+- Click the "Connect" button to link your GitHub repository with your Heroku app.
+- Scroll down the page and choose to either Automatically Deploy each time changes are pushed to GitHub, or Manually deploy.
+- The application can be run from the Application Configuration page by clicking on the Open App button.
 
 
 ## Credits 
 
 ### Media
-<!-- - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes as the preview used in this readme file.
-- [Pilestone - Color Blind Vision Simulator](https://pilestone.com/pages/color-blindness-simulator-1) - used to generate the view of colour-blind conditions of the CLI based game.
-- [Dictionary source](http://www.gwicks.net/dictionaries.htm) - the link from which the chosen dictionary was downloaded. -->
+- [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes as the preview used in this readme file.
 
 ### Code
 
