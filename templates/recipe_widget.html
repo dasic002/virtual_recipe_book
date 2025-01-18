@@ -3,6 +3,19 @@
     <div class="card mb-4">
         <div class="card-body dark-bg rounded-3">
             <div class="image-container">
+                {% if user.is_authenticated %}
+                <div class="favourited">
+                    {% if user == faved.author %}
+                    <button class="btn btn-save"><i class="fa-solid fa-heart"></i></button>
+                    {% else %}
+                    <button class="btn btn-save"><i class="fa-regular fa-heart"></i></button>
+                    {% endif %}
+                </div>
+                <div class="rating">
+                    <a href="{% url 'recipe_detail' recipe.slug %}#ratings" class="btn btn-rate">{{ recipe.average_score|default:" - " }}&nbsp;<i
+                            class="fa-solid fa-star"></i></a>
+                </div>
+                {% endif %}
                 {% if "placeholder" in recipe.featured_image.url %}
                 <img class="card-img-top" src="{% static 'images/placeholder.png' %}" alt="placeholder image">
                 {% else %}
@@ -10,7 +23,8 @@
                 {% endif %}
             </div>
             <div class="card-url pt-1">
-                <a href="{% if user.is_authenticated %}{% url 'recipe_detail' recipe.slug %}{% else %}{% url 'sample_recipe_detail' recipe.slug %}{% endif %}" class="recipe-link">
+                <a href="{% if user.is_authenticated %}{% url 'recipe_detail' recipe.slug %}{% else %}{% url 'sample_recipe_detail' recipe.slug %}{% endif %}"
+                    class="recipe-link">
                     <h2 class="card-title">{{ recipe.title }}</h2>
                     <p>{{ recipe.description }}</p>
                 </a>

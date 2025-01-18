@@ -19,17 +19,19 @@ The home page whilst a user is logged in, will display the library of public rec
 ***
 
 ## Table of contents
-<!-- * [UX User Experience](#ux---user-experience)
-  * [User stories](#user-stories)
-  * [Flowchart](#flowchart)
+* [UX User Experience](#ux---user-experience)
+  * [User stories](#user-stories).
   * [Strategy](#strategy)
   * [Scope](#scope)
+  * [Surface](#surface)
+  * [Structure](#structure)
+  * [Wireframes](#wireframes)
   * [Surface](#surface)
 * [Features](#features)
 * [Technologies](#technologies)
 * [Testing](#testing)
 * [Deployment](#deployment)
-* [Credits](#credits) -->
+* [Credits](#credits)
 
 
 
@@ -78,36 +80,36 @@ Each issue expands on the user intent, our Acceptance Criteatia and Tasks to bui
 ![Kanban board in Project](docs/images/kanban_board.PNG)
 
 __Must have features:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/8)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/9)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/1)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/2)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/22)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/4)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/5)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/3)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/6)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/7)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/23)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/24)
+- CLOSED - [USER STORY: draft recipe](https://github.com/dasic002/virtual_recipe_book/issues/8)
+- CLOSED - [USER STORY: Approve recipes to publish](https://github.com/dasic002/virtual_recipe_book/issues/9)
+- CLOSED - [USER STORY: View Paginated list of recipes](https://github.com/dasic002/virtual_recipe_book/issues/1)
+- CLOSED - [USER STORY: Open Recipe](https://github.com/dasic002/virtual_recipe_book/issues/2)
+- CLOSED - [USER STORY: View Comments](https://github.com/dasic002/virtual_recipe_book/issues/22)
+- CLOSED - [USER STORY: User Login](https://github.com/dasic002/virtual_recipe_book/issues/4)
+- CLOSED - [USER STORY: User logout](https://github.com/dasic002/virtual_recipe_book/issues/5)
+- CLOSED - [USER STORY: Account registration](https://github.com/dasic002/virtual_recipe_book/issues/3)
+- CLOSED - [USER STORY: Create a recipe](https://github.com/dasic002/virtual_recipe_book/issues/6)
+- CLOSED - [USER STORY: Private or Public recipes](https://github.com/dasic002/virtual_recipe_book/issues/7)
+- CLOSED - [USER STORY: Update existing recipe ](https://github.com/dasic002/virtual_recipe_book/issues/23)
+- CLOSED - [USER STORY: Delete Recipe](https://github.com/dasic002/virtual_recipe_book/issues/24)
 
 __Should have:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/13)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/15)
-- IN PROGRESS - [](https://github.com/dasic002/virtual_recipe_book/issues/14)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/11)
+- CLOSED - [USER STORY: Comment on recipe ](https://github.com/dasic002/virtual_recipe_book/issues/13)
+- CLOSED - [USER STORY: Modify or delete comment on a recipe](https://github.com/dasic002/virtual_recipe_book/issues/15)
+- IN PROGRESS - [USER STORY: Approve comments](https://github.com/dasic002/virtual_recipe_book/issues/14)
+- OPEN - [USER STORY: Personalise a Recipe](https://github.com/dasic002/virtual_recipe_book/issues/11)
 
 __Could have:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/17)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/10)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/12)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/16)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/18)
+- CLOSED - [USER STORY: View rating](https://github.com/dasic002/virtual_recipe_book/issues/17)
+- OPEN - [USER STORY: Approve changed published recipes](https://github.com/dasic002/virtual_recipe_book/issues/10)
+- OPEN - [USER STORY: Mark recipes as favourites](https://github.com/dasic002/virtual_recipe_book/issues/12)
+- OPEN - [USER STORY: Add a rating to a recipe](https://github.com/dasic002/virtual_recipe_book/issues/16)
+- OPEN - [USER STORY: Add tags to recipe](https://github.com/dasic002/virtual_recipe_book/issues/18)
 
 __Won't have:__
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/19)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/20)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/21)
+- OPEN - [USER STORY: Add a recipe to weekly meal planner](https://github.com/dasic002/virtual_recipe_book/issues/19)
+- OPEN - [USER STORY: Add a meal planner to grocery list](https://github.com/dasic002/virtual_recipe_book/issues/20)
+- OPEN - [USER STORY: Add recipe to grocery list](https://github.com/dasic002/virtual_recipe_book/issues/21)
 
 
 ### Structure
@@ -148,94 +150,140 @@ Google Fonts included:
 - Roboto
 - Lato
 
+#### Icons and images
+Recognisable icons sourced from [FontAwesome](https://fontawesome.com/) were used for [edit](https://fontawesome.com/icons/pen-to-square?f=classic&s=solid), [delete](https://fontawesome.com/icons/trash?f=classic&s=solid), [like](https://fontawesome.com/icons/heart?f=classic&s=regular) and [rating](https://fontawesome.com/icons/star?f=classic&s=regular) buttons as well as an accompanying image for the error pages [403](https://fontawesome.com/icons/ban?f=classic&s=solid), [404](https://fontawesome.com/icons/circle-question?f=classic&s=regular), [405](https://fontawesome.com/icons/circle-xmark?f=classic&s=regular) and [500](https://fontawesome.com/icons/link-slash?f=classic&s=solid).
+
+Regarding images, a [placeholder image](static/images/placeholder.png) and a [mascot image](static/images/placeholder.png) was generated using [Adobe Firefly - AI image generating tool](https://www.adobe.com/uk/products/firefly.html) through Adobe Photoshop, all other images are sourced from the original recipes online.
+Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst the mascot is intended to be a friendly robot chef caricature.
+
 ## Features 
 
-<!-- ### Existing Features
-#### Welcome
-Upon the game loading, the terminal will display a simple Heading "Welcome to Wordle", with only a prompt at the bottom of the interface for the user to enter their name. This is to keep the interface as simply and least daunting as possible before the player begins the game.<br>
-  ![Welcome page](documentation/feat_welcome.PNG)
+### Existing Features
+- __The landing page - Welcome__
+  - As viewed by an anonymous user (i.e.: not registered and logged in user) - the landing page will consist of:
+    - A simple Welcome section welcoming the visitor and inviting the user to sign up.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-welcome.PNG" alt="Welcome section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-welcome.PNG" alt="Welcome section desktop" width="750vw"/>
+      </td></tr>
+      </table>
+    - 3 sample recipes the visitor is free to explore, without access to rate, save or comment.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-sample-recipes.PNG" alt="Sample recipes section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-sample-recipes.PNG" alt="Sample recipes section desktop" width="750vw"/>
+      </td></tr>
+      </table>
+  - As viewed by a logged in user - the landing page turns into the published recipes library displaying all recipes users have chosen to publish including the saved status and average rating of the recipe within the recipe card.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-library.PNG" alt="Published recipe section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-library.PNG" alt="Published recipe section desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-#### New game display
-Once the player has input a name the terminal generates the user variables and word selection and presents the game in the CLI after clearing the welcome display away.
-
-__Note:__ If the play simply pressed enter without entering a name, the game will use the default of "Player-1".
-
-The display will include:
-  1) a personalised message of "Welcome, _player name_".
-  2) an instruction how to bring up the rules of the game.
-  3) blank guess lines shown as a series of asterisks __` *  *  *  *  * `__.
-  4) prompt for player to enter their guess.<br>
+- __Navigation Menu__
+  - The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Sign up** or **Logout** and **My recipes** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-nav-menu.PNG" alt="Nav menu mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-nav-menu.PNG" alt="Nav menu desktop" width="750vw"/>
+      </td></tr>
+      </table>
   
-![New game displayed](documentation/feat_game_display.PNG) -->
+
+<!-- - __How to Play__
+  - This section revealed on clicking the "How to play" button in the menu or the "?" icon button on the landing page or player prompts, contains various subsections providing instructions with illustrations on how to play the game of kings.<br>
+  ![How To Play pg1 of 10](documentation/Feat-htp1_10.PNG) ![How To Play pg2 of 10](documentation/Feat-htp2_10.PNG) ![How To Play pg3 of 10](documentation/Feat-htp3_10.PNG) 
+  - The steps are provided in subsections that are navigated using the left and right arrow buttons at the bottom. Whilst the "X" button returns to the game area, this is so the player can refer to the instructions at any time and easily resume their game.<br>
+  ![How To Play navigation](documentation/Feat-htp_nav.PNG) 
+
+- __Credits__
+  - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) WhatsApp.<br>
+  ![Credits section](documentation/Feat-Credits.PNG)
+
+- __Error 404 Page__
+  - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
+  ![Error 404 page](documentation/Feat-404page.PNG)
+
+- __Player Prompt__
+  The player prompt screen prompts the human player(s) that it is their turn, particularly useful when more than one human is playing on the same device, to help keep the player's hand and picks a secret. The prompt includes a section with last actions taken by each player. The prompt will always include the button "READY" for the player to move on to their next action and the "?" icon button as a shortcut to review the instructions.
+
+  - __Initial prompt__ - At the start of the game or round this section will have an entry of "New Game!" or "New Round!" and any actions by players that have taken their turn. Mostly indicating that the players have had a turn to look at their bottom 2 cards and if any of them have decided knock already. The button "READY" will move the player to see their hand, allow shuffling and reveal the bottom 2 cards when done.<br>
+  ![Early player prompt](documentation/Feat-player_prompt.PNG)
+
+  - __Mid round prompt__ - After all players have had a chance to see their bottom 2 cards, the "READY" button brings the player to the table view where they can opt to take the card from the discard stack or draw from the draw stack. Hence, the first difference in the prompt is the addition of "Pick a card!" on the heading. The players' actions should also describe them as the player would view on the table. For example:
+      - If a player has picked the top card from the discard stack and used it to swap with another in their hand, the syntax will follow <br>
+      __"[playerName]__ took the __[name of card on discard stack]__ for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
+      This is useful in gameplay to get an idea of how good the other players are doing and for the intriguing moment the player may have lost a good card from their hand.
+      - If a player has drawn a new card and swapped a card in their hand, the syntax becomes <br>
+      __"[playerName]__ drew for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
+      The difference being that it omits the name of the card drawn as in real life no other player would have visibility of what was picked up.
+      - If a player has drawn and discarded a card, presumably because the value was too high.<br>
+      __"[playerName]__ drew and discarded __[name of card discarded]"__<br>
+  ![Mid Round player prompt](documentation/Feat-player_prompt2.PNG)
+
+  - __Last playing prompt of the round__ - After a player has opted to knock on their cards, all players thereafter will see the prompt with the heading changed to "last card!" and see the text "**KNOCKED!**" added at the end of that player's action. This is to offer the others a chance to have their last turn of the round.<br>
+  ![last playing prompt of the round](documentation/Feat-player_prompt3.PNG)
+
+  - __End of round prompt__ - Only visible to the knocking player (if human) or to the next human player. This triggers the scoring of all players' cards and the "READY" button will reveal the table view with the scores, players' cards and outcome of the round or game.<br>
+  ![end of round prompt](documentation/Feat-player_prompt4.PNG)
+
+- __Player card hand__
+  - __Selecting to shuffle and countdown to reveal__
+  After the player has gone through the initial prompt, the game displays the player's card hand as they'd see on the table. The player can opt to shuffle 2 cards at a time on their hand in the hope it may reveal higher values on the bottom 2 cards. On clicking "Done" the cards can no longer be selected and the game counts down to reveal these bottom cards.<br>
+  ![before selecting to shuffle](documentation/Feat-card_to_shuffle.PNG) 
+  ![selecting cards to shuffle](documentation/Feat-card_to_selected_pair.PNG)
+  ![Countdown to reveal](documentation/Feat-card_to_btm_reveal.PNG)
   
-<!-- #### Player Prompt
-The game prompts the player to take a guess, provided it passes the validation checks, the game checks the input guess against the randomly selected word for this session. Every time the guess is incorrect the prompt changes to "Oops! That guess is wrong. You have {number} of guess(es) left.".
+  - __Selecting a card to swap with picked__
+  After the player as picked a card from either stack on the table and accepted to swap that card with one in their hand, the game reuses the same player card hand display to show the player's hand so the player can select which to swap it with. On selection of the card, the game will reveal the card being discarded and countdown the knocking button before moving on to the next player.<br>
+  ![selecting cards to shuffle](documentation/Feat-card_to_swap.PNG)
+  
+- __Knocking - bell icon button__
+Available after the player has viewed their bottom 2 cards or swapped or discarded a card, the button for knocking appears with a 3 seconds countdown to allow the player to lock in their hand if they believe they have the winning hand.<br>
+![knock after viewing hand for first time](documentation/Feat-knock_on_start.PNG)
+![knock after discarding a card](documentation/Feat-knock_after_pick.PNG)<br>
+If no other player has knocked yet, the button is enabled still and the icon will appear in the deep purple and contrast well with the background. After another player has knocked, the button is disabled, the content is shown in grey and the countdown is shortened to 1 second as it the player cannot act any longer on it.<br>
+![enabled knocking button](documentation/Feat-Knock_enabled.PNG) 
+![disabled knocking button](documentation/Feat-Knock_disabled.PNG)<br>
 
-![Prompt after incorrect guess](documentation/feat_prompt-after-wrong-attempt.PNG) -->
+- __Table view__
+  - __To pick a card__ - shown after the player has been prompted to pick up a card, this screen displays the table with the other players above, the stacks to pick from in the middle and the player's hand below. In this view, the stacks section has the deep purple background to indicate to the player that their next action involves making a selection here. Should another player have knocked for their hand, a bell icon will appear next to their name.<br>
+  ![picking a card from a stack](documentation/Feat-table-cards-dealt.PNG)
+  ![knocking player indicated by icon](documentation/Feat-table_knocked.PNG)
+  
+  - __End of Round/Game__ - shown after the human player has been prompted with end of round, the same view is displayed, except this time the players' cards are all revealed, scores assigned and in place of the stacks of cards in the middle, the round or game outcome is announced and a button prompting the player to move on to the next round or a new game. Also visible at this stage are icons next to the players' names, the winner of the round or game will have a trophy icon. Should the winner not be the player that knocked the icon "2X" is assigned to the knocking player to indicate their score of this round has been doubled. All other players are assigned an "X" icon.<br>
+  ![end of round table](documentation/Feat-end_of_round.PNG)
+  ![end of round table, knocking player lost](documentation/Feat-end_of_round_doubled.PNG)
+  ![end of game table](documentation/Feat-end_of_game.PNG)
 
-<!-- #### Invalid guess inputs display
-To reduce frustrations over incorrect guesses we have put in place some input validations, as well as adding a `strip()` method to the guess input so should the user enter a whitespace before or after typing their word, it will not trigger the validation checks for a seemingly valid guess.
+- __Player picked card__
+This view is displayed when the player has made a selection of picking the card from either stack. It present the picked card in a larger format and offers a reject and an accept button to make their decision. Accepting the card will display the player's hand to select the position in their hand that they are swapping it with. Should the card be picked from the discard stack, rejecting this card will simply return to the table, whilst picking from the draw stack it will discard the card. This is because the player's turn must always end with discarding a card, be it from the draw stack or from their hand.<br>
+![view of picked card](documentation/Feat-picked_card.PNG)
 
-##### Invalid data: not exactly 5 characters long
-This first check verifies the guess is only 5 characters long, not shorter or longer. In the chance the player enters a guess that fails this check the game prints out the game display again but with the message advising the guess was invalid and explaining why so.
+### Features Left to Implement
+- A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
 
-![Invalid data: shorter than 5 chars](documentation/feat_invalid-short-input.PNG)
+- To make the game play as accurate to real life, knocking on viewing of the bottom 2 cards of the player's hand should record time taken by the player from the moment the knock button appears and compare that to whoever has knocked too, whoever was quickest to knock after viewing their cards gets the status. However, this is rare for players to want to knock this early and even more so for more than one player to feel confident enough to knock this early and would only be necessary if the game remains played on one single device.
 
-![Invalid data: longer than 5 chars](documentation/feat_invalid-long-input.PNG)
+- The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of JavaScript alone and have not learnt about WebSocket yet.
 
-##### Invalid data: includes characters not in the alphabet
-Should the guess input pass the 5 characters long verification, the next check verifies that no characters other than letters in the alphabet have been used. Should the player enter punctuation marks, numbers or other special characters, the game will refresh and display the error message explaining why the last entered guess was not valid.
+- The original intent with the BotSkill value, was to mimic a bot player that might have poorer memory for remembering the cards accurately. So 1 - as novice, might be a bot that remembers a particular card as being in another position or have thought it's value was higher and risk losing good cards. Whilst level 3 - expert, might remember the cards it has seen with great accuracy or that it employs a very discerning tactic of wanting for only the best cards to be picked up before "knocking", locking their hand.
 
-![Invalid data: includes a non-alphabetic character](documentation/feat_invalid-non-alpha-input.PNG)
-
-##### Invalid data: is not a word in the dictionary used
-Finally, after passing the other checks, the last check verifies that the input is a word included in our dictionary. Should it not be included in the dictionary, it will refresh the game and advise the word is not in the dictionary.
-
-![Invalid data: not in our dictionary](documentation/feat_invalid-not-a-word-input.PNG) -->
-
-<!-- #### Clues on guesses made
-The objective of wordle is that the player gets given clues on all guesses so the player can deduce what the selected word is. In our version of the game:
-- Blank lines are shown as plain text asterisks ` * `.
-- Letters not existing in the selected word are shown in a dark grey background - these tell the player to avoid using these letters in future guesses.
-- Letters existing in the selected word but in the incorrect place are shown in a bright yellow background - these tell the player to try words where this letter is in another place.
-- Letters existing in the selected word and in the correct place are shown in a green background - these tell the player to try words where this letter is as it is.
-
-#### End of Round
-The round ends when the player has either guessed the selected word or has failed to do so after 6 attempts.
-##### Correct guess
-On guessing the word, the terminal prints out "Nicely done, _player name_!" and confirms the word of the day.
-
-![Game won](documentation/feat_game-won.PNG)
-
-##### 6 Wrong guesses
-On 6 failed attempts, the terminal prints out "GAME OVER", reveals the word of the day and "Oh no, _player name_! You've lost this streak!".
-
-![Game lost](documentation/feat_game-lost.PNG)
-
-##### Scores
-In either case the game will keep track of the score, namely the consecutive number of times the player has guessed the word correctly. Should it be the maximum the player has managed to get in this session, the game will record it as a high score. Should the player, win the game, the "Current streak" counter increments by 1, if the game was lost, it resets to 0.
-
-The game will also calculate and display the average number of guesses the player has needed to guess the word of the day. It will also look up the player's longest winning streak and rank the player against the other game sessions recorded.
-
-![Game scoring](documentation/feat_game-scoring.PNG)
-
-##### Inviting for a new game
-At the end of the round, the game prompts the player for another game. If the player inputs anything but "n" or "N", a new round will start with a new word of the game. Should the player have had enough, they'll enter "n" or "N" for No to exit the game. On doing so a message thanking the player for playing will be printed out.
-
-![Game exit](documentation/feat_game-exit.PNG)
-
-#### Game rules display
-Should the player need to be reminded of the rules, the player can enter "help!" as a guess input. This will bypass the usual validations and cause the game to print the rules on a clear terminal and request a prompt just to press 'Enter' when done with the game for when the player feels ready to resume the game.
-
-![Rules display](documentation/feat_rules.PNG) -->
-
-### Data Models
-Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
-
-#### Entity Relationship Diagram
-
-![Entity Relationship Diagram](docs/images/RecipeBook_ERD.jpg)
-
+- More game interactions. Initially planned to include:
+  - the option of having sounds on the game;
+  - customisable colour theme of cards artwork and table appearance;
+  - Illustrated and/or animated reactions on reveals of the cards swapped out, for instance a good swap could display a thumbs up and a "Nice!" text over the card, whereas a bad swap could momentarily turn the image monochrome and display a message of "Oh no!". -->
 
 <!-- ### Features Left to Implement
 These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
@@ -284,6 +332,12 @@ The most feasible way I can think of is to either:
 - provide new players their timestamp based ID after entering their name so that next time they access the game, if it is entered in the name prompt of the welcome page, the game can recognise the input is all numeric and 12 digits long, which makes the game lookup the number as an ID, if it exists in our worksheet it will pull the data into the game and allow the next round, if won to increment the current winning streak as if the player had not closed the previous game.
 - or that when new players enter their name on the welcome page prompt, the game asks the player to provide a unique username and password, with the game confirming that the username is valid and available in the worksheet. Next time the player returns, when prompted for a name, the player can enter their username, the game looks up the usernames in the worksheet and prompts for a password, before it resumes the game with the same stats.  -->
 
+### Data Models
+Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
+
+#### Entity Relationship Diagram
+
+![Entity Relationship Diagram](docs/images/RecipeBook_ERD.jpg)
 
 ## Technologies
 - Languages used:
