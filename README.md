@@ -20,7 +20,7 @@ The home page whilst a user is logged in, will display the library of public rec
 
 ## Table of contents
 * [UX User Experience](#ux---user-experience)
-  * [User stories](#user-stories).
+  * [User stories](#user-stories)
   * [Strategy](#strategy)
   * [Scope](#scope)
   * [Surface](#surface)
@@ -33,11 +33,7 @@ The home page whilst a user is logged in, will display the library of public rec
 * [Deployment](#deployment)
 * [Credits](#credits)
 
-
-
 ***
-
-
 ## UX - User Experience
 
 ### User stories
@@ -159,9 +155,20 @@ Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst th
 ## Features 
 
 ### Existing Features
-- __The landing page - Welcome__
-  - As viewed by an anonymous user (i.e.: not registered and logged in user) - the landing page will consist of:
-    - A simple Welcome section welcoming the visitor and inviting the user to sign up.
+#### Navigation Menu
+The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Register** or **Logout** and **My recipes** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-nav-menu.PNG" alt="Nav menu mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-nav-menu.PNG" alt="Nav menu desktop" width="750vw"/>
+      </td></tr>
+      </table>
+
+#### Home page
+As viewed by an anonymous user (i.e.: not registered and logged in user) - the landing page will consist of:
+  - __Welcome section__ - A simple Welcome section welcoming the visitor and inviting the user to sign up.
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
@@ -170,7 +177,7 @@ Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst th
       <img src="docs/images/feat_desktop-welcome.PNG" alt="Welcome section desktop" width="750vw"/>
       </td></tr>
       </table>
-    - 3 sample recipes the visitor is free to explore, without access to rate, save or comment.
+  - __Sample library__ - 3 sample recipes the visitor is free to explore, without access to rate, save or comment on the recipe.
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
@@ -179,7 +186,8 @@ Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst th
       <img src="docs/images/feat_desktop-sample-recipes.PNG" alt="Sample recipes section desktop" width="750vw"/>
       </td></tr>
       </table>
-  - As viewed by a logged in user - the landing page turns into the published recipes library displaying all recipes users have chosen to publish including the saved status and average rating of the recipe within the recipe card.
+As viewed by a logged in user
+  - __Published Library__ - the landing page turns into the published recipes library displaying all recipes users have chosen to publish including the saved status and average rating of the recipe within the recipe card.
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
@@ -189,89 +197,155 @@ Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst th
       </td></tr>
       </table>
 
-- __Navigation Menu__
-  - The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Sign up** or **Logout** and **My recipes** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
+#### My Recipes
+Once a user is logged in, the link is available in the nav menu. It navigates to a library page, listing all of the recipes the current user has created, no matter the state (**DRAFT**, **PRIVATE**, **UNLISTED** and **PUBLISHED**). In this same page, the user has access to manage their library. The page includes the recipe widget and pagination widget just like in the home page.<br>
+![my recipes page](docs/images/feat_my-recipes.png)
+  - __Add recipe__ - Present at the top of the page is a **Add recipe** button, click it will navigate to a blank recipe editor form.<br>
+  ![add recipe button](docs/images/feat_add-btn.PNG)
+  - __Edit recipe__ - Present at the base of each recipe card, the **edit** button will navigate the user to the recipe editor form, pre-populated with the recipe details.<br>
+  ![edit button](docs/images/feat_edit-btn.PNG) 
+  - __Delete recipe__ - Present at the base of each recipe card, the **delete** button will bring up a modal window to confirm the user wants to delete the given recipe from the database. Clicking delete will erase the data from the database and redirect the user to their recipe library with an alert message confirming the recipe has been deleted.<br>
+  ![delete button](docs/images/feat_delete-btn.PNG)
+
+#### Recipe editor form
+The form used by the authenticated user to create a new recipe or update an existing one.<br>
+![Recipe editor page](docs/images/feat_recipe-editor.png)
+The form includes the fields for:
+- Title - single line text input field, for recipe title
+- Description - text area input field, for an inticing excerpt describing the recipe
+- Prep (Preparation) time - integer input field, for time taken, in minutes, to prepare ingredients through to the moment the dish is ready to get cooked, frozen or left to set.
+- Cook (cooking) time - integer input field, for time taken, in minutes, for the dish to be cooked, frozen or set.
+- Servings - integer input field, for the number of servings the recipe described supplies.
+- Method - text area input field, for recording the steps taken to prepare the given dish.
+- Listing type - dropdown list, selecting between the options:
+  - **DRAFT** - draft recipe, details are not complete, visible only to author.
+  - **PRIVATE** - ideally a complete recipe, visible only to author.
+  - **UNLISTED** - ideally a complete recipe, visible to any registered user that has the direct URL.
+  - **PUBLISHED** - complete recipe, ready to be shared in the published recipe available to any registered user. Requires the Admin user to approve the recipe before it appears on the published library or the user has the direct URL.
+- Source - single line text input field, so the author can enter details of the origin of the recipe. i.e.: a book, grandmother, tv show.
+- Source url - slug input field, so the author can enter the url for the original recipe if it was sourced online.
+- Ingredient subset form - generated with Django's formsets, it is made visible on clicking "add ingredient", managed via javascript.<br>
+  ![Ingredient formset](docs/images/feat_ingredient-formset.png)
+  - Food item - single line text input field, to enter food item name.
+  - Quantity - float number input field, set to 2 decimal points.
+  - Unit - dropdown list, to select the applicable unit of measure.
+  - Remove ingredient button - run with javascript to delete the ingredient form above to ignore entered data or remove the ingredient from the database.
+- Submit button - to submit new recipe or changes made to existing recipe.
+
+If the user has navigated to this page by clicking **new recipe** the form will open with blank fields ready for data entry. If navigated to by selecting a recipe to **edit**, the form will be prepopulated with the recipe data.
+
+On successful submission, the form will create an alert messages to indicate to the user the data was successfully submitted.
+
+#### User Library
+Similarly to the My recipes page, logged in users can navigate to other users' recipe library view, by clicking on the author name of a given recipe card. This page will render all the published recipes by the given author. The title on the page will indicate the current author library in view.<br>
+![User library](docs/images/feat_user-library.png)
+
+#### Widgets
+##### Recipe widget
+This reusable template renders the recipe card to display in the library views. It consists of image, title, description, Author and timestamp of recipe being added. The author username here is clickable and will take the user to the author's library to view their published recipes, however, this is only visible to logged in users and will redirect the Anonymous user to the log in page.<br>
+
+Once the user is logged in, the widget will include the save button and rating. Where the save button indicates whether the user has saved the given recipe or not. The rating indicates the average rating given to a recipe and is a button that if clicked, will direct the user to the ratings section in the recipe details page.<br>
+
+Finally, if the user has navigated to "My recipes" page, the recipe widget will include the edit and delete buttons as the user expects to have full managemment control of their own recipes here.<br>
+      <table>
+      <tr><th>Anonymous User</th><th>Logged in User</th><th>My recipes views</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_recipe-widget-anon.png" alt="Recipe widget view to Anonymous users" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_recipe-widget-logged-in.png" alt="Recipe widget view to logged in users" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_recipe-widget-my-recipe.png" alt="Recipe widget view in My recipes page" width="300vw"/>
+      </td></tr>
+      </table>
+
+##### Pagination widget
+This reusable template renders the pagination for a given library view. Should the given library contain more than the library template allows to render in a page, in this case 6 recipes per page, the widget will include the following:
+- current page out of the total number of pages available to navigate through.
+- page navigation buttons needed in the current position, i.e.: page 1 of 2 will only include buttons to navigate forward pages.<br>
+      <table>
+      <tr><th>Single page</th><th>First page</th><th>Last page</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_pagination-1of1-page.PNG" alt="Pagination widget view of single page" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_pagination-1of2-page.PNG" alt="Pagination widget view of first page" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_pagination-2of2-page.PNG" alt="Pagination widget view of last page" width="300vw"/>
+      </td></tr>
+      </table>
+
+#### Recipe details
+When a logged in user clicks on a recipe, the recipe will be displayed in this template, which consists of photo of the dish, title and publication details at the top, with the save button and rating average over the photo just as in the recipe widget.<br>
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
-      <img src="docs/images/feat_mobile-nav-menu.PNG" alt="Nav menu mobile" width="150vw"/>
+      <img src="docs/images/feat_mobile-recipe-detail-image.png" alt="recipe detail image mobile" width="150vw"/>
       </td><td>
-      <img src="docs/images/feat_desktop-nav-menu.PNG" alt="Nav menu desktop" width="750vw"/>
+      <img src="docs/images/feat_desktop-recipe-detail-image.PNG" alt="recipe detail image desktop" width="750vw"/>
       </td></tr>
       </table>
-  
 
-<!-- - __How to Play__
-  - This section revealed on clicking the "How to play" button in the menu or the "?" icon button on the landing page or player prompts, contains various subsections providing instructions with illustrations on how to play the game of kings.<br>
-  ![How To Play pg1 of 10](documentation/Feat-htp1_10.PNG) ![How To Play pg2 of 10](documentation/Feat-htp2_10.PNG) ![How To Play pg3 of 10](documentation/Feat-htp3_10.PNG) 
-  - The steps are provided in subsections that are navigated using the left and right arrow buttons at the bottom. Whilst the "X" button returns to the game area, this is so the player can refer to the instructions at any time and easily resume their game.<br>
-  ![How To Play navigation](documentation/Feat-htp_nav.PNG) 
+Followed by the recipe description, ingredients and steps.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-ingredients.png" alt="recipe detail ingredients mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-ingredients.PNG" alt="recipe detail ingredients desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-- __Credits__
-  - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) WhatsApp.<br>
-  ![Credits section](documentation/Feat-Credits.PNG)
+Then, the ratings section which will display the current user's review before showing the remaining reviews in a collapsible table.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-ratings.png" alt="recipe detail ratings mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-ratings.PNG" alt="recipe detail ratings desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-- __Error 404 Page__
-  - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
-  ![Error 404 page](documentation/Feat-404page.PNG)
+Finally, the comments section, which will display all approved comments on the recipe. If the current user has made comments, they will have edit and delete buttons available on their comments and should their comments be pending approval, a message will indicate so too.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-comments.png" alt="recipe detail comments mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-comments.PNG" alt="recipe detail comments desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-- __Player Prompt__
-  The player prompt screen prompts the human player(s) that it is their turn, particularly useful when more than one human is playing on the same device, to help keep the player's hand and picks a secret. The prompt includes a section with last actions taken by each player. The prompt will always include the button "READY" for the player to move on to their next action and the "?" icon button as a shortcut to review the instructions.
+- __Anonymous user handling__
+<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-anon-ratings.png" alt="anon user recipe detail ratings mobile" width="450vw"/>
+      </td><td>
+      <img src="docs/images/feat_mobile-recipe-detail-anon-comments.png" alt="anon user recipe detail comments mobile" width="450vw"/>
+      </td></tr>
+      </table>
 
-  - __Initial prompt__ - At the start of the game or round this section will have an entry of "New Game!" or "New Round!" and any actions by players that have taken their turn. Mostly indicating that the players have had a turn to look at their bottom 2 cards and if any of them have decided knock already. The button "READY" will move the player to see their hand, allow shuffling and reveal the bottom 2 cards when done.<br>
-  ![Early player prompt](documentation/Feat-player_prompt.PNG)
-
-  - __Mid round prompt__ - After all players have had a chance to see their bottom 2 cards, the "READY" button brings the player to the table view where they can opt to take the card from the discard stack or draw from the draw stack. Hence, the first difference in the prompt is the addition of "Pick a card!" on the heading. The players' actions should also describe them as the player would view on the table. For example:
-      - If a player has picked the top card from the discard stack and used it to swap with another in their hand, the syntax will follow <br>
-      __"[playerName]__ took the __[name of card on discard stack]__ for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
-      This is useful in gameplay to get an idea of how good the other players are doing and for the intriguing moment the player may have lost a good card from their hand.
-      - If a player has drawn a new card and swapped a card in their hand, the syntax becomes <br>
-      __"[playerName]__ drew for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
-      The difference being that it omits the name of the card drawn as in real life no other player would have visibility of what was picked up.
-      - If a player has drawn and discarded a card, presumably because the value was too high.<br>
-      __"[playerName]__ drew and discarded __[name of card discarded]"__<br>
-  ![Mid Round player prompt](documentation/Feat-player_prompt2.PNG)
-
-  - __Last playing prompt of the round__ - After a player has opted to knock on their cards, all players thereafter will see the prompt with the heading changed to "last card!" and see the text "**KNOCKED!**" added at the end of that player's action. This is to offer the others a chance to have their last turn of the round.<br>
-  ![last playing prompt of the round](documentation/Feat-player_prompt3.PNG)
-
-  - __End of round prompt__ - Only visible to the knocking player (if human) or to the next human player. This triggers the scoring of all players' cards and the "READY" button will reveal the table view with the scores, players' cards and outcome of the round or game.<br>
-  ![end of round prompt](documentation/Feat-player_prompt4.PNG)
-
-- __Player card hand__
-  - __Selecting to shuffle and countdown to reveal__
-  After the player has gone through the initial prompt, the game displays the player's card hand as they'd see on the table. The player can opt to shuffle 2 cards at a time on their hand in the hope it may reveal higher values on the bottom 2 cards. On clicking "Done" the cards can no longer be selected and the game counts down to reveal these bottom cards.<br>
-  ![before selecting to shuffle](documentation/Feat-card_to_shuffle.PNG) 
-  ![selecting cards to shuffle](documentation/Feat-card_to_selected_pair.PNG)
-  ![Countdown to reveal](documentation/Feat-card_to_btm_reveal.PNG)
-  
-  - __Selecting a card to swap with picked__
-  After the player as picked a card from either stack on the table and accepted to swap that card with one in their hand, the game reuses the same player card hand display to show the player's hand so the player can select which to swap it with. On selection of the card, the game will reveal the card being discarded and countdown the knocking button before moving on to the next player.<br>
-  ![selecting cards to shuffle](documentation/Feat-card_to_swap.PNG)
-  
-- __Knocking - bell icon button__
-Available after the player has viewed their bottom 2 cards or swapped or discarded a card, the button for knocking appears with a 3 seconds countdown to allow the player to lock in their hand if they believe they have the winning hand.<br>
-![knock after viewing hand for first time](documentation/Feat-knock_on_start.PNG)
-![knock after discarding a card](documentation/Feat-knock_after_pick.PNG)<br>
-If no other player has knocked yet, the button is enabled still and the icon will appear in the deep purple and contrast well with the background. After another player has knocked, the button is disabled, the content is shown in grey and the countdown is shortened to 1 second as it the player cannot act any longer on it.<br>
-![enabled knocking button](documentation/Feat-Knock_enabled.PNG) 
-![disabled knocking button](documentation/Feat-Knock_disabled.PNG)<br>
-
-- __Table view__
-  - __To pick a card__ - shown after the player has been prompted to pick up a card, this screen displays the table with the other players above, the stacks to pick from in the middle and the player's hand below. In this view, the stacks section has the deep purple background to indicate to the player that their next action involves making a selection here. Should another player have knocked for their hand, a bell icon will appear next to their name.<br>
-  ![picking a card from a stack](documentation/Feat-table-cards-dealt.PNG)
-  ![knocking player indicated by icon](documentation/Feat-table_knocked.PNG)
-  
-  - __End of Round/Game__ - shown after the human player has been prompted with end of round, the same view is displayed, except this time the players' cards are all revealed, scores assigned and in place of the stacks of cards in the middle, the round or game outcome is announced and a button prompting the player to move on to the next round or a new game. Also visible at this stage are icons next to the players' names, the winner of the round or game will have a trophy icon. Should the winner not be the player that knocked the icon "2X" is assigned to the knocking player to indicate their score of this round has been doubled. All other players are assigned an "X" icon.<br>
-  ![end of round table](documentation/Feat-end_of_round.PNG)
-  ![end of round table, knocking player lost](documentation/Feat-end_of_round_doubled.PNG)
-  ![end of game table](documentation/Feat-end_of_game.PNG)
-
-- __Player picked card__
-This view is displayed when the player has made a selection of picking the card from either stack. It present the picked card in a larger format and offers a reject and an accept button to make their decision. Accepting the card will display the player's hand to select the position in their hand that they are swapping it with. Should the card be picked from the discard stack, rejecting this card will simply return to the table, whilst picking from the draw stack it will discard the card. This is because the player's turn must always end with discarding a card, be it from the draw stack or from their hand.<br>
-![view of picked card](documentation/Feat-picked_card.PNG)
+#### User Authentication
+- __Register__
+- __Login__
+- __Logout__
+#### Alert messages
+#### HTTP Error pages__
+- __403__
+- __404__
+<!-- - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
+![Error 404 page](documentation/Feat-404page.PNG) -->
+- __405__
+- __500__
 
 ### Features Left to Implement
+These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
+
+#### Recipe saving
+#### Recipe rating
+#### Comment approval within Recipe
+
+<!-- ### Features Left to Implement
 - A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
 
 - To make the game play as accurate to real life, knocking on viewing of the bottom 2 cards of the player's hand should record time taken by the player from the moment the knock button appears and compare that to whoever has knocked too, whoever was quickest to knock after viewing their cards gets the status. However, this is rare for players to want to knock this early and even more so for more than one player to feel confident enough to knock this early and would only be necessary if the game remains played on one single device.
@@ -285,8 +359,7 @@ This view is displayed when the player has made a selection of picking the card 
   - customisable colour theme of cards artwork and table appearance;
   - Illustrated and/or animated reactions on reveals of the cards swapped out, for instance a good swap could display a thumbs up and a "Nice!" text over the card, whereas a bad swap could momentarily turn the image monochrome and display a message of "Oh no!". -->
 
-<!-- ### Features Left to Implement
-These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
+<!-- 
 
 #### __Alphabet checklist__
 The official Wordle game includes the whole keyboard in the display, highlighting which letters have not been used, which are non-existing in the word of the day and existing or correctly placed. This helps the player visualise which letters they could use on their next guess much like a checklist of the alphabet. It becomes easier to try sounding out words for the next guess without using the letters the game has rules out. 
@@ -430,11 +503,8 @@ Chefs on the Net app uses a relational database to store and manage data. The re
 
 ### Bugs
 
-<!-- - __ANSI escape 8-bit colours not visible on Heroku - FIXED__<br>
-Heroku allows for colours in its app, but these are restricted to 3-bit and 4-bit, so have selected colours from that selection instead.
-
-- __Dictionary includes words with the character "ƒ" - FIXED__<br>
-This character appeared on words that should have ended with an accented e (é), like __sauté__. For ease of playing the game this character has been replaced with a plain "e". -->
+- __Images uploading to Cloudinary via frontend form - OUTSTANDING__<br>
+After setting up the model to include cloudinary library and field and even following an implementation guide from cloudinary, the recipe editor form would not recognise there was a file selected in the form to upload, so it always failed the form validation on submission. I removed the field from the formset so the form could still be used for MVP until I could figure out how to make it work.
 
 
 ## Deployment
