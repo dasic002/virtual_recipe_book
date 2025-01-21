@@ -315,7 +315,7 @@ Finally, the comments section, which will display all approved comments on the r
       </table>
 
 - __Anonymous user handling__
-<br>
+When the recipe details page is viewable by an anonymous user, the forms in ratings and comments sections are disabled and encourage the user to sign up or login.<br>
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
@@ -326,38 +326,41 @@ Finally, the comments section, which will display all approved comments on the r
       </table>
 
 #### User Authentication
-- __Register__
-- __Login__
-- __Logout__
-#### Alert messages
-#### HTTP Error pages__
-- __403__
-- __404__
-<!-- - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
-![Error 404 page](documentation/Feat-404page.PNG) -->
-- __405__
-- __500__
+To add user authentication the Django Allauth package was installed. It provides our app with the capabilities to detect a user and provide real use scenarios for our CRUD functionalities. User registration, login and logout was added to our app using the views and templates provided with Allauth.<br>
+- __Registration__<br>
+![Account registration](docs/images/feat_sign-up.PNG)
+- __Login__<br>
+![Account login](docs/images/feat_login.PNG)
+- __Logout__<br>
+![Account logout](docs/images/feat_logout.PNG)
+- __Further controls__
+  - Only one superuser has been created and has access to the admin control panel, this was to prevent the risk of granting too much access to users and creating a more labour intensive user admin, as with each new user registration, the superuser would need to login and grant access to the new user. Whereas, it is better if all the controls users need are available within the frontend interface.
+  - Django login required mixin was added to limit what access Anonymous users have and redirect them to the login page automatically. This function adds forwards the user to the intended URL once they have logged in. 
+  - Otherwise, our code does verify the user is authenticated and has the rights to access a given page and will redirect to the relevant error responses as appropriate.
 
-### Features Left to Implement
+#### Alert messages
+Alert messages have been enabled to provide the user with feedback on actions taken, be it notify of successfull registration, login, logout, recipe or comment created, edited or deleted.<br>
+![Confirmation recipe created alert](docs/images/feat_alert-recipe-added.PNG)
+
+#### HTTP Error pages
+Bespoke error pages for codes 403, 404, 405 and 500 have been created to fit within the style of the website and provide easy access to the navigation so the user can get back to an accessible page of the site.
+- __403__<br>
+![error 403](docs/images/error_403.PNG)
+- __404__<br>
+![error 404](docs/images/error_404.PNG)
+- __405__<br>
+![error 405](docs/images/error_405.PNG)
+- __500__<br>
+![error 500](docs/images/error_500.PNG)
+
+<!-- ### Features Left to Implement
 These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
 
 #### Recipe saving
 #### Recipe rating
 #### Comment approval within Recipe
+In hindsight, the rest of the users could have been granted staff status to perhaps add the means to approve comments and add photos to recipes as we've not been able to properly implement image uploads to cloudinary through our frontend recipe editor form. -->
 
-<!-- ### Features Left to Implement
-- A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
-
-- To make the game play as accurate to real life, knocking on viewing of the bottom 2 cards of the player's hand should record time taken by the player from the moment the knock button appears and compare that to whoever has knocked too, whoever was quickest to knock after viewing their cards gets the status. However, this is rare for players to want to knock this early and even more so for more than one player to feel confident enough to knock this early and would only be necessary if the game remains played on one single device.
-
-- The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of JavaScript alone and have not learnt about WebSocket yet.
-
-- The original intent with the BotSkill value, was to mimic a bot player that might have poorer memory for remembering the cards accurately. So 1 - as novice, might be a bot that remembers a particular card as being in another position or have thought it's value was higher and risk losing good cards. Whilst level 3 - expert, might remember the cards it has seen with great accuracy or that it employs a very discerning tactic of wanting for only the best cards to be picked up before "knocking", locking their hand.
-
-- More game interactions. Initially planned to include:
-  - the option of having sounds on the game;
-  - customisable colour theme of cards artwork and table appearance;
-  - Illustrated and/or animated reactions on reveals of the cards swapped out, for instance a good swap could display a thumbs up and a "Nice!" text over the card, whereas a bad swap could momentarily turn the image monochrome and display a message of "Oh no!". -->
 
 <!-- 
 

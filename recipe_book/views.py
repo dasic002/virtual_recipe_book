@@ -318,10 +318,20 @@ def recipe_edit(request, slug):
             )
 
             return redirect('user_library', recipe.author.username)
+        
+        else:
+            messages.add_message(
+                request, messages.ERROR,
+                (f'Recipe {recipe.title} has not been updated!' +
+                    f' You may not have permission to edit this recipe!')
+            )
 
-    else:
+    elif request.user == recipe.author:
         recipe_form = RecipeForm(instance=recipe)
         ingredient_form = IngredientFormSet(instance=recipe)
+    
+    else:
+        raise PermissionDenied
 
     return render(
         request,
