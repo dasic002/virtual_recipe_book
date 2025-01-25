@@ -353,60 +353,102 @@ Bespoke error pages for codes 403, 404, 405 and 500 have been created to fit wit
 - __500__<br>
 ![error 500](docs/images/error_500.PNG)
 
-<!-- ### Features Left to Implement
-These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
+### Features Left to Implement
+Due to personal time constraints the following features were not implemented so I did not get distracted with a feature creep and not deliver on my MVP.
 
-#### Recipe saving
-#### Recipe rating
-#### Comment approval within Recipe
-In hindsight, the rest of the users could have been granted staff status to perhaps add the means to approve comments and add photos to recipes as we've not been able to properly implement image uploads to cloudinary through our frontend recipe editor form. -->
+#### __Recipe form - image upload__
+The recipe form was meant to include fields for every detail the recipe creator would expect to include. An enticing picture is often expected to capture the readers' interest, and for ease of creating the recipe, the frontend form should have included a field for this image upload. However, as much as it was tried, every time the field was included in the form, it never uploaded the image and the form this not see the field as valid spite having selected a photo to upload.
+
+A how to guide from Cloudinary was followed, but after spending a few hours trying to implement this feature, the field was removed for now so that at least the recipe could be created. In the meantime, users were granted staff status and access to edit recipes through the admin panel. This is not optimal, as any of these users can modify another creator's recipe, but it would allow the user to upload an image.
+
+>__How might we create this?__<br>
+>I'd need to revisit the how to guide by Cloudinary, perhaps replicate their project exactly to prove it works and further research to see if other users have had a similar struggle and found a solution.
+
+>[Cloudinary Docs - Manage images in a Django app](https://cloudinary.com/documentation/django_helper_methods_tutorial)
+
+#### __Recipe form - Steps/Method recorded as JSON__
+For a cleaner view of the recipe steps, the steps were meant to be recorded as a JSON so it could be easily rendered into as a list view in a table. It is a feature commonly seen in other cooking sites and as a person that often cooks referring to a recipe on my phone, it is very helpful to folllow it this way.<br>
+
+![rendered steps as a list](docs/images/feat_old-steps.PNG)
+
+I got to the point of rendering this in the recipe detail view, by manually entering the steps in a JSON format in the form, but this isn't very user friendly and I ran out of time to implement a better interface. The idea was to create a Steps/Method formset with add and remove buttons, similar to what was done with the ingredients form. The user would be able to simply write the steps in clean text in each separate field and the form would collate and convert it into JSON to save in the model.
+
+>__How might we create this?__<br>
+>I suspect it would involve creating a new inline formset for a textarea field and link it to a Django library to handle JSON files, then having javascript to dynamically add and remove fields as the user creates or edits a recipe.
+
+>A fallback option would be, to keep the Method field in the recipe form, but have javascript hide it from the user. The script still creates the dynamically added and removed fields, but on submit, javascript collates the text entered as JSON and places it into the hidden field to save into the model. When the user wishes to edit the recipe and the prepopulated form is rendered, the script can iterate through the JSON content of the hidden field and render it into the extended step fields. This option does feels labour intensive and believe there must be a library that handles this already and mitigates for converting text that may include apostrophes or double quotes when placing it into the JSON values.
+
+#### __Comment approval within Recipe__
+This feature would allow the recipe creator to navigate to a given recipe of their making and as they scroll down the list of comments, those marked for review would display Approve and Reject buttons.
+
+The Approve button would simply approve and enable public viewing of the comment. Whereas, the Reject button would pop up a form with a text field, to allow the recipe creator to provide feedback as to why the comment was rejected. In the Django view, on rejection, it will manipulate the text entry to include:
+- Original comment.
+- Template message stating the comment was rejected, e.g.: ----REJECTED on {date and time}----
+- Reviewer's response text.
+
+The text field for the reviewer's response would be prepopulated with a standard short reminder for users to be polite and considerate, but the reviewer can opt to erase this if not applicable. The reviewer can only edit their response, not the original comment or the reject template.
+
+The whole text in the comment (including reviewer's text) can be edited by the commenter still and on submission it is set to review status again.
+
+>__How might we create this?__<br>
+>Firstly, every comment made in the given recipe would need to be visible to the recipe author to review, so the recipe detail template would need to check if the current user is the recipe author, and if so display all comments for the recipe. Then, if given comment is pending review add buttons and hidden form, with a data values to recall the comment instance.
+
+> Create a javascript to detect the clicking of the reject button, make the comment review form visible and perhaps bring up a Modal to confirm the reviewer wants to continue with the comment rejection as they will not have a chance to edit their review again.
+
+> On confirming comment rejection, a POST request is made and the form handling in the view will append the template rejection marker text followed by the reviewer response. As well as marking the comment as rejected.
+
+>The django template would also need to be updated to display rejected comments in the same way pending review comments are shown, except include a message that the comment needs to be revised. The comment author can edit it the same way they edit any other comment.
+
+>Similar to the image upload field issue, whilst this feature has not been built, users have been granted access to edit comments in the admin panel, but this seems a little redundant when everyone has access to each others' comments, regardless of recipe authors. I've not had a chance to see if there is a way of filtering access to edit comments in the admin panel by whether the user is the author of a given recipe.
 
 
-<!-- 
+#### __Recipe saving__
+Similar to bookmarking sites as you browse, this feature would allow users to toggle saving a recipe the user likes the sound of and wishes to try making it later, by simply clicking on the heart icon button over the recipe photo. The site has the button to render the sample likes added via the admin page, but it is not setup as frontend form yet.
 
-#### __Alphabet checklist__
-The official Wordle game includes the whole keyboard in the display, highlighting which letters have not been used, which are non-existing in the word of the day and existing or correctly placed. This helps the player visualise which letters they could use on their next guess much like a checklist of the alphabet. It becomes easier to try sounding out words for the next guess without using the letters the game has rules out. 
+>__How might we create this?__<br>
+>Essentially as a simplified version of the comment form linked up to the "Favourite" model. Upon visiting a new recipe, the button is set to "not saved" (visible as heart outline icon) after the relevant view has queried the model and found no records of the current user ever liking the given recipe. The save "heart" button would be the submit button of its own form. 
 
-__How might we create this?__
-We have not recreated this feature, but we could potentially use the empty space to the right of the guesses to print out the alphabet and highlighting what letters are still available to use. This would probably be done as dictionary variable, where the alphabet forms the keys and the values are the same as used for listing out the clues in a guess ('-' for unused/unchecked, 'X' for not in word of the day, 'O' for exist in Word of the day, 'C' is in the correct place of the word of the day).
+>The code for the POST method in the recipe detail view would need to change to distinguish between the which "submit" button triggered it, then the recipe save form would take current recipe and user as parameters to add entry to the model. The user is redirected back to the page and the save button is changed to solid icon as an entry is visible. 
 
+>Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again.
 
-#### __Hard Mode gameplay__
-Wordle includes __Hard Mode__ which tracks letters the player has guessed that exist in the selected word and should the player not use them in the next guess they attempt, wordle will not accept the entry. Should the letter be in the correct place, wordle will only accept words with the correctly guessed letters in the same places. 
+#### __Recipe rating__
+Similar to the recipe save button, the feature would allow the user to select the number of stars they'd like to rate the recipe with, simply clicking on the star would submit their rating.
 
-For example, should the word of the day be __LIVER__ and:
-1) the first guess be __PLATE__, then __L__ and __E__ are indicated as exiting but being in the wrong place, the second guess would need to include both __L__ and __E__, so it could __not__ be something like _NERVE_ or _LOUSY_, but could be _LIKED_ or _LOVER_.
-2) Should the second guess in fact be __LIKED__, the letters __L__, __I__ and __E__ will be indicated as correctly guessed and need to be used in the same places for the following guess, something looking like __L I _ E _.__, which could be LIFER, LIMEN, LINEN, LINER, LIVED, LIVER just to name a few. 
+Additionally, the user could click a button to add or edit a review to make a rating form visible, which would contain simply a text field and a submit button.
 
-The aim of this feature is to avoid the player trying completely different words to find other missing letters without the constraints of considering the words that the word of the day could be with the clues given. For instance, without __Hard Mode__ the player's second guess could be __VIRUS__ (after 1st as __PLATE__), it doesn't include __L__ and __E__ that would have been highlighted from _PLATE_, but does include __V__, __I__ and __R__. 
+A delete button, would delete the whole rating instance, whether it included a text review or not.
 
-From those 2 guesses, the player should be able to deduce that the word of the day is __LIVER__ on the third guess. 
+A nice touch for User Experience would be to add a script to detect hovering over a star icon button and display lower rating buttons as being hovered too. i.e.: in a row of 5 buttons, when the user hovers over the 3rd button, the buttons on the left for 1-star and 2-stars ratings would highlight too, so the user understands clicking this button will submit a 3-stars rating.
 
-__How might we create this?__
-If we were to implement this feature, we could store the list output from the evaluation of previous guesses to use in a validation of input and comparing the previously correct guessed letter placement matching that in the new guess. 
-For letters existing in the selected word, the function evaluating guesses can output a dictionary of these letters, and the input validation checks that these letters are used in the latest input before it proceeds to evaluating for the game. 
+>__How might we create this?__<br>
+>The django template to render the rating and review has been included already, but to add the function of the frontend form I would have to include:
+>- similar code to the recipe saving to operate the star buttons.
+>- similar form like what has been done for adding comments.
+>- adding the javascript to handle the hover state of multiple buttons and copying the text into the form in the same way comments are edited.
 
+#### __Personalise a Recipe__
+This feature would enable users to create a copy of a given recipe to add their own twist, for instance to perhaps make a meat containing dish vegetarian, vegan or easier to make.
 
-#### __Feedback messages__
-Wordle has a feedback word for correctly guessing the word of the day at each attempt. Specifically, the following messages display guessing correctly at:
-1) first attempt - __Genius__
-2) second attempt - __Magnificent__
-3) third attempt - __Impressive__
-4) fourth attempt - __Splendid__
-5) fifth attempt - __Great__
-6) sixth attempt - __Phew__
+When a user navigates to a published recipe, a button to personalise the recipe would be available, it would open the recipe create form prepopulated with the given recipe details ready for the user to modify. On submitting the form, the details are saved in a new instance with the changes made and the current user as the author.
 
-__How might we create this?__
-These messages could have been a constant variable as a list and upon winning the round, the message is composed calling the list item by index. The index would be calculated with the length of the list of guesses made minus 1.
+>__How might we create this?__<br>
+>Presumably something like recipe_create but fetching the recipe instance and setting the recipe form and ingredient form to given instance. However, on POST request method being called, it saves as a new instance, just like in the recipe_create. Automatically, adding the referenced recipe details in the model fields for Origin, Source and Source URL. Perhaps even appending a template message at the base of the description that the recipe is based on previous recipe with a link to view original.
 
+#### __Add tags to recipes__
+As many cooking sites include, this feature would present as clickable keywords that describe the recipe, such like vegetarian or lunch. So the user can navigate the library filtering the recipes by a given keyword.
 
-#### __Returning players login__
-Playing the official Wordle game the game recognises the devices, so as the player returns day after day it can track the player's stats. For extended features, players can register an account with New York Times to access other games too. The benefit is that a returning player can keep building on their winning streak to overcome their own high score (longest streak) without having to play more rounds in one single session of accessing the game.
+These keywords would be available as buttons in the recipe library or inside the recipe detail page, when the user clicks on them, it redirects the user to the library with a view of all recipes including such tag.
 
-__How might we create this?__
-The most feasible way I can think of is to either:
-- provide new players their timestamp based ID after entering their name so that next time they access the game, if it is entered in the name prompt of the welcome page, the game can recognise the input is all numeric and 12 digits long, which makes the game lookup the number as an ID, if it exists in our worksheet it will pull the data into the game and allow the next round, if won to increment the current winning streak as if the player had not closed the previous game.
-- or that when new players enter their name on the welcome page prompt, the game asks the player to provide a unique username and password, with the game confirming that the username is valid and available in the worksheet. Next time the player returns, when prompted for a name, the player can enter their username, the game looks up the usernames in the worksheet and prompts for a password, before it resumes the game with the same stats.  -->
+>__How might we create this?__<br>
+>Would need to create 2 new models:
+>- One to keep track of a list of unique tag keywords.
+>- Another to track the links of those keywords to recipes, since it is a many to many relation.
+
+>Then, setting up new URL, probably `/<slug:tag>/` and linking it to the RecipeLibrary view, passing it the keyword used as the tag variable and using it to filter the recipe queryset to those linked to that keyword.
+
+>I suspect that the RecipeLibrary view cannot be reused, so a new one specific for presenting tag filtered library would be created and called upon with the URL.
+
 
 ### Data Models
 Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).

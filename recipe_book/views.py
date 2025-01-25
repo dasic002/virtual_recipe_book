@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Comment, Recipe, User
+from .models import Comment, Favourite, Recipe, User
 from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
@@ -34,6 +34,13 @@ def RecipeLibrary(request):
 
     sample_list = recipe_list.order_by('created_on')[:3]
 
+    if request.user.is_authenticated:
+        faves_list = recipe_list.filter(saves__author=request.user)
+
+        for recipe in recipe_list:
+            if recipe.saves.filter(author=request.user).first() is not None:
+                recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
+
     template = loader.get_template('recipe_book/index.html')
 
     paginator = Paginator(recipe_list, 6)
@@ -43,7 +50,7 @@ def RecipeLibrary(request):
     context = {
         'recipe_list': recipe_list,
         'sample_list': sample_list,
-        'page_obj': page_obj
+        'page_obj': page_obj,
     }
 
     return HttpResponse(template.render(context, request))
