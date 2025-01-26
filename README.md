@@ -453,9 +453,44 @@ These keywords would be available as buttons in the recipe library or inside the
 ### Data Models
 Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
 
-#### Entity Relationship Diagram
+#### __Model - Recipe__
+**Title** - CharField, maximum length of 50 characters that must be unique.
 
-![Entity Relationship Diagram](docs/images/RecipeBook_ERD.jpg)
+**Slug** - SlugField, maximum length of 50 characters that must be unique and not save as Null.
+- To automatically generate the slug from the title created, this article [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real) was followed to implement this function on form submission.
+
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the recipe author will preset to Null, so we avoid deleting recipes other users like and the deleted user doesn't mind leaving them on the site on account deletion.
+
+**Feature_image** - CloudinaryField, stores the url to the image uploaded to Cloudinary server.
+
+**Description** - TextField, for user to describe the dish to entice readers.
+
+**Prep_time** - PositiveIntegerField, default of 1, this field records the time taken, in minutes, to prepare ingredients before cooking.
+
+**Cook_time** - PositiveIntegerField, default of 1, this field records the time taken, in minutes, to cook/heat/fry/bake/freeze the meal.
+
+**Servings** - PositiveIntegerField, default of 1, this field records number of servings the recipe described provides.
+
+**Method** - TextField, to write the steps to prepare the dish.
+
+**Listing_type** - IntegerField, to takes choices 0:Draft, 1:Private, 2:Unlisted, 3:Published.
+- Draft - the user creates a draft recipe, not ready for sharing or in a useful state.
+- Private - the user does not wish to share the recipe with anyone, just for personal use.
+- Unlisted - the user wishes to share the link to their recipe with other users that have the direct URL.
+- Published - the user wishes to share the recipe with all users on the site and have it listed in the common library.
+
+<!-- 
+#### Model - Ingredient
+#### Model - Comment
+#### Model - Rating
+#### Model - Favourite -->
+
+#### Entity Relationship Diagram
+In this ERD we can see the models created and how they are related to one another.
+
+![Entity Relationship Diagram](docs/images/RecipeBook_ERD.png)
+
 
 ## Technologies
 - Languages used:
@@ -670,6 +705,7 @@ web: gunicorn PROJECT_NAME.wsgi
 
 ### Code
 
+- Article on auto-generating slug from field - [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real)
 <!-- - Reference for clearing the screen in python - [Clearing Screen in Linux Operating System](https://www.geeksforgeeks.org/clear-screen-python/)
 - Reference for multiline string to print "pages" - [Multiline Strings](https://www.w3schools.com/python/gloss_python_multi_line_strings.asp)
 - Reference for readlines() method to list words - [readlines() Method](https://www.w3schools.com/python/ref_file_readlines.asp)

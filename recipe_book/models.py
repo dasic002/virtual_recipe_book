@@ -19,7 +19,7 @@ STATUS = (
 )
 
 
-# Create your models here.
+# Follows a similar format to the Post model in the walkthrough project
 class Recipe(models.Model):
     """
     Stores a single recipe entry related to :model:`auth.User`.
@@ -59,6 +59,9 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author}"
 
+    # creates the slug automatically from the title string
+    # followed the last example in this link
+    # https://learndjango.com/tutorials/django-slug-tutorial
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
