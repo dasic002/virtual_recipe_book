@@ -53,9 +53,12 @@ class Recipe(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    # sets the order fo recipes to list the most recent first
     class Meta:
         ordering = ["-created_on"]
 
+    # sets the string of a recipe record to the format of
+    # "<recipe title> by <recipe author>"
     def __str__(self):
         return f"{self.title} by {self.author}"
 
@@ -67,6 +70,9 @@ class Recipe(models.Model):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
+    # set as a property we can call, this function will create an iterable list
+    # of all the scores for the given recipe. Then using the statistics library
+    # mean function, to calculate the average score.
     @property
     def average_score(self):
         list_score = self.ratings.values_list('score', flat=True)
@@ -78,6 +84,9 @@ class Recipe(models.Model):
 
         return list_score
 
+    # set as a property we can call, this function will collect the ingredients
+    # for a given recipe and format it in a human legible list before rendering
+    # to the recipe detail page.
     @property
     def ingredients(self):
         list_ingredients = self.ingredients_needed.all()
@@ -86,9 +95,12 @@ class Recipe(models.Model):
             line.unit = line.Unit.__call__(line.unit).label
         return list_ingredients
 
+    # Set as a property we can all, this function will unpack the JSON values
+    # as if it were a dictionary into a list of tuples so we can iterate
+    # through into the method table.
+    # Redundant whilst method is stored as a textfield rather than JSON.
     @property
     def steps(self):
-        # redundant whilst method is stored as text rather than JSON
         return self.method.items()
 
 

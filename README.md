@@ -356,7 +356,7 @@ Bespoke error pages for codes 403, 404, 405 and 500 have been created to fit wit
 ### Features Left to Implement
 Due to personal time constraints the following features were not implemented so I did not get distracted with a feature creep and not deliver on my MVP.
 
-#### __Recipe form - image upload__
+#### <ins>Recipe form - image upload</ins>
 The recipe form was meant to include fields for every detail the recipe creator would expect to include. An enticing picture is often expected to capture the readers' interest, and for ease of creating the recipe, the frontend form should have included a field for this image upload. However, as much as it was tried, every time the field was included in the form, it never uploaded the image and the form this not see the field as valid spite having selected a photo to upload.
 
 A how to guide from Cloudinary was followed, but after spending a few hours trying to implement this feature, the field was removed for now so that at least the recipe could be created. In the meantime, users were granted staff status and access to edit recipes through the admin panel. This is not optimal, as any of these users can modify another creator's recipe, but it would allow the user to upload an image.
@@ -366,7 +366,7 @@ A how to guide from Cloudinary was followed, but after spending a few hours tryi
 
 >[Cloudinary Docs - Manage images in a Django app](https://cloudinary.com/documentation/django_helper_methods_tutorial)
 
-#### __Recipe form - Steps/Method recorded as JSON__
+#### <ins>Recipe form - Steps/Method recorded as JSON</ins>
 For a cleaner view of the recipe steps, the steps were meant to be recorded as a JSON so it could be easily rendered into as a list view in a table. It is a feature commonly seen in other cooking sites and as a person that often cooks referring to a recipe on my phone, it is very helpful to folllow it this way.<br>
 
 ![rendered steps as a list](docs/images/feat_old-steps.PNG)
@@ -378,7 +378,7 @@ I got to the point of rendering this in the recipe detail view, by manually ente
 
 >A fallback option would be, to keep the Method field in the recipe form, but have javascript hide it from the user. The script still creates the dynamically added and removed fields, but on submit, javascript collates the text entered as JSON and places it into the hidden field to save into the model. When the user wishes to edit the recipe and the prepopulated form is rendered, the script can iterate through the JSON content of the hidden field and render it into the extended step fields. This option does feels labour intensive and believe there must be a library that handles this already and mitigates for converting text that may include apostrophes or double quotes when placing it into the JSON values.
 
-#### __Comment approval within Recipe__
+#### <ins>Comment approval within Recipe</ins>
 This feature would allow the recipe creator to navigate to a given recipe of their making and as they scroll down the list of comments, those marked for review would display Approve and Reject buttons.
 
 The Approve button would simply approve and enable public viewing of the comment. Whereas, the Reject button would pop up a form with a text field, to allow the recipe creator to provide feedback as to why the comment was rejected. In the Django view, on rejection, it will manipulate the text entry to include:
@@ -402,7 +402,7 @@ The whole text in the comment (including reviewer's text) can be edited by the c
 >Similar to the image upload field issue, whilst this feature has not been built, users have been granted access to edit comments in the admin panel, but this seems a little redundant when everyone has access to each others' comments, regardless of recipe authors. I've not had a chance to see if there is a way of filtering access to edit comments in the admin panel by whether the user is the author of a given recipe.
 
 
-#### __Recipe saving__
+#### <ins>Recipe saving</ins>
 Similar to bookmarking sites as you browse, this feature would allow users to toggle saving a recipe the user likes the sound of and wishes to try making it later, by simply clicking on the heart icon button over the recipe photo. The site has the button to render the sample likes added via the admin page, but it is not setup as frontend form yet.
 
 >__How might we create this?__<br>
@@ -412,7 +412,7 @@ Similar to bookmarking sites as you browse, this feature would allow users to to
 
 >Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again.
 
-#### __Recipe rating__
+#### <ins>Recipe rating</ins>
 Similar to the recipe save button, the feature would allow the user to select the number of stars they'd like to rate the recipe with, simply clicking on the star would submit their rating.
 
 Additionally, the user could click a button to add or edit a review to make a rating form visible, which would contain simply a text field and a submit button.
@@ -421,13 +421,15 @@ A delete button, would delete the whole rating instance, whether it included a t
 
 A nice touch for User Experience would be to add a script to detect hovering over a star icon button and display lower rating buttons as being hovered too. i.e.: in a row of 5 buttons, when the user hovers over the 3rd button, the buttons on the left for 1-star and 2-stars ratings would highlight too, so the user understands clicking this button will submit a 3-stars rating.
 
+Star ratings would be visible, whilst the rating is marked as review or approved, but not is rejected. The review will only be made visible on approved state. The idea is that users cannot use this feature to bypass verification to be offensive or dishonest.
+
 >__How might we create this?__<br>
 >The django template to render the rating and review has been included already, but to add the function of the frontend form I would have to include:
 >- similar code to the recipe saving to operate the star buttons.
 >- similar form like what has been done for adding comments.
 >- adding the javascript to handle the hover state of multiple buttons and copying the text into the form in the same way comments are edited.
 
-#### __Personalise a Recipe__
+#### <ins>Personalise a Recipe</ins>
 This feature would enable users to create a copy of a given recipe to add their own twist, for instance to perhaps make a meat containing dish vegetarian, vegan or easier to make.
 
 When a user navigates to a published recipe, a button to personalise the recipe would be available, it would open the recipe create form prepopulated with the given recipe details ready for the user to modify. On submitting the form, the details are saved in a new instance with the changes made and the current user as the author.
@@ -435,7 +437,7 @@ When a user navigates to a published recipe, a button to personalise the recipe 
 >__How might we create this?__<br>
 >Presumably something like recipe_create but fetching the recipe instance and setting the recipe form and ingredient form to given instance. However, on POST request method being called, it saves as a new instance, just like in the recipe_create. Automatically, adding the referenced recipe details in the model fields for Origin, Source and Source URL. Perhaps even appending a template message at the base of the description that the recipe is based on previous recipe with a link to view original.
 
-#### __Add tags to recipes__
+#### <ins>Add tags to recipes</ins>
 As many cooking sites include, this feature would present as clickable keywords that describe the recipe, such like vegetarian or lunch. So the user can navigate the library filtering the recipes by a given keyword.
 
 These keywords would be available as buttons in the recipe library or inside the recipe detail page, when the user clicks on them, it redirects the user to the library with a view of all recipes including such tag.
@@ -453,7 +455,9 @@ These keywords would be available as buttons in the recipe library or inside the
 ### Data Models
 Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
 
-#### __Model - Recipe__
+#### <ins>Model - Recipe</ins>
+Model to record recipe details.
+
 **Title** - CharField, maximum length of 50 characters that must be unique.
 
 **Slug** - SlugField, maximum length of 50 characters that must be unique and not save as Null.
@@ -474,17 +478,109 @@ Chefs on the Net app uses a relational database to store and manage data. The re
 
 **Method** - TextField, to write the steps to prepare the dish.
 
-**Listing_type** - IntegerField, to takes choices 0:Draft, 1:Private, 2:Unlisted, 3:Published.
+**Listing_type** - IntegerField, to take choices 0:Draft, 1:Private, 2:Unlisted, 3:Published.
 - Draft - the user creates a draft recipe, not ready for sharing or in a useful state.
 - Private - the user does not wish to share the recipe with anyone, just for personal use.
 - Unlisted - the user wishes to share the link to their recipe with other users that have the direct URL.
 - Published - the user wishes to share the recipe with all users on the site and have it listed in the common library.
 
-<!-- 
-#### Model - Ingredient
-#### Model - Comment
-#### Model - Rating
-#### Model - Favourite -->
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the recipe has been submitted to be published, the site admin must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin deemed recipe inappropriate to publish on the site.
+- Approved - Site admin approved recipe for publishing on the site.
+
+**Origin** - ForeignKey, links to another recipe on the model that a given recipe is based off. Since recipes may be sourced outside of chefs on the net, this field can be left blank and set to null.
+
+**Source** - CharField, maximum length of 250, but can be left blank. Included so creator can make reference to recipe origin, perhaps from a book or friend.
+
+**Source_url** - URLField, maximum length of 250, can be left blank. Included so creator can make reference to recipe origin if sourced online.
+
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+**Updated_on** - DateTimeField, automatically adds a timestamp at the time a change is made.
+
+
+#### <ins>Model - Ingredient</ins>
+Ingredients were placed in a separate model so it was easier to implement another model later in the project to generate a dictionary of food items and make it easier to consolidate ingredients in a grocery lists when users add recipes to their meal plan.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this ingredient instance belongs to.
+- Should a recipe be deleted, the record of this given Ingredient instance will be deleted.
+
+**Food_item** - CharField, records the name of the food item.
+
+**Quantity** - DecimalField, field to record the number for a food item measure, format set to 999.99, so up to 3 digits whole number and 2 decimal places. Helpful when trying to record halves, quarters and all else in between.
+
+**Unit** - IntegerField to take choices of unit of measurements, with the default set to 0:Piece.
+- 0:piece - PIECE
+- 1:stick - STICK
+- 2:mg - MILLIGRAM
+- 3:g - GRAM
+- 4:kg - KILOGRAM
+- 5:oz - OUNCE
+- 6:lb - POUND
+- 7:ml - MILLILITERS
+- 8:cl - CENTILITERS
+- 9:l - LITERS
+- 10:tsp - TEASPOON
+- 11:tbsp - TABLESPOON
+- 12:floz - FLUID_OUNCE
+- 13:cup - CUP
+- 14:pint - PINT
+- 15:quart - QUART
+- 16:gallon - GALLON
+
+
+#### <ins>Model - Comment</ins>
+Model to record user comments on any given recipe.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this comment instance belongs to.
+- Should a recipe be deleted, the record of this given comment instance will be deleted.
+
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the commenter will preset to Null, so we avoid deleting the comment/recipe feedback other users may find useful.
+
+**Body** - TextField, body of text for the comment.
+
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the comment has been made, the site admin or recipe owner must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin or recipe owner has deemed the comment inappropriate to publish on the site.
+- Approved - Site admin or recipe owner approved comment for publishing on the site.
+
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+
+#### <ins>Model - Rating</ins>
+Model to record the rating and reviews users provide on a given recipe.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this rating instance belongs to.
+- Should a recipe be deleted, the record of this given Rating instance will be deleted.
+
+**Score** - IntegerField, to record a score as a number between 1 and 5. default is 0.
+
+**Review** - CharField, maximum length of 250 and can be left blank.
+
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the reviewer will preset to Null, so we avoid deleting the recipe rating instance other users may find useful.
+
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the review has been made, the site admin or recipe owner must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin or recipe owner has deemed the review inappropriate to publish on the site.
+- Approved - Site admin or recipe owner approved the review for publishing on the site.
+
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+
+#### <ins>Model - Favourite</ins>
+Model to record the instances the user saves a given recipe as a favourite.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this favourite instance refers to.
+- Should a recipe be deleted, the record of this given Favourite instance will be deleted.
+
+**Author** - ForeignKey, links up to the built-in User model. 
+- Should a User be deleted, the record of this given Favourite instance will be deleted.
+
+**Added_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
 
 #### Entity Relationship Diagram
 In this ERD we can see the models created and how they are related to one another.
