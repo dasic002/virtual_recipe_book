@@ -5,6 +5,9 @@ from .models import Comment, Recipe, Ingredient
 
 
 class CommentForm(forms.ModelForm):
+    '''
+    Class for form for comments
+    '''
     class Meta:
         model = Comment
         fields = ('body',)
@@ -16,6 +19,12 @@ class CommentForm(forms.ModelForm):
 
 
 class RecipeForm(forms.ModelForm):
+    '''
+    Class for form for recipe
+
+    feature_image field currently excluded from form as it is not working
+    correctly and causing form not to validate and save the rest of the data.
+    '''
     # featured_image = CloudinaryFileField()
 
     class Meta:
@@ -35,6 +44,9 @@ class RecipeForm(forms.ModelForm):
 
 
 class IngredientForm(forms.ModelForm):
+    '''
+    Class for form for ingredient
+    '''
     class Meta:
         model = Ingredient
         fields = (
@@ -43,7 +55,8 @@ class IngredientForm(forms.ModelForm):
             'unit',
         )
 
-
+# Creates formset for our dynamically manipulated form to save multiple
+# instances of ingredients in one submission.
 IngredientFormSet = inlineformset_factory(
     Recipe,
     Ingredient,

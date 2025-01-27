@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Comment, Favourite, Recipe, User
+from .models import Comment, Recipe, User
 from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
@@ -205,7 +205,6 @@ def recipe_create(request):
     ingredient_form = IngredientFormSet()
 
     if request.method == "POST":
-        # recipe_form = RecipeForm(request.POST, request.FILES)
         recipe_form = RecipeForm(data=request.POST)
         ingredient_form = IngredientFormSet(data=request.POST)
 

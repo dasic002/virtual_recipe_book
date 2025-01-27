@@ -374,7 +374,7 @@ For a cleaner view of the recipe steps, the steps were meant to be recorded as a
 I got to the point of rendering this in the recipe detail view, by manually entering the steps in a JSON format in the form, but this isn't very user friendly and I ran out of time to implement a better interface. The idea was to create a Steps/Method formset with add and remove buttons, similar to what was done with the ingredients form. The user would be able to simply write the steps in clean text in each separate field and the form would collate and convert it into JSON to save in the model.
 
 >__How might we create this?__<br>
->I suspect it would involve creating a new inline formset for a textarea field and link it to a Django library to handle JSON files, then having javascript to dynamically add and remove fields as the user creates or edits a recipe.
+>I suspect it would involve creating a new inline formset for a textarea field and link it to a Django library to handle JSON files, then having javascript to dynamically add and remove fields as the user creates or edits a recipe. Likely using this python method [json.loads()](https://www.geeksforgeeks.org/json-loads-in-python/).
 
 >A fallback option would be, to keep the Method field in the recipe form, but have javascript hide it from the user. The script still creates the dynamically added and removed fields, but on submit, javascript collates the text entered as JSON and places it into the hidden field to save into the model. When the user wishes to edit the recipe and the prepopulated form is rendered, the script can iterate through the JSON content of the hidden field and render it into the extended step fields. This option does feels labour intensive and believe there must be a library that handles this already and mitigates for converting text that may include apostrophes or double quotes when placing it into the JSON values.
 
@@ -582,27 +582,29 @@ Model to record the instances the user saves a given recipe as a favourite.
 **Added_on** - DateTimeField, automatically adds the timestamp at time of entry.
 
 
-#### Entity Relationship Diagram
+#### <ins>Entity Relationship Diagram</ins>
 In this ERD we can see the models created and how they are related to one another.
 
 ![Entity Relationship Diagram](docs/images/RecipeBook_ERD.png)
 
 
-## Technologies
-- Languages used:
+## Technologies used
+- Languages:
   - [HTML5](https://en.wikipedia.org/wiki/HTML5)
   - [CSS3](https://en.wikipedia.org/wiki/CSS)
   - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
   - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-  - [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
-  - [Django](https://docs.djangoproject.com/en/5.0/)
+- Frameworks, Libraries and Packages:
+  - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+  - [Django 5.0](https://docs.djangoproject.com/en/5.0/)
+- Tools:
 - [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
 - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
 - [GitHub](https://github.com/) - to store and publish the project.
+- [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
 - [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
 - [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code. 
-- [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
 
 ## Testing 
 
@@ -798,10 +800,20 @@ web: gunicorn PROJECT_NAME.wsgi
 
 ### Media
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes as the preview used in this readme file.
+- [Favicon](https://favicon.io/) - to generate the favicon for the site.
 
 ### Code
 
 - Article on auto-generating slug from field - [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real)
+- Forms - using inline forms - [Django Docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#inline-formsets)
+- Forms - dynamically more entries - [YouTube](https://www.youtube.com/watch?v=s3T-w2jhDHE)
+- Forms - dynamically add forms - [Brennan T](https://www.brennantymrak.com/articles/django-dynamic-formsets-javascript)
+- Forms - populate form to update record - [stackoverflow](https://stackoverflow.com/questions/70682238/django-how-to-auto-populate-existing-data-in-django-form-while-updating)
+- Models - ON_DELETE options - [geeksforgeeks.org](https://www.geeksforgeeks.org/foreign-keys-on_delete-option-in-django-models/)
+- Models - PositiveIntegerField - [stackoverflow](https://stackoverflow.com/questions/42425933/how-do-i-set-a-default-max-and-min-value-for-an-integerfield-django)
+- Models - Referring to another instance, used for recipe Origin field - [stackoverflow](https://stackoverflow.com/questions/4910905/in-django-how-do-you-make-a-model-refer-to-itself)
+- Script - Managing comments, follows the Codestar blog walkthrough project - in this project it can be seen in [recipe-detail.js](static/js/recipe-detail.js)
+- Favicon - guidance on adding a favicon to django projects - [learnDjango](https://learndjango.com/tutorials/django-favicon-tutorial#:~:text=3.-,Add%20the%20Favicon,can%20help%20with%20higher%20resolution.)
 <!-- - Reference for clearing the screen in python - [Clearing Screen in Linux Operating System](https://www.geeksforgeeks.org/clear-screen-python/)
 - Reference for multiline string to print "pages" - [Multiline Strings](https://www.w3schools.com/python/gloss_python_multi_line_strings.asp)
 - Reference for readlines() method to list words - [readlines() Method](https://www.w3schools.com/python/ref_file_readlines.asp)

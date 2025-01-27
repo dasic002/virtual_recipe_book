@@ -104,6 +104,7 @@ class Recipe(models.Model):
         return self.method.items()
 
 
+# Follows a similar format to the Post model in the walkthrough project
 class Comment(models.Model):
     """
     Stores a single Recipe comment entry related to
@@ -125,9 +126,12 @@ class Comment(models.Model):
     approved = models.IntegerField(choices=STATUS, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    # sets the order fo comments to list the most recent first
     class Meta:
         ordering = ["created_on"]
 
+    # sets the string of a comment record to the format of
+    # "<comment body> by <comment author>"
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
 
@@ -157,9 +161,12 @@ class Rating(models.Model):
     approved = models.IntegerField(choices=STATUS, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    # sets the order fo ratings to list the most recent first
     class Meta:
         ordering = ["-created_on"]
 
+    # sets the string of a rating record to the format of
+    # "<recipe title> - rated by <rating author>"
     def __str__(self):
         return f"{self.recipe.title} - rated by {self.author}"
 
@@ -181,9 +188,12 @@ class Favourite(models.Model):
     )
     added_on = models.DateTimeField(auto_now_add=True)
 
+    # sets the order fo ratings to list the most recent first
     class Meta:
         ordering = ["-added_on"]
 
+    # sets the string of a favourite record to the format of
+    # "<recipe title> - saved by <favourite author>"
     def __str__(self):
         return f"{self.recipe.title} - saved by {self.author}"
 
@@ -194,6 +204,8 @@ class Ingredient(models.Model):
     related to :model:`recipe_book.Recipe`.
     """
 
+    # defines the class of units of measurement, to only be used for
+    # ingredients
     class Unit(models.IntegerChoices):
         PIECE = 0, "pc"
         STICK = 1, "stick"
@@ -224,7 +236,13 @@ class Ingredient(models.Model):
         default=Unit.PIECE
     )
 
+    # Converts the unit of measurement into a human legible format by
+    # enumerating the the integer stored against the Unit class and stores it
+    # as the unit variable to call again. Then, sets the string of an
+    # ingredient record to the format of
+    # "<ingredient quantity><ingredient unit label> <ingredient food_item>
+    # used in <recipe title>"
     def __str__(self):
         self.unit = self.Unit.__call__(self.unit)
-        return (f"{self.quantity}{self.unit.label} {self.food_item}" +
+        return (f"{self.quantity}{self.unit.label} {self.food_item} " +
                 f"used in {self.recipe.title}")
