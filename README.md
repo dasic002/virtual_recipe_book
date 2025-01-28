@@ -673,11 +673,46 @@ In this ERD we can see the models created and how they are related to one anothe
 |Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays|PASS|
 |Nav Button - hamburger icon|Click Hamburger icon|hamburger icon toggles to reveal and collapse nav menu|PASS|
 |Nav button - Register|Click button "Register" just after loading the site|Loads sign up page|PASS|
-|Nav button - Login|Click button "Login" just after loading the site|Loads login page|PASS|
-|Nav button - Logout|Click button "Logout" after starting a game|Loads logout confirmation page|PASS|
+|Nav button - Login|Click button "Login"|Loads login page|PASS|
+|Nav button - Logout|Click button "Logout"|Loads logout confirmation page|PASS|
 |Nav Button - Logout|Click button "Sign out"|Confirms logging out and returns to Home page|PASS|
 |Nav Button - Home|Click button "Home"|Loads to Home as either welcome or library dependant on login status|PASS|
 |Nav Button - My Recipes|Click button "My Recipes"|Loads Logged in user's recipe library to view and manage their recipes|PASS|
+|Landing page - Welcome section|Loading the page|As an anonymous user, message welcoming the visitor and inviting to signup. Otherwise, as a logged in user, the section does not exist.|PASS|
+|Landing page - Recipe library|Loading the page|As an anonymous user, the user can only view 3 recipes and can click on them to view further details.|PASS|
+|Landing page - Recipe library|Loading the page|As a logged in user,  the user sees a page with the latest 6 recipes and can click on them to view further details.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As an anonymous user, the user can see image, title, description, author and date.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As a logged in user, the user can see the same, but has button for favourite and rating average overlaid on the recipe photo.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As an anonymous user, the user can click on the author name, but will be redirected to the login page.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As a logged in user, the user can click on the author name and see a library of approved published recipes by the same author.|PASS|
+|My recipes - Recipe widget|Loading the page|As a logged in user and author of recipes, in this page, the recipe widget includes edit and delete buttons.|PASS|
+|My recipes - Add recipe button|Click button "Add recipe"|As a logged in user, the user can click the button to add a recipe to the site and opens recipe create form.|PASS|
+|My recipes - Edit recipe button|Click recipe edit button|As a logged in user, the user can click the edit button on a given recipe they authored and opens recipe editor form prepopulated with details.|PASS|
+|My recipes - Delete recipe button|Click recipe delete button|As a logged in user, the user can click the delete button on a given recipe they authored and a confirmation modal pops up.|PASS|
+|My recipes - Delete modal|Click "Delete" button|As a logged in user, the user can click the delete button on the modal to confirm deletion and recipe gets deleted.|PASS|
+|My recipes - Delete modal|Click "Close" button or outside the modal|Delete confirmation modal disappears and action is taken on the database.|PASS|
+|Recipe editor - Recipe form|Submit blank form|Form notifies user fields that are required.|PASS|
+|Recipe editor - Recipe form|Submit with only required fields filled in|Recipe is saved, user is redirected to My recipes page and new recipe is visible.|PASS|
+|Recipe editor - Recipe form|Open the form by selecting a recipe to edit and add ingredient.|Recipe is updated and user is redirected to My recipes again.|PASS|
+|Recipe editor - Recipe form|Open the form by selecting a recipe to edit and remove ingredient.|Recipe is updated and user is redirected to My recipes again.|PASS|
+|Pagination|Loading any library as a logged in user|Page displays number of current page of total number of pages to view. If the library contains more than 6 recipes, page navigating buttons appear along the bottom and users can navigate through more pages to view the rest of the library.|PASS|
+|Recipe widget - Favourite button|Loading the page|If the recipe has been marked as a favourite by the current user, the button will display a solid heart icon.|PASS|
+|Recipe widget - Favourite button|Loading the page|If the recipe has NOT been marked as a favourite by the current user, the button will display an outline heart icon.|PASS|
+|Recipe widget - Rating score button|Loading the page|If the recipe has any ratings, the average score will display here. Otherwise, defaults to "-".|PASS|
+|Recipe widget - Rating score button|Click the rating button on widget|Button navigates the user to the ratings section of the recipe.|PASS|
+|Recipe detail - Header|Loading the page|Header contains same information present on the recipe widget.|PASS|
+|Recipe detail - Description|Loading the page|Full description content is visible.|PASS|
+|Recipe detail - Ingredients and Steps|Loading the page|Headings are visible and if the recipe contains content for these, it is displayed too. Ingredients in a table and Steps as paragraph(s) of text.|PASS|
+|Recipe detail - Ratings|Loading the page|Heading is visible. If current user has not rated the recipe, blank star icon buttons appear. Otherwise, the number of star icons are shown solid to match the score given.|PASS|
+|Recipe detail - Ratings|Loading the page|If current user has written a review, the string of text is visible just below the star icon buttons.|PASS|
+|Recipe detail - Ratings|Loading the page|If other users have rated the given recipe, an expandable section is available to click and display the remaining reviews.|PASS|
+|Recipe detail - Comments|Loading the page|If comments have been made and approved, they are displayed and listed with most recent at the top.|PASS|
+|Recipe detail - Comments|Loading the page|If current user has made comments on the given recipe, they are displayed, listed with most recent at the top and clearly indicated if the comment is still awaiting approval. Edit and delete buttons are available for those comments too.|PASS|
+|Recipe detail - Comments edit|Click edit comment button|Text is copied to the comment form body field, submit button changes to Update and user can edit text.|PASS|
+|Recipe detail - Comments edit|Click Update on comment edit|User is redirect to recipe detail page and comment is updated.|PASS|
+|Recipe detail - Comments delete|Click delete comment button|Delete confirmation modal appears.|PASS|
+|Recipe detail - Comments delete|Click delete button on modal|User is redirected to the recipe detail page and comment has been deleted.|PASS|
+|Recipe detail - Comments delete|Click Close button on modal or outside of modal|Modal closes and comment is not deleted.|PASS|
 |Page scaling - mobile|Viewing the page on mobile display in portrait|Font size is legible and the page does not require scrolling on timed buttons. No overlapping text or images.|PASS|
 |Page scaling - mobile|Viewing the page on mobile display in landscape|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
 |Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
@@ -690,9 +725,7 @@ In this ERD we can see the models created and how they are related to one anothe
 |Error 500 page|Click on the Home button|Brings viewer back to main page|PASS|
 
 
-
 ### Bugs
-
 - __Images uploading to Cloudinary via frontend form - OUTSTANDING__<br>
 After setting up the model to include cloudinary library and field and even following an implementation guide from cloudinary, the recipe editor form would not recognise there was a file selected in the form to upload, so it always failed the form validation on submission. I removed the field from the formset so the form could still be used for MVP until I could figure out how to make it work.
 

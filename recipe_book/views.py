@@ -321,7 +321,7 @@ def recipe_edit(request, slug):
 
             messages.add_message(
                 request, messages.SUCCESS,
-                (f'Recipe {recipe.title} updated! If you have set the' +
+                (f'Recipe {recipe.title} updated! If you have set the ' +
                     f'recipe public it will be awaiting approval')
             )
 
