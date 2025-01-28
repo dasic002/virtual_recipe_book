@@ -35,8 +35,6 @@ def RecipeLibrary(request):
     sample_list = recipe_list.order_by('created_on')[:3]
 
     if request.user.is_authenticated:
-        faves_list = recipe_list.filter(saves__author=request.user)
-
         for recipe in recipe_list:
             if recipe.saves.filter(author=request.user).first() is not None:
                 recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
@@ -242,7 +240,7 @@ def user_library(request, author):
 
     **Context**
 
-    ``recipes_created``
+    ``recipes_list``
         A set of instances related to author from
         :model:`recipe_book.Recipe`. Conditionally
         filtered, if user is the author of queryset
@@ -253,25 +251,29 @@ def user_library(request, author):
 
     **Template:**
 
-    :template:`recipe_book/recipe_detail.html`
+    :template:`recipe_book/user_library.html`
     """
     author = get_object_or_404(User, username=author)
     if request.user == author:
-        recipes_created = Recipe.objects.filter(
+        recipe_list = Recipe.objects.filter(
             author=author).order_by("-created_on")
     else:
-        recipes_created = Recipe.objects.filter(
+        recipe_list = Recipe.objects.filter(
             author=author).filter(approved=2).filter(
                 listing_type=3).order_by("-created_on")
 
+    for recipe in recipe_list:
+        if recipe.saves.filter(author=request.user).first() is not None:
+            recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
+
     template = loader.get_template('recipe_book/user_library.html')
 
-    paginator = Paginator(recipes_created, 6)
+    paginator = Paginator(recipe_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
 
     context = {
-        'recipes_created': recipes_created,
+        'recipe_list': recipe_list,
         'page_obj': page_obj,
         'author': author,
     }

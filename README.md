@@ -597,14 +597,26 @@ In this ERD we can see the models created and how they are related to one anothe
 - Frameworks, Libraries and Packages:
   - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
   - [Django 5.0](https://docs.djangoproject.com/en/5.0/)
+  - [Django-AllAuth](https://docs.allauth.org/en/latest/installation/quickstart.html)
+  - [Django-Crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html)
+  - [Django-Summernote](https://github.com/lqez/django-summernote)
+  - [Google Fonts](https://fonts.google.com/)
+  - [FontAwesome](https://fontawesome.com)
 - Tools:
-- [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
-- [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
-- [GitHub](https://github.com/) - to store and publish the project.
-- [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
-- [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
-- [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
-- [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code. 
+  - [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
+  - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
+  - [GitHub](https://github.com/) - to store and publish the project.
+  - [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
+  - [Cloudinary](https://cloudinary.com/) - to host images on the cloud server.
+  - [Database maker by CodeInstitute](https://dbs.ci-dbs.net) - the PostgreSQL hosting by CodeInstitute.
+  - [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) - Chrome's developer tools to inspect your project as rendered in the browser.
+  - [Favicon](https://favicon.io/) - to generate the favicon for the site.
+  - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
+  - [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
+  - [W3C Markup Validation](https://validator.w3.org/) - to validate the HTML code.
+  - [W3C CSS Validation](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
+  - [JSHint](https://jshint.com/) - to check JavaScript code.
+  - [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code.
 
 ## Testing 
 
@@ -735,7 +747,13 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 - Save the file.
 
 #### Create a Database
+##### Via Code Institute's database maker
+If you are a current student of Code Institute, you should have access to their [database maker service](https://dbs.ci-dbs.net)
+- Enter your email address linked to your LMS Portal.
+- The database will be generated and an email with the details will be sent to you.
+- The email will contain a management URL that is unique to you and will offer the options to view details for linking to your project or delete the database.
 
+##### Via ElephantSQL
 - Create an account and log in with ElephantSQL.com.
 - From the dashboard click “Create New Instance”.
 - Set up your plan
@@ -755,7 +773,7 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 
 - Create an account and log in with Cloudinary.com.
 - In the dashboard copy your API Environment variable.
-- In your env.py file replace `<API ENVIRONEMENT VARIABLE>` in the CLOUDINARY_URL environment variable with the copied API Environment variable.
+- In your env.py file replace `<API ENVIRONMENT VARIABLE>` in the CLOUDINARY_URL environment variable with the copied API Environment variable.
 - Save the file.
 
 ### Deployment
@@ -769,7 +787,7 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 ALLOWED_HOSTS = ["PROJECT_NAME.herokuapp.com", "YOUR_HOSTNAME"]
 ```
 
-- Make surea file named Procfile exists on the top level directory which contans the following code:
+- Make sure a file named Procfile exists on the top level directory which contans the following code:
 
 ```python
 web: gunicorn PROJECT_NAME.wsgi
@@ -795,58 +813,37 @@ web: gunicorn PROJECT_NAME.wsgi
 - Scroll down the page and choose to either Automatically Deploy each time changes are pushed to GitHub, or Manually deploy.
 - The application can be run from the Application Configuration page by clicking on the Open App button.
 
-
 ## Credits 
+
+### Content
+- Recipes - A few sourced from [BBC Good Food](https://www.bbcgoodfood.com/) and some loosely written by the developper.
 
 ### Media
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes as the preview used in this readme file.
 - [Favicon](https://favicon.io/) - to generate the favicon for the site.
+- [Cheese on toast image](https://www.happyveggiekitchen.com/air-fryer-cheese-on-toast/) - sourced a more appealing image of this classic staple dish
 
 ### Code
-
 - Article on auto-generating slug from field - [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real)
 - Forms - using inline forms - [Django Docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#inline-formsets)
 - Forms - dynamically more entries - [YouTube](https://www.youtube.com/watch?v=s3T-w2jhDHE)
 - Forms - dynamically add forms - [Brennan T](https://www.brennantymrak.com/articles/django-dynamic-formsets-javascript)
 - Forms - populate form to update record - [stackoverflow](https://stackoverflow.com/questions/70682238/django-how-to-auto-populate-existing-data-in-django-form-while-updating)
+- Forms - making use of the formset can_delete, using **.deleted_objects** for ingredients in recipe edit view - [django docs](https://docs.djangoproject.com/en/5.0/topics/forms/formsets/#can-delete)
+- Forms - Overriding the default fields, guide for comment form - [django docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#overriding-the-default-fields)
 - Models - ON_DELETE options - [geeksforgeeks.org](https://www.geeksforgeeks.org/foreign-keys-on_delete-option-in-django-models/)
 - Models - PositiveIntegerField - [stackoverflow](https://stackoverflow.com/questions/42425933/how-do-i-set-a-default-max-and-min-value-for-an-integerfield-django)
 - Models - Referring to another instance, used for recipe Origin field - [stackoverflow](https://stackoverflow.com/questions/4910905/in-django-how-do-you-make-a-model-refer-to-itself)
-- Script - Managing comments, follows the Codestar blog walkthrough project - in this project it can be seen in [recipe-detail.js](static/js/recipe-detail.js)
+- Views - guidance on using Paginator in function based view - [stackoverflow](https://stackoverflow.com/questions/64170923/pagination-in-function-based-view-shows-all-objects)
+- Views - guide on Paginator - [django docs](https://docs.djangoproject.com/en/5.0/topics/pagination/#using-paginator-in-a-view-function)
+- Template - guidance on how to iterate over a specified number of turns, used to display the star rating buttons - [stackoverflow](https://stackoverflow.com/questions/48637178/do-django-templates-allow-for-range-in-for-loops)
+- Template language - include function, used to work with repeated widgets - [stackoverflow](https://stackoverflow.com/questions/41397427/can-multiple-templates-be-extended-by-one-template-in-django)
+- Script - managing comments, follows the Codestar blog walkthrough project - in this project it can be seen in [recipe-detail.js](static/js/recipe-detail.js)
 - Favicon - guidance on adding a favicon to django projects - [learnDjango](https://learndjango.com/tutorials/django-favicon-tutorial#:~:text=3.-,Add%20the%20Favicon,can%20help%20with%20higher%20resolution.)
-<!-- - Reference for clearing the screen in python - [Clearing Screen in Linux Operating System](https://www.geeksforgeeks.org/clear-screen-python/)
-- Reference for multiline string to print "pages" - [Multiline Strings](https://www.w3schools.com/python/gloss_python_multi_line_strings.asp)
-- Reference for readlines() method to list words - [readlines() Method](https://www.w3schools.com/python/ref_file_readlines.asp)
-- Validating input - [Love Sandwiches - Validating our data part 1](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/c92755338ef548f28cc31a7c3d5bfb46/?child=first)
-- Reference for alphabetic chars only in a string - [String isalpha() Method](https://www.w3schools.com/python/ref_string_isalpha.asp)
-- Reference to check value exists in list - [Check If List Item Exists](https://www.w3schools.com/python/gloss_python_check_if_list_item_exists.asp)
-- Reference for while loop until valid data - [Creating our User Request Loop](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/c92755338ef548f28cc31a7c3d5bfb46/?child=first)
-- Reference for centering text in string - [String center() Method](https://www.w3schools.com/python/ref_string_center.asp)
-- Reference to create dictionary comprehensions - [Dictionary comprehensions](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+CPP_06_20+3/courseware/f780287e5c3f4e939cd0adb8de45c12a/82a59be9f20a4f36bff58ff4a102d60a/)
-- Formatting text - [How do I print colored text to the terminal?](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
-- ANSI colours - [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit)
-- Reference for Datetime to use in creating a timestamp based ID - [Datetime](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+CPP_06_20+3/courseware/272f493b4d57445fbd634e7ceca3a98c/4ab3e01af44f4bf2828739c1d0591a45/) and [formatting](https://www.w3schools.com/python/python_datetime.asp#gsc.tab=0)
-- Reference for getting values from a dictionary - [values()](https://www.w3schools.com/python/ref_dictionary_values.asp)
-- Reference for returning a sum of integers in a list - [math.fsum()](https://www.w3schools.com/python/ref_math_fsum.asp)
-- Reference for setup, finding and updating spreadsheet with [gspread](https://docs.gspread.org/en/latest/user-guide.html) -->
+- CSS Overflow - used to make the recipe cards a consistent size and crop description if too long - [stackoverflow](https://stackoverflow.com/questions/32134117/how-to-set-limit-for-words-in-bootstrap)
+- CSS - customising the details elements used for password advice and ratings conciseness - [sitepoint](https://www.sitepoint.com/style-html-details-element/)
+- Python - how to use statistics.mean() method - [w3schools](https://www.w3schools.com/python/ref_stat_mean.asp)
+- HTML Meta - specify browser head background colour - [Medium](https://medium.com/@evkirkiles/coloring-the-webkit-browser-bars-28d75cd8cf7f)
 
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.
-
-<!--## Other General Project Advice
-
- Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work! 
-
-- One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through [this article](https://chris.beams.io/posts/git-commit/) by Chris Beams on How to Write  a Git Commit Message 
-  - Make sure to keep the messages in the imperative mood 
-
-- When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
-  - For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept. 
-
-- Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
-  - [Writing Your Best Code](https://learn.shayhowe.com/html-css/writing-your-best-code/)
-  - [HTML & CSS Coding Best Practices](https://medium.com/@inceptiondj.info/html-css-coding-best-practice-fadb9870a00f)
-  - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
-
-Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!  -->
-
