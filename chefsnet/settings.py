@@ -40,6 +40,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '8000-dasic002-virtualrecipeb-8r0waajl78a.ws.codeinstitute-ide.net',
     '.herokuapp.com',
+    '127.0.0.1',
 ]
 
 
@@ -120,7 +121,8 @@ DATABASES = {
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
+    "https://localhost"
 ]
 
 # Password validation
