@@ -643,8 +643,8 @@ In this ERD we can see the models created and how they are related to one anothe
     - Desktop:<br>
   ![Lighthouse desktop analysis](docs/images/lighthouse-test.PNG)
 
-  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/GameOfKings/index.html) showed no obvious errors after some improvements were made.<br>
-  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
+  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://chefs-on-the-net-2-0-d863c6b075c3.herokuapp.com/) showed no obvious errors after some improvements were made.<br>
+  ![Wave accessibility evaluation results](docs/images/test-wave-accessibility.png)
 
 
 
