@@ -638,10 +638,10 @@ In this ERD we can see the models created and how they are related to one anothe
 - Accessibility
   - Running the site through lighthouse analysis does show some issues with some insuficient colour contrast and performance suggests I should minimise my JS files for faster loading. Otherwise still rates above 90 on accessibility:
     - Mobile:<br>
-  ![Lighthouse mobile analysis](docs/images/lighthouse-test-mobile.PNG)
+  ![Lighthouse mobile analysis](docs/images/lighthouse-test-mobile-v2-0.PNG)
  
     - Desktop:<br>
-  ![Lighthouse desktop analysis](docs/images/lighthouse-test.PNG)
+  ![Lighthouse desktop analysis](docs/images/lighthouse-test-desktop-v2-0.PNG)
 
   - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://chefs-on-the-net-2-0-d863c6b075c3.herokuapp.com/) showed no obvious errors after some improvements were made.<br>
   ![Wave accessibility evaluation results](docs/images/test-wave-accessibility.png)
