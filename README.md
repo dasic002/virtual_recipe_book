@@ -729,6 +729,9 @@ In this ERD we can see the models created and how they are related to one anothe
 - __Images uploading to Cloudinary via frontend form - OUTSTANDING__<br>
 After setting up the model to include cloudinary library and field and even following an implementation guide from cloudinary, the recipe editor form would not recognise there was a file selected in the form to upload, so it always failed the form validation on submission. I removed the field from the formset so the form could still be used for MVP until I could figure out how to make it work.
 
+- __Clicking on edit or delete comment threw errors at times - FIXED__<br>
+On testing the recipe detail page, it was found that clicking the edit comment button would sometimes log an error to the console, or clicking on the delete button would provide 'null' as opposed to a ID number for the given comment to compose the delete-comment URL on the delete modal. The issue appeared to be intermittent until I realised the errors occurred when clicking the icon used on the buttons, rather than clicking on the button space around the icon. This meant the clicked target being used was the icon, rather than the button, as since the icon does not contain the data-comment-id attribute, it returned null. After a quick search online, found a simple solution [here](https://stackoverflow.com/questions/22962386/click-event-on-button-is-sending-an-icon-as-the-target), simply changing my JavaScript file [recipe-detail.js](staticfiles/js/recipe-detail.js), to listen to the clicked target as `e.currentTarget` instead of `e.target`, so it reference the buttons it is listening for rather than components within.
+
 
 ## Deployment
 ### Local Development
