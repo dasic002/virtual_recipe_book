@@ -339,6 +339,11 @@ def recipe_edit(request, slug):
         ingredient_form = IngredientFormSet(instance=recipe)
     
     else:
+        messages.add_message(
+            request, messages.ERROR,
+            ('You can only edit your own recipes!')
+        )
+
         raise PermissionDenied
 
     return render(
