@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Comment, Recipe, User
+from django.urls import is_valid_path
+from .models import Comment, Recipe, User, Favourite
 from .forms import CommentForm, IngredientFormSet, RecipeForm
 
 
@@ -363,12 +364,8 @@ def recipe_delete(request, id):
 
     **Context**
 
-    ``recipe_form``
-        Form modelled from :model:`recipe_book.Recipe`.
-
-    ``ingredient_form``
-        Formset linked to :model:`recipe_book.Recipe`
-        linked via the foregin key of recipe.
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
 
     **Template:**
 
@@ -388,6 +385,81 @@ def recipe_delete(request, id):
             'You can only delete your own recipes!')
 
     return redirect('user_library', username)
+
+
+@login_required
+def recipe_fave(request, id):
+    """
+    Adds recipe to user's favourites from :model:`recipe_book.Recipe`,
+    recording in :model:`recipe_book.Favourite`.
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+        
+    ``favourite``
+        An instance of :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+        :template:`recipe_book/user_library.html`
+    """
+    next_url = request.GET.get('next', '/')
+    recipe = get_object_or_404(Recipe, id=id)
+
+    if recipe.saves.filter(author=request.user).first() is None:
+        recipe.saves.create(author=request.user)
+        messages.add_message(
+            request, messages.SUCCESS,
+            f'Recipe {recipe.title} added to your favourites!')
+    else:
+        messages.add_message(
+            request, messages.ERROR,
+            f'Recipe {recipe.title} already in your favourites!')
+    
+    if is_valid_path(next_url):
+        return redirect(next_url)
+    else:
+        return redirect('home')
+
+
+@login_required
+def recipe_unfave(request, id):
+    """
+    Removes recipe from user's favourites from :model:`recipe_book.Recipe`,
+    removing from :model:`recipe_book.Favourite`.
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+
+    ``favourite``
+        An instance of :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+        :template:`recipe_book/user_library.html`
+    """
+    next_url = request.GET.get('next', '/')
+    fave = get_object_or_404(Favourite, id=id)
+    recipe = fave.recipe
+
+    if fave is not None:
+        fave.delete()
+        messages.add_message(
+            request, messages.SUCCESS,
+            f'Recipe {recipe.title} removed from your favourites!')
+    else:
+        messages.add_message(
+            request, messages.ERROR,
+            f'Recipe {recipe.title} not in your favourites!')
+    
+    if is_valid_path(next_url):
+        return redirect(next_url)
+    else:
+        return redirect('home')
 
 
 @login_required
