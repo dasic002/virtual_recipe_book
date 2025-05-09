@@ -2,6 +2,7 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
+    path('profile/<slug:author>/favourites', views.user_faves, name='user_faves'),
     path('profile/<slug:author>/', views.user_library, name='user_library'),
     path('recipe-create/', views.recipe_create, name='recipe_create'),
     path('', views.RecipeLibrary, name='home'),

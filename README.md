@@ -156,13 +156,13 @@ Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst th
 
 ### Existing Features
 #### Navigation Menu
-The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Register** or **Logout** and **My recipes** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
+The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Register** or **Logout**, **My recipes** and  **My favourites** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
-      <img src="docs/images/feat_mobile-nav-menu.PNG" alt="Nav menu mobile" width="150vw"/>
+      <img src="docs/images/feat_mobile-nav-menu-1.PNG" alt="Nav menu mobile" width="150vw"/>
       </td><td>
-      <img src="docs/images/feat_desktop-nav-menu.PNG" alt="Nav menu desktop" width="750vw"/>
+      <img src="docs/images/feat_desktop-nav-menu-1.PNG" alt="Nav menu desktop" width="750vw"/>
       </td></tr>
       </table>
 
@@ -240,11 +240,17 @@ On successful submission, the form will create an alert messages to indicate to 
 Similarly to the My recipes page, logged in users can navigate to other users' recipe library view, by clicking on the author name of a given recipe card. This page will render all the published recipes by the given author. The title on the page will indicate the current author library in view.<br>
 ![User library](docs/images/feat_user-library.png)
 
+#### User favourites
+Similar to User Library, logged in users can navigate to **My favourites** page to view a library composed of all the recipes the user has saved. The title on the page will indicate the owner of the collection fo favourites seen. The owner of this collection can remove saved recipes by clicking the save button featuring the solid heart icon.<br>
+![User Favourites](docs/images/feat_user-favourites.png)
+
 #### Widgets
 ##### Recipe widget
 This reusable template renders the recipe card to display in the library views. It consists of image, title, description, Author and timestamp of recipe being added. The author username here is clickable and will take the user to the author's library to view their published recipes, however, this is only visible to logged in users and will redirect the Anonymous user to the log in page.<br>
 
-Once the user is logged in, the widget will include the save button and rating. Where the save button indicates whether the user has saved the given recipe or not. The rating indicates the average rating given to a recipe and is a button that if clicked, will direct the user to the ratings section in the recipe details page.<br>
+Once the user is logged in, the widget will include the save button and rating. Where the save button indicates whether the user has saved the given recipe or not. The save button will call a url to create the Favourite instance or delete it, then by using a `?next=` parameter in the url, the user will be returned to the page they were, be it the homepage or User library.
+
+The rating indicates the average rating given to a recipe and is a button that if clicked, will direct the user to the ratings section in the recipe details page.<br>
 
 Finally, if the user has navigated to "My recipes" page, the recipe widget will include the edit and delete buttons as the user expects to have full managemment control of their own recipes here.<br>
       <table>
@@ -402,7 +408,7 @@ The whole text in the comment (including reviewer's text) can be edited by the c
 >Similar to the image upload field issue, whilst this feature has not been built, users have been granted access to edit comments in the admin panel, but this seems a little redundant when everyone has access to each others' comments, regardless of recipe authors. I've not had a chance to see if there is a way of filtering access to edit comments in the admin panel by whether the user is the author of a given recipe.
 
 
-#### <ins>Recipe saving</ins>
+<!-- #### <ins>Recipe saving</ins>
 Similar to bookmarking sites as you browse, this feature would allow users to toggle saving a recipe the user likes the sound of and wishes to try making it later, by simply clicking on the heart icon button over the recipe photo. The site has the button to render the sample likes added via the admin page, but it is not setup as frontend form yet.
 
 >__How might we create this?__<br>
@@ -410,7 +416,7 @@ Similar to bookmarking sites as you browse, this feature would allow users to to
 
 >The code for the POST method in the recipe detail view would need to change to distinguish between the which "submit" button triggered it, then the recipe save form would take current recipe and user as parameters to add entry to the model. The user is redirected back to the page and the save button is changed to solid icon as an entry is visible. 
 
->Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again.
+>Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again. -->
 
 #### <ins>Recipe rating</ins>
 Similar to the recipe save button, the feature would allow the user to select the number of stars they'd like to rate the recipe with, simply clicking on the star would submit their rating.
@@ -880,6 +886,7 @@ web: gunicorn PROJECT_NAME.wsgi
 - CSS - customising the details elements used for password advice and ratings conciseness - [sitepoint](https://www.sitepoint.com/style-html-details-element/)
 - Python - how to use statistics.mean() method - [w3schools](https://www.w3schools.com/python/ref_stat_mean.asp)
 - HTML Meta - specify browser head background colour - [Medium](https://medium.com/@evkirkiles/coloring-the-webkit-browser-bars-28d75cd8cf7f)
+- URLs - Using next parameter to redirect user - [geeks for geeks](https://www.geeksforgeeks.org/django-redirect-to-previous-page-after-login/)
 
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.

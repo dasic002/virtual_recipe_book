@@ -4,6 +4,7 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 {% url 'user_library' user.username as user_library_url %}
+{% url 'user_faves' user.username as user_faves_url %}
 
 
 <!DOCTYPE html>
@@ -60,6 +61,10 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == user_library_url %}active"
                             aria-current="page{% endif %}" href="{% url 'user_library' user.username %}">My recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == user_faves_url %}active"
+                            aria-current="page{% endif %}" href="{% url 'user_faves' user.username %}">My favourites</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

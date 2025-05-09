@@ -283,6 +283,45 @@ def user_library(request, author):
 
 
 @login_required
+def user_faves(request, author):
+    """
+    Display users' collection of favourite recipes
+    :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``faves_list``
+        A set of instances related to author from
+        :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+    :template:`recipe_book/user_faves.html`
+    """
+    author = get_object_or_404(User, username=author)
+    faves_list = Recipe.objects.filter(
+        saves__author=author).order_by("-created_on")
+
+    for recipe in faves_list:
+        if recipe.saves.filter(author=request.user).first() is not None:
+            recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
+    
+    template = loader.get_template('recipe_book/user_faves.html')
+
+    paginator = Paginator(faves_list, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'faves_list': faves_list,
+        'page_obj': page_obj,
+        'author': author,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
 def recipe_edit(request, slug):
     """
     Edits user's existing recipe from :model:`recipe_book.Recipe`.

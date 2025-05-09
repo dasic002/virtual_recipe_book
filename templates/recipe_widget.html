@@ -41,7 +41,7 @@
                     on:</p>
                 <p>{{ recipe.created_on}}</p>
             </div>
-            {% if user == author %}
+            {% if user == recipe.author and request.path != "/" %}
             <div class="recipe-tools">
                 <span>
                     <a href="{% url 'recipe_edit' recipe.slug %}" class="btn btn-edit"><i
