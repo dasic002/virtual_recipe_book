@@ -90,7 +90,7 @@
             {% else %}
             <!-- Logged in user has reviewed this recipe -->
             {% if user_rating %}
-            <div class="pb-3 text-center">
+            <div id="userRating" class="pb-3 text-center">
                 <p class="card-text">Your review:</p>
 
                 {% with n='*****' %}
@@ -101,12 +101,21 @@
                     {% endif %}
                     {% endfor %}
                     {% endwith %}
-                    <p class="card-text">{{ user_rating.review }}</p>
+                    <p id="userRatingBody" class="card-text" data-score="{{ user_rating.score }}">
+                        {{ user_rating.review }}
+                    </p>
+                    
+                    <span>
+                        <button class="btn btn-edit" data-rating-id="{{ user_rating.id }}"><i
+                                class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-delete" data-rating-id="{{ user_rating.id }}"><i
+                                class="fa-solid fa-trash"></i></button>
+                    </span>
             </div>
             {% endif %}
 
             <!-- Logged in user has not reviewed the recipe -->
-            <div class="col card mb-4 text-left" {% if user_rating %}hidden{% endif %}>
+            <div id="ratingEditor" class="col card mb-4 text-left" {% if user_rating %}hidden{% endif %}>
                 <div class="card-body">
                     <h4>Leave a review:</h4>
                     <form id="rating_form" method="post" style="margin-top: 1.3em;">
@@ -214,11 +223,11 @@
     <div class="modal-dialog">
         <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete <span class="object-type">comment</span>?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete your comment?</p>
+                <p>Are you sure you want to delete your <span class="object-type">comment</span>?</p>
                 <p>This action cannot be undone.</p>
             </div>
             <div class="modal-footer">

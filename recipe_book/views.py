@@ -528,6 +528,51 @@ def recipe_unfave(request, id):
 
 
 @login_required
+def rating_edit(request, slug, rating_id):
+    """
+    view to edit ratings
+    """
+    if request.method == "POST":
+
+        rating = get_object_or_404(Rating, pk=rating_id)
+        rating_form = RatingForm(data=request.POST, instance=rating)
+
+        if rating_form.is_valid() and rating.author == request.user:
+            rating = rating_form.save(commit=False)
+            rating.approved = 0
+            rating.save()
+            messages.add_message(request, messages.SUCCESS, 'Rating Updated!')
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'Error updating rating!')
+
+    return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+@login_required
+def rating_delete(request, slug, rating_id):
+    """
+    view to delete ratings
+    """
+    rating = get_object_or_404(Rating, pk=rating_id)
+
+    if rating.author == request.user:
+        rating.delete()
+        messages.add_message(request, messages.SUCCESS, 'Rating deleted!')
+    else:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You can only delete your own ratings!')
+
+        raise PermissionDenied
+
+    return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+@login_required
 def comment_edit(request, slug, comment_id):
     """
     view to edit comments
@@ -566,5 +611,7 @@ def comment_delete(request, slug, comment_id):
             request,
             messages.ERROR,
             'You can only delete your own comments!')
+
+        raise PermissionDenied
 
     return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
