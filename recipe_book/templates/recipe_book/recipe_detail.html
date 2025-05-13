@@ -172,9 +172,9 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="p-2 comments
-                    {% if not comment.approved and comment.author == user %}
+                    {% if comment.approved != 2 and comment.author == user %}
                     faded
-                    {% elif not comment.approved %} d-none{% endif %}">
+                    {% elif comment.approved != 2 %} d-none{% endif %}">
                         <p class="font-weight-bold">
                             {{ comment.author }}
                             <span class="font-weight-normal">
@@ -195,6 +195,10 @@
                         {% if not comment.approved and comment.author == user %}
                         <p class="approval">
                             This comment is awaiting approval
+                        </p>
+                        {% elif comment.approved == 1 and comment.author == user %}
+                        <p class="approval">
+                            This comment has been <strong>REJECTED</strong>, please revise. Remember to keep it civil and respectful.
                         </p>
                         {% endif %}
                     </div>
