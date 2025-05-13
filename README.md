@@ -10,7 +10,7 @@ Recipes require approval from the superuser to listing the recipe for general vi
 The home page whilst a user is logged in, will display the library of public recipes available, whilst in "My recipes" page, users can view their own recipes and more easily review comments and ratings on their recipes.
 
 
-[View the deployed webapp here](https://chefs-on-the-net-08c612a798ef.herokuapp.com/)
+[View the deployed webapp here](https://chefs-on-the-net-2-0-d863c6b075c3.herokuapp.com/)
 
 [View the Agile project here](https://github.com/users/dasic002/projects/6)
 
@@ -98,8 +98,8 @@ __Should have:__
 __Could have:__
 - CLOSED - [USER STORY: View rating](https://github.com/dasic002/virtual_recipe_book/issues/17)
 - OPEN - [USER STORY: Approve changed published recipes](https://github.com/dasic002/virtual_recipe_book/issues/10)
-- OPEN - [USER STORY: Mark recipes as favourites](https://github.com/dasic002/virtual_recipe_book/issues/12)
-- OPEN - [USER STORY: Add a rating to a recipe](https://github.com/dasic002/virtual_recipe_book/issues/16)
+- CLOSED - [USER STORY: Mark recipes as favourites](https://github.com/dasic002/virtual_recipe_book/issues/12)
+- CLOSED - [USER STORY: Add a rating to a recipe](https://github.com/dasic002/virtual_recipe_book/issues/16)
 - OPEN - [USER STORY: Add tags to recipe](https://github.com/dasic002/virtual_recipe_book/issues/18)
 
 __Won't have:__
@@ -873,11 +873,14 @@ web: gunicorn PROJECT_NAME.wsgi
 - Forms - populate form to update record - [stackoverflow](https://stackoverflow.com/questions/70682238/django-how-to-auto-populate-existing-data-in-django-form-while-updating)
 - Forms - making use of the formset can_delete, using **.deleted_objects** for ingredients in recipe edit view - [django docs](https://docs.djangoproject.com/en/5.0/topics/forms/formsets/#can-delete)
 - Forms - Overriding the default fields, guide for comment form - [django docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#overriding-the-default-fields)
+- Forms - Including multiple forms on a single page, sense check my forms do not conflict with each other - [geeksforgeeks](https://www.geeksforgeeks.org/handle-multiple-forms-on-a-single-page-in-django/)
+- Forms - how to clear forms on editing comments or ratings, using `reset()` method - [w3schools](https://www.w3schools.com/Jsref/met_form_reset.asp)
 - Models - ON_DELETE options - [geeksforgeeks.org](https://www.geeksforgeeks.org/foreign-keys-on_delete-option-in-django-models/)
 - Models - PositiveIntegerField - [stackoverflow](https://stackoverflow.com/questions/42425933/how-do-i-set-a-default-max-and-min-value-for-an-integerfield-django)
 - Models - Referring to another instance, used for recipe Origin field - [stackoverflow](https://stackoverflow.com/questions/4910905/in-django-how-do-you-make-a-model-refer-to-itself)
 - Views - guidance on using Paginator in function based view - [stackoverflow](https://stackoverflow.com/questions/64170923/pagination-in-function-based-view-shows-all-objects)
 - Views - guide on Paginator - [django docs](https://docs.djangoproject.com/en/5.0/topics/pagination/#using-paginator-in-a-view-function)
+- Views - how to exclude an object from a queryset using `exclude()` - [stackoverflow](https://stackoverflow.com/questions/3032104/django-excluding-specific-instances-from-queryset-without-using-field-lookup)
 - Template - guidance on how to iterate over a specified number of turns, used to display the star rating buttons - [stackoverflow](https://stackoverflow.com/questions/48637178/do-django-templates-allow-for-range-in-for-loops)
 - Template language - include function, used to work with repeated widgets - [stackoverflow](https://stackoverflow.com/questions/41397427/can-multiple-templates-be-extended-by-one-template-in-django)
 - Script - managing comments, follows the Codestar blog walkthrough project - in this project it can be seen in [recipe-detail.js](static/js/recipe-detail.js)

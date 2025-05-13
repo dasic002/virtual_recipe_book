@@ -96,8 +96,9 @@ def sample_recipe_detail(request, slug):
     else:
         raise PermissionDenied
 
-    ratings = recipe.ratings.filter(approved=2)
-    user_rating = ratings.filter(author=request.user.id).first()
+    ratings_list = recipe.ratings.all().order_by("-created_on")
+    user_rating = ratings_list.filter(author=request.user.id).first()
+    ratings = ratings_list.exclude(author=request.user.id).exclude(approved=1)
     rating_form = RatingForm()
     comments = recipe.comments.all().order_by("-created_on")
     comment_form = CommentForm()
