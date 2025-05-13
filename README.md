@@ -300,13 +300,13 @@ Followed by the recipe description, ingredients and steps.<br>
       </td></tr>
       </table>
 
-Then, the ratings section which will display the current user's review before showing the remaining reviews in a collapsible table.<br>
+Then, the ratings section which will display the current user's review before showing the remaining reviews in a collapsible table. If the current user has add a review, it will display edit and delete buttons just below. Should their rating be pending approval, their score is public, but their review text is only visible to the author until approved. If rejected, both score and review will only be visible to the author.<br>
       <table>
       <tr><th>Mobile</th><th>Desktop</th></tr>
       <tr><td>
-      <img src="docs/images/feat_mobile-recipe-detail-ratings.png" alt="recipe detail ratings mobile" width="150vw"/>
+      <img src="docs/images/feat_mobile-recipe-detail-ratings-1.png" alt="recipe detail ratings mobile" width="150vw"/>
       </td><td>
-      <img src="docs/images/feat_desktop-recipe-detail-ratings.PNG" alt="recipe detail ratings desktop" width="750vw"/>
+      <img src="docs/images/feat_desktop-recipe-detail-ratings-1.PNG" alt="recipe detail ratings desktop" width="750vw"/>
       </td></tr>
       </table>
 
@@ -418,7 +418,7 @@ Similar to bookmarking sites as you browse, this feature would allow users to to
 
 >Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again. -->
 
-#### <ins>Recipe rating</ins>
+<!-- #### <ins>Recipe rating</ins>
 Similar to the recipe save button, the feature would allow the user to select the number of stars they'd like to rate the recipe with, simply clicking on the star would submit their rating.
 
 Additionally, the user could click a button to add or edit a review to make a rating form visible, which would contain simply a text field and a submit button.
@@ -433,7 +433,7 @@ Star ratings would be visible, whilst the rating is marked as review or approved
 >The django template to render the rating and review has been included already, but to add the function of the frontend form I would have to include:
 >- similar code to the recipe saving to operate the star buttons.
 >- similar form like what has been done for adding comments.
->- adding the javascript to handle the hover state of multiple buttons and copying the text into the form in the same way comments are edited.
+>- adding the javascript to handle the hover state of multiple buttons and copying the text into the form in the same way comments are edited. -->
 
 #### <ins>Personalise a Recipe</ins>
 This feature would enable users to create a copy of a given recipe to add their own twist, for instance to perhaps make a meat containing dish vegetarian, vegan or easier to make.
