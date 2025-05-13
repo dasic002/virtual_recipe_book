@@ -122,6 +122,7 @@
                         {{ rating_form | crispy }}
                         {% csrf_token %}
                         <button id="ratingSubmitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button id="ratingCancelButton" type="button" class="btn btn-cancel btn-lg" hidden>Cancel</button>
                         <span class="ps-3">Rating as: {{ user.username }}</span>
                     </form>
                 </div>
@@ -167,6 +168,7 @@
                         {{ comment_form | crispy }}
                         {% csrf_token %}
                         <button id="commentSubmitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button id="commentCancelButton" type="button" class="btn btn-cancel btn-lg" hidden>Cancel</button>
                         <span class="ps-3">Posting as: {{ user.username }}</span>
                     </form>
                     {% else %}

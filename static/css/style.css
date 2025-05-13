@@ -182,6 +182,7 @@ input {
 }
 
 .btn-delete,
+.btn-cancel,
 .btn-save,
 .btn-rate {
     color: #F53FA0;
@@ -189,7 +190,8 @@ input {
     background: rgba(0, 0, 0, .7);
 }
 
-.btn-delete {
+.btn-delete,
+.btn-cancel {
     border: 1px solid #F53FA0;
 }
 
@@ -202,7 +204,8 @@ input {
     border: none;
 }
 
-.btn-delete:hover {
+.btn-delete:hover,
+.btn-cancel:hover {
     color: #fff;
     background: #F53FA0;
     border: 1px solid transparent;

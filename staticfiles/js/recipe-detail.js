@@ -2,10 +2,12 @@ const editButtons = document.getElementsByClassName("btn-edit");
 const commentText = document.getElementById("id_body");
 const commentForm = document.getElementById("comment_form");
 const commentSubmitBtn = document.getElementById("commentSubmitButton");
+const commentCancelBtn = document.getElementById("commentCancelButton");
 
 const ratingText = document.getElementById("id_review");
 const ratingForm = document.getElementById("rating_form");
 const ratingSubmitBtn = document.getElementById("ratingSubmitButton");
+const ratingCancelBtn = document.getElementById("ratingCancelButton");
 const userRating = document.getElementById("userRating");
 const ratingEditor = document.getElementById("ratingEditor");
 
@@ -39,7 +41,8 @@ for (let button of editButtons) {
       ratingText.value = ratingContent;
       document.getElementById(`id_score_${score - 1}`).checked = true;
       ratingSubmitBtn.innerText = "Update";
-      ratingForm.setAttribute("action", `edit_rating/${ratingId}`);
+      ratingCancelBtn.hidden = false;
+      ratingForm.setAttribute("action", `edit-rating/${ratingId}`);
       ratingForm.querySelector("textarea").focus();
     } else {
       let commentContent = document.getElementById(
@@ -47,11 +50,33 @@ for (let button of editButtons) {
       ).innerText;
       commentText.value = commentContent;
       commentSubmitBtn.innerText = "Update";
-      commentForm.setAttribute("action", `edit_comment/${commentId}`);
+      commentCancelBtn.hidden = false;
+      commentForm.setAttribute("action", `edit-comment/${commentId}`);
       commentForm.querySelector("textarea").focus();
     }
   });
 }
+
+/**
+ * Initializes cancel functionality for the provided cancel buttons.
+ */
+commentCancelBtn.addEventListener("click", (e) => {
+  commentForm.reset();
+  commentSubmitBtn.innerText = "Submit";
+  commentCancelBtn.hidden = true;
+  commentForm.removeAttribute("action");
+});
+
+ratingCancelBtn.addEventListener("click", (e) => {
+  ratingForm.reset();
+  ratingSubmitBtn.innerText = "Submit";
+  ratingCancelBtn.hidden = true;
+  ratingForm.removeAttribute("action");
+  if (userRating) {
+    ratingEditor.hidden = true;
+    userRating.hidden = false;
+  }
+});
 
 /**
  * Initializes deletion functionality for the provided delete buttons.
@@ -68,8 +93,8 @@ for (let button of deleteButtons) {
     let commentId = e.currentTarget.getAttribute("data-comment-id");
     let ratingId = e.currentTarget.getAttribute("data-rating-id");
     deleteConfirm.href = ratingId
-      ? `delete_rating/${ratingId}`
-      : `delete_comment/${commentId}`;
+      ? `delete-rating/${ratingId}`
+      : `delete-comment/${commentId}`;
     
     for (let type of deleteType) {
       if (ratingId) {
