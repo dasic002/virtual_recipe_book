@@ -219,3 +219,10 @@ input {
 .approval {
     color: rgb(222, 146, 168);
 }
+
+#div_id_score>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}

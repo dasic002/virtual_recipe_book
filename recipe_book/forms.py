@@ -1,7 +1,22 @@
-from django.forms import inlineformset_factory, Textarea
+from django.forms import inlineformset_factory, Textarea, RadioSelect
 from django import forms
 from cloudinary.forms import CloudinaryFileField
-from .models import Comment, Recipe, Ingredient
+from .models import Comment, Rating, Recipe, Ingredient
+
+
+class RatingForm(forms.ModelForm):
+    '''
+    Class for form for rating
+    '''
+    class Meta:
+        model = Rating
+        fields = ('score', 'review')
+        widgets = {
+            "review": Textarea(attrs={
+                "rows": 5,
+                "class": 'dark-bg'}),
+            "score": RadioSelect(),
+        }
 
 
 class CommentForm(forms.ModelForm):

@@ -8,8 +8,8 @@ from django.template import loader
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import is_valid_path
-from .models import Comment, Recipe, User, Favourite
-from .forms import CommentForm, IngredientFormSet, RecipeForm
+from .models import Comment, Recipe, User, Favourite, Rating
+from .forms import CommentForm, RatingForm, IngredientFormSet, RecipeForm
 
 
 # Create your views here.
@@ -97,6 +97,7 @@ def sample_recipe_detail(request, slug):
 
     ratings = recipe.ratings.filter(approved=2)
     user_rating = ratings.filter(author=request.user.id).first()
+    rating_form = RatingForm()
     comments = recipe.comments.all().order_by("-created_on")
     comment_form = CommentForm()
     faved = recipe.saves.filter(author=request.user.id).first()
@@ -108,6 +109,7 @@ def sample_recipe_detail(request, slug):
             "recipe": recipe,
             "ratings": ratings,
             "user_rating": user_rating,
+            "rating_form": rating_form,
             "comments": comments,
             "comment_form": comment_form,
             "faved": faved,
@@ -148,16 +150,25 @@ def recipe_detail(request, slug):
     queryset = Recipe.objects.filter(
         Q(listing_type='2') | Q(listing_type='3') | Q(author=request.user)
         )
-
+    
     recipe = get_object_or_404(queryset, slug=slug)
-    ratings = recipe.ratings.filter(approved=2)
-    user_rating = ratings.filter(author=request.user.id).first()
-    comments = recipe.comments.all().order_by("-created_on")
-    comment_form = CommentForm()
-    faved = recipe.saves.filter(author=request.user.id).first()
-
+    
     if request.method == "POST":
-        comment_form = CommentForm(data=request.POST)
+        rating_form = RatingForm(request.POST)
+        comment_form = CommentForm(request.POST)
+
+        if rating_form.is_valid():
+            rating = rating_form.save(commit=False)
+            rating.author = request.user
+            rating.recipe = recipe
+            rating.approved = 0
+            rating.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Rating submitted and awaiting approval'
+            )
+            rating_form = RatingForm()
+
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
@@ -169,6 +180,19 @@ def recipe_detail(request, slug):
             )
             comment_form = CommentForm()
 
+    else:
+        rating_form = RatingForm()
+        comment_form = CommentForm()
+
+    ratings_list = recipe.ratings.all().order_by("-created_on")
+    user_rating = ratings_list.filter(author=request.user.id).first()
+    ratings = ratings_list.exclude(author=request.user.id)
+    
+    rating_form = RatingForm()
+    comments = recipe.comments.all().order_by("-created_on")
+    comment_form = CommentForm()
+    faved = recipe.saves.filter(author=request.user.id).first()
+
     return render(
         request,
         "recipe_book/recipe_detail.html",
@@ -176,6 +200,7 @@ def recipe_detail(request, slug):
             "recipe": recipe,
             "ratings": ratings,
             "user_rating": user_rating,
+            "rating_form": rating_form,
             "comments": comments,
             "comment_form": comment_form,
             "faved": faved,
