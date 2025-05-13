@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from django.utils.translation import gettext_lazy as _
 from cloudinary.models import CloudinaryField
 import statistics
 
@@ -76,17 +75,18 @@ class Recipe(models.Model):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
-
     @property
     def average_score(self):
         """
-        set as a property we can call, this function will create an iterable list
-        of all the scores for the given recipe. Then using the statistics library
-        mean function, to calculate the average score.
+        set as a property we can call, this function will create an iterable
+        list of all the scores for the given recipe. Then using the statistics
+        library mean function, to calculate the average score.
 
         Average score ignores any ratings that have been rejected.
         """
-        list_score = self.ratings.exclude(approved=1).values_list('score', flat=True)
+        list_score = self.ratings.exclude(approved=1).values_list(
+            'score', flat=True
+            )
 
         if len(list_score) > 0:
             list_score = round(statistics.mean(list_score), 1)
@@ -98,9 +98,9 @@ class Recipe(models.Model):
     @property
     def ingredients(self):
         """
-        set as a property we can call, this function will collect the ingredients
-        for a given recipe and format it in a human legible list before rendering
-        to the recipe detail page.
+        set as a property we can call, this function will collect the
+        ingredients for a given recipe and format it in a human legible list
+        before rendering to the recipe detail page.
         """
         list_ingredients = self.ingredients_needed.all()
         for line in list_ingredients:
@@ -111,9 +111,9 @@ class Recipe(models.Model):
     @property
     def steps(self):
         """
-        set as a property we can call, this function will unpack the JSON values
-        as if it were a dictionary into a list of tuples so we can iterate
-        through into the method table.
+        set as a property we can call, this function will unpack the JSON
+        values as if it were a dictionary into a list of tuples so we can
+        iterate through into the method table.
 
         Redundant whilst method is stored as a textfield rather than JSON.
         """

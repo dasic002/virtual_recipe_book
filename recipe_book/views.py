@@ -38,7 +38,8 @@ def RecipeLibrary(request):
     if request.user.is_authenticated:
         for recipe in recipe_list:
             if recipe.saves.filter(author=request.user).first() is not None:
-                recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
+                recipe.liked_by_user = recipe.saves.filter(
+                    author=request.user).first()
 
     template = loader.get_template('recipe_book/index.html')
 
@@ -150,9 +151,9 @@ def recipe_detail(request, slug):
     queryset = Recipe.objects.filter(
         Q(listing_type='2') | Q(listing_type='3') | Q(author=request.user)
         )
-    
+
     recipe = get_object_or_404(queryset, slug=slug)
-    
+
     if request.method == "POST":
         rating_form = RatingForm(request.POST)
         comment_form = CommentForm(request.POST)
@@ -187,7 +188,7 @@ def recipe_detail(request, slug):
     ratings_list = recipe.ratings.all().order_by("-created_on")
     user_rating = ratings_list.filter(author=request.user.id).first()
     ratings = ratings_list.exclude(author=request.user.id).exclude(approved=1)
-    
+
     rating_form = RatingForm()
     comments = recipe.comments.all().order_by("-created_on")
     comment_form = CommentForm()
@@ -245,7 +246,7 @@ def recipe_create(request):
             messages.add_message(
                 request, messages.SUCCESS,
                 (f'Recipe {recipe.title} saved! If you have set the recipe ' +
-                    f'public it will be awaiting approval')
+                    'public it will be awaiting approval')
             )
 
             return redirect('user_library', recipe.author.username)
@@ -291,7 +292,8 @@ def user_library(request, author):
 
     for recipe in recipe_list:
         if recipe.saves.filter(author=request.user).first() is not None:
-            recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
+            recipe.liked_by_user = recipe.saves.filter(
+                author=request.user).first()
 
     template = loader.get_template('recipe_book/user_library.html')
 
@@ -330,8 +332,9 @@ def user_faves(request, author):
 
     for recipe in faves_list:
         if recipe.saves.filter(author=request.user).first() is not None:
-            recipe.liked_by_user = recipe.saves.filter(author=request.user).first()
-    
+            recipe.liked_by_user = recipe.saves.filter(
+                author=request.user).first()
+
     template = loader.get_template('recipe_book/user_faves.html')
 
     paginator = Paginator(faves_list, 6)
@@ -388,22 +391,22 @@ def recipe_edit(request, slug):
             messages.add_message(
                 request, messages.SUCCESS,
                 (f'Recipe {recipe.title} updated! If you have set the ' +
-                    f'recipe public it will be awaiting approval')
+                    'recipe public it will be awaiting approval')
             )
 
             return redirect('user_library', recipe.author.username)
-        
+
         else:
             messages.add_message(
                 request, messages.ERROR,
                 (f'Recipe {recipe.title} has not been updated!' +
-                    f' You may not have permission to edit this recipe!')
+                    ' You may not have permission to edit this recipe!')
             )
 
     elif request.user == recipe.author:
         recipe_form = RecipeForm(instance=recipe)
         ingredient_form = IngredientFormSet(instance=recipe)
-    
+
     else:
         messages.add_message(
             request, messages.ERROR,
@@ -462,7 +465,7 @@ def recipe_fave(request, id):
 
     ``recipe``
         An instance of :model:`recipe_book.Recipe`.
-        
+
     ``favourite``
         An instance of :model:`recipe_book.Favourite`.
 
@@ -482,7 +485,7 @@ def recipe_fave(request, id):
         messages.add_message(
             request, messages.ERROR,
             f'Recipe {recipe.title} already in your favourites!')
-    
+
     if is_valid_path(next_url):
         return redirect(next_url)
     else:
@@ -520,7 +523,7 @@ def recipe_unfave(request, id):
         messages.add_message(
             request, messages.ERROR,
             f'Recipe {recipe.title} not in your favourites!')
-    
+
     if is_valid_path(next_url):
         return redirect(next_url)
     else:

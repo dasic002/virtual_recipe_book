@@ -1,6 +1,5 @@
 from django.forms import inlineformset_factory, Textarea, RadioSelect
 from django import forms
-from cloudinary.forms import CloudinaryFileField
 from .models import Comment, Rating, Recipe, Ingredient
 
 
@@ -40,7 +39,6 @@ class RecipeForm(forms.ModelForm):
     feature_image field currently excluded from form as it is not working
     correctly and causing form not to validate and save the rest of the data.
     '''
-    # featured_image = CloudinaryFileField()
 
     class Meta:
         model = Recipe
@@ -54,7 +52,6 @@ class RecipeForm(forms.ModelForm):
             'listing_type',
             'source',
             'source_url',
-            # 'featured_image',
         )
 
 
@@ -69,6 +66,7 @@ class IngredientForm(forms.ModelForm):
             'quantity',
             'unit',
         )
+
 
 # Creates formset for our dynamically manipulated form to save multiple
 # instances of ingredients in one submission.
