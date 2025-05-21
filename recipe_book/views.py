@@ -169,7 +169,7 @@ def recipe_detail(request, slug):
                 request, messages.SUCCESS,
                 'Rating submitted and awaiting approval'
             )
-            rating_form = RatingForm()
+            return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
@@ -180,7 +180,7 @@ def recipe_detail(request, slug):
                 request, messages.SUCCESS,
                 'Comment submitted and awaiting approval'
             )
-            comment_form = CommentForm()
+            return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
     else:
         rating_form = RatingForm()
