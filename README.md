@@ -23,12 +23,11 @@ The home page whilst a user is logged in, will display the library of public rec
   * [User stories](#user-stories)
   * [Strategy](#strategy)
   * [Scope](#scope)
-  * [Surface](#surface)
   * [Structure](#structure)
   * [Wireframes](#wireframes)
   * [Surface](#surface)
 * [Features](#features)
-* [Technologies](#technologies)
+* [Technologies used](#technologies-used)
 * [Testing](#testing)
 * [Deployment](#deployment)
 * [Credits](#credits)
@@ -345,7 +344,8 @@ To add user authentication the Django Allauth package was installed. It provides
   - Otherwise, our code does verify the user is authenticated and has the rights to access a given page and will redirect to the relevant error responses as appropriate.
 
 #### Alert messages
-Alert messages have been enabled to provide the user with feedback on actions taken, be it notify of successfull registration, login, logout, recipe or comment created, edited or deleted.<br>
+Alert messages have been enabled to provide the user with feedback on actions taken, be it notify of successful registration, login, logout, recipe or comment created, edited or deleted.<br>
+A javascript file triggers the auto close function of alerts, after 5 seconds, it gently fades the alert out and slides up the div.<br>
 ![Confirmation recipe created alert](docs/images/feat_alert-recipe-added.PNG)
 
 #### HTTP Error pages
@@ -738,6 +738,8 @@ After setting up the model to include cloudinary library and field and even foll
 - __Clicking on edit or delete comment threw errors at times - FIXED__<br>
 On testing the recipe detail page, it was found that clicking the edit comment button would sometimes log an error to the console, or clicking on the delete button would provide 'null' as opposed to a ID number for the given comment to compose the delete-comment URL on the delete modal. The issue appeared to be intermittent until I realised the errors occurred when clicking the icon used on the buttons, rather than clicking on the button space around the icon. This meant the clicked target being used was the icon, rather than the button, as since the icon does not contain the data-comment-id attribute, it returned null. After a quick search online, found a simple solution [here](https://stackoverflow.com/questions/22962386/click-event-on-button-is-sending-an-icon-as-the-target), simply changing my JavaScript file [recipe-detail.js](staticfiles/js/recipe-detail.js), to listen to the clicked target as `e.currentTarget` instead of `e.target`, so it reference the buttons it is listening for rather than components within.
 
+- __Refreshing a page after creating a comment repeated the same comment - FIXED__<br>
+After adding a comment or review to a recipe, on refresh it either generated an error 500 or repeated the same comment. The fix was just redirecting the user to the same page so it converted the POST request to a GET request.
 
 ## Deployment
 ### Local Development
@@ -890,6 +892,7 @@ web: gunicorn PROJECT_NAME.wsgi
 - Python - how to use statistics.mean() method - [w3schools](https://www.w3schools.com/python/ref_stat_mean.asp)
 - HTML Meta - specify browser head background colour - [Medium](https://medium.com/@evkirkiles/coloring-the-webkit-browser-bars-28d75cd8cf7f)
 - URLs - Using next parameter to redirect user - [geeks for geeks](https://www.geeksforgeeks.org/django-redirect-to-previous-page-after-login/)
+- JS - AutoClose bootstrap alerts - [codehim](https://codehim.com/bootstrap/bootstrap-5-alert-auto-close/)
 
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.
