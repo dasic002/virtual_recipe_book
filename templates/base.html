@@ -63,8 +63,8 @@
                             aria-current="page{% endif %}" href="{% url 'user_library' user.username %}">My recipes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == user_faves_url %}active"
-                            aria-current="page{% endif %}" href="{% url 'user_faves' user.username %}">My favourites</a>
+                        <a class="nav-link {% if request.path == user_faves_url %}active" aria-current="page{% endif %}"
+                            href="{% url 'user_faves' user.username %}">My favourites</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -89,10 +89,11 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
-                <div class="alert {{ message.tags }} alert-dismissible
+                <div class="auto-close alert {{ message.tags }} alert-dismissible
           fade show my-1" id="msg" role="alert">
                     {{ message | safe }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                 </div>
                 {% endfor %}
             </div>
@@ -126,6 +127,7 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
         </script>
     <script src="https://kit.fontawesome.com/dc62a552aa.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/auto-close-msg.js' %}"></script>
     {% block extras %}
     {% endblock %}
 </body>
