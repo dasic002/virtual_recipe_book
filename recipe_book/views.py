@@ -7,8 +7,9 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template import loader
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Comment, Recipe, User
-from .forms import CommentForm, IngredientFormSet, RecipeForm
+from django.urls import is_valid_path
+from .models import Comment, Recipe, User, Favourite, Rating
+from .forms import CommentForm, RatingForm, IngredientFormSet, RecipeForm
 
 
 # Create your views here.
@@ -34,6 +35,12 @@ def RecipeLibrary(request):
 
     sample_list = recipe_list.order_by('created_on')[:3]
 
+    if request.user.is_authenticated:
+        for recipe in recipe_list:
+            if recipe.saves.filter(author=request.user).first() is not None:
+                recipe.liked_by_user = recipe.saves.filter(
+                    author=request.user).first()
+
     template = loader.get_template('recipe_book/index.html')
 
     paginator = Paginator(recipe_list, 6)
@@ -43,7 +50,7 @@ def RecipeLibrary(request):
     context = {
         'recipe_list': recipe_list,
         'sample_list': sample_list,
-        'page_obj': page_obj
+        'page_obj': page_obj,
     }
 
     return HttpResponse(template.render(context, request))
@@ -89,8 +96,10 @@ def sample_recipe_detail(request, slug):
     else:
         raise PermissionDenied
 
-    ratings = recipe.ratings.filter(approved=2)
-    user_rating = ratings.filter(author=request.user.id).first()
+    ratings_list = recipe.ratings.all().order_by("-created_on")
+    user_rating = ratings_list.filter(author=request.user.id).first()
+    ratings = ratings_list.exclude(author=request.user.id).exclude(approved=1)
+    rating_form = RatingForm()
     comments = recipe.comments.all().order_by("-created_on")
     comment_form = CommentForm()
     faved = recipe.saves.filter(author=request.user.id).first()
@@ -102,6 +111,7 @@ def sample_recipe_detail(request, slug):
             "recipe": recipe,
             "ratings": ratings,
             "user_rating": user_rating,
+            "rating_form": rating_form,
             "comments": comments,
             "comment_form": comment_form,
             "faved": faved,
@@ -144,14 +154,23 @@ def recipe_detail(request, slug):
         )
 
     recipe = get_object_or_404(queryset, slug=slug)
-    ratings = recipe.ratings.filter(approved=2)
-    user_rating = ratings.filter(author=request.user.id).first()
-    comments = recipe.comments.all().order_by("-created_on")
-    comment_form = CommentForm()
-    faved = recipe.saves.filter(author=request.user.id).first()
 
     if request.method == "POST":
-        comment_form = CommentForm(data=request.POST)
+        rating_form = RatingForm(request.POST)
+        comment_form = CommentForm(request.POST)
+
+        if rating_form.is_valid():
+            rating = rating_form.save(commit=False)
+            rating.author = request.user
+            rating.recipe = recipe
+            rating.approved = 0
+            rating.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Rating submitted and awaiting approval'
+            )
+            return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
@@ -161,6 +180,20 @@ def recipe_detail(request, slug):
                 request, messages.SUCCESS,
                 'Comment submitted and awaiting approval'
             )
+            return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+    else:
+        rating_form = RatingForm()
+        comment_form = CommentForm()
+
+    ratings_list = recipe.ratings.all().order_by("-created_on")
+    user_rating = ratings_list.filter(author=request.user.id).first()
+    ratings = ratings_list.exclude(author=request.user.id).exclude(approved=1)
+
+    rating_form = RatingForm()
+    comments = recipe.comments.all().order_by("-created_on")
+    comment_form = CommentForm()
+    faved = recipe.saves.filter(author=request.user.id).first()
 
     return render(
         request,
@@ -169,6 +202,7 @@ def recipe_detail(request, slug):
             "recipe": recipe,
             "ratings": ratings,
             "user_rating": user_rating,
+            "rating_form": rating_form,
             "comments": comments,
             "comment_form": comment_form,
             "faved": faved,
@@ -198,7 +232,6 @@ def recipe_create(request):
     ingredient_form = IngredientFormSet()
 
     if request.method == "POST":
-        # recipe_form = RecipeForm(request.POST, request.FILES)
         recipe_form = RecipeForm(data=request.POST)
         ingredient_form = IngredientFormSet(data=request.POST)
 
@@ -214,7 +247,7 @@ def recipe_create(request):
             messages.add_message(
                 request, messages.SUCCESS,
                 (f'Recipe {recipe.title} saved! If you have set the recipe ' +
-                    f'public it will be awaiting approval')
+                    'public it will be awaiting approval')
             )
 
             return redirect('user_library', recipe.author.username)
@@ -236,7 +269,7 @@ def user_library(request, author):
 
     **Context**
 
-    ``recipes_created``
+    ``recipes_list``
         A set of instances related to author from
         :model:`recipe_book.Recipe`. Conditionally
         filtered, if user is the author of queryset
@@ -247,25 +280,70 @@ def user_library(request, author):
 
     **Template:**
 
-    :template:`recipe_book/recipe_detail.html`
+    :template:`recipe_book/user_library.html`
     """
     author = get_object_or_404(User, username=author)
     if request.user == author:
-        recipes_created = Recipe.objects.filter(
+        recipe_list = Recipe.objects.filter(
             author=author).order_by("-created_on")
     else:
-        recipes_created = Recipe.objects.filter(
+        recipe_list = Recipe.objects.filter(
             author=author).filter(approved=2).filter(
                 listing_type=3).order_by("-created_on")
 
+    for recipe in recipe_list:
+        if recipe.saves.filter(author=request.user).first() is not None:
+            recipe.liked_by_user = recipe.saves.filter(
+                author=request.user).first()
+
     template = loader.get_template('recipe_book/user_library.html')
 
-    paginator = Paginator(recipes_created, 6)
+    paginator = Paginator(recipe_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
 
     context = {
-        'recipes_created': recipes_created,
+        'recipe_list': recipe_list,
+        'page_obj': page_obj,
+        'author': author,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
+def user_faves(request, author):
+    """
+    Display users' collection of favourite recipes
+    :model:`recipe_book.Recipe`.
+
+    **Context**
+
+    ``faves_list``
+        A set of instances related to author from
+        :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+    :template:`recipe_book/user_faves.html`
+    """
+    author = get_object_or_404(User, username=author)
+    faves_list = Recipe.objects.filter(
+        saves__author=author).order_by("-created_on")
+
+    for recipe in faves_list:
+        if recipe.saves.filter(author=request.user).first() is not None:
+            recipe.liked_by_user = recipe.saves.filter(
+                author=request.user).first()
+
+    template = loader.get_template('recipe_book/user_faves.html')
+
+    paginator = Paginator(faves_list, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'faves_list': faves_list,
         'page_obj': page_obj,
         'author': author,
     }
@@ -313,15 +391,30 @@ def recipe_edit(request, slug):
 
             messages.add_message(
                 request, messages.SUCCESS,
-                (f'Recipe {recipe.title} updated! If you have set the' +
-                    f'recipe public it will be awaiting approval')
+                (f'Recipe {recipe.title} updated! If you have set the ' +
+                    'recipe public it will be awaiting approval')
             )
 
             return redirect('user_library', recipe.author.username)
 
-    else:
+        else:
+            messages.add_message(
+                request, messages.ERROR,
+                (f'Recipe {recipe.title} has not been updated!' +
+                    ' You may not have permission to edit this recipe!')
+            )
+
+    elif request.user == recipe.author:
         recipe_form = RecipeForm(instance=recipe)
         ingredient_form = IngredientFormSet(instance=recipe)
+
+    else:
+        messages.add_message(
+            request, messages.ERROR,
+            ('You can only edit your own recipes!')
+        )
+
+        raise PermissionDenied
 
     return render(
         request,
@@ -340,12 +433,8 @@ def recipe_delete(request, id):
 
     **Context**
 
-    ``recipe_form``
-        Form modelled from :model:`recipe_book.Recipe`.
-
-    ``ingredient_form``
-        Formset linked to :model:`recipe_book.Recipe`
-        linked via the foregin key of recipe.
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
 
     **Template:**
 
@@ -365,6 +454,126 @@ def recipe_delete(request, id):
             'You can only delete your own recipes!')
 
     return redirect('user_library', username)
+
+
+@login_required
+def recipe_fave(request, id):
+    """
+    Adds recipe to user's favourites from :model:`recipe_book.Recipe`,
+    recording in :model:`recipe_book.Favourite`.
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+
+    ``favourite``
+        An instance of :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+        :template:`recipe_book/user_library.html`
+    """
+    next_url = request.GET.get('next', '/')
+    recipe = get_object_or_404(Recipe, id=id)
+
+    if recipe.saves.filter(author=request.user).first() is None:
+        recipe.saves.create(author=request.user)
+        messages.add_message(
+            request, messages.SUCCESS,
+            f'Recipe {recipe.title} added to your favourites!')
+    else:
+        messages.add_message(
+            request, messages.ERROR,
+            f'Recipe {recipe.title} already in your favourites!')
+
+    if is_valid_path(next_url):
+        return redirect(next_url)
+    else:
+        return redirect('home')
+
+
+@login_required
+def recipe_unfave(request, id):
+    """
+    Removes recipe from user's favourites from :model:`recipe_book.Recipe`,
+    removing from :model:`recipe_book.Favourite`.
+
+    **Context**
+
+    ``recipe``
+        An instance of :model:`recipe_book.Recipe`.
+
+    ``favourite``
+        An instance of :model:`recipe_book.Favourite`.
+
+    **Template:**
+
+        :template:`recipe_book/user_library.html`
+    """
+    next_url = request.GET.get('next', '/')
+    fave = get_object_or_404(Favourite, id=id)
+    recipe = fave.recipe
+
+    if fave is not None:
+        fave.delete()
+        messages.add_message(
+            request, messages.SUCCESS,
+            f'Recipe {recipe.title} removed from your favourites!')
+    else:
+        messages.add_message(
+            request, messages.ERROR,
+            f'Recipe {recipe.title} not in your favourites!')
+
+    if is_valid_path(next_url):
+        return redirect(next_url)
+    else:
+        return redirect('home')
+
+
+@login_required
+def rating_edit(request, slug, rating_id):
+    """
+    view to edit ratings
+    """
+    if request.method == "POST":
+
+        rating = get_object_or_404(Rating, pk=rating_id)
+        rating_form = RatingForm(data=request.POST, instance=rating)
+
+        if rating_form.is_valid() and rating.author == request.user:
+            rating = rating_form.save(commit=False)
+            rating.approved = 0
+            rating.save()
+            messages.add_message(request, messages.SUCCESS, 'Rating Updated!')
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'Error updating rating!')
+
+    return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+@login_required
+def rating_delete(request, slug, rating_id):
+    """
+    view to delete ratings
+    """
+    rating = get_object_or_404(Rating, pk=rating_id)
+
+    if rating.author == request.user:
+        rating.delete()
+        messages.add_message(request, messages.SUCCESS, 'Rating deleted!')
+    else:
+        messages.add_message(
+            request,
+            messages.ERROR,
+            'You can only delete your own ratings!')
+
+        raise PermissionDenied
+
+    return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
 @login_required
@@ -406,5 +615,7 @@ def comment_delete(request, slug, comment_id):
             request,
             messages.ERROR,
             'You can only delete your own comments!')
+
+        raise PermissionDenied
 
     return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - {{ author }} Favourites{% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<!-- If user is logged in we want to show the full Library -->
+
+<!-- index.html content starts here -->
+<div class="container-fluid">
+    <div class="row">
+        <h1>{% if user == author %}Your {% else %}{{ author }} {% endif %} Favourites</h1>
+        
+        <!-- Recipe Entries Column -->
+        <div class="col-12 left">
+            <div class="row">
+                {% for recipe in page_obj %}
+                {% include "recipe_widget.html" %}
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% include "page_nav.html" %}
+</div>
+
+<!-- index.html content ends here -->
+
+{% endif %}
+{% endblock %}
+
+
+{% block extras %}
+<script src="{% static 'js/user-library.js' %}"></script>
+{% endblock %}

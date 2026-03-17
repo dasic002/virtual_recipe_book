@@ -10,7 +10,7 @@ Recipes require approval from the superuser to listing the recipe for general vi
 The home page whilst a user is logged in, will display the library of public recipes available, whilst in "My recipes" page, users can view their own recipes and more easily review comments and ratings on their recipes.
 
 
-[View the deployed webapp here](https://chefs-on-the-net-08c612a798ef.herokuapp.com/)
+[View the deployed webapp here](https://chefs-on-the-net-2-0-d863c6b075c3.herokuapp.com/)
 
 [View the Agile project here](https://github.com/users/dasic002/projects/6)
 
@@ -19,23 +19,20 @@ The home page whilst a user is logged in, will display the library of public rec
 ***
 
 ## Table of contents
-<!-- * [UX User Experience](#ux---user-experience)
+* [UX User Experience](#ux---user-experience)
   * [User stories](#user-stories)
-  * [Flowchart](#flowchart)
   * [Strategy](#strategy)
   * [Scope](#scope)
+  * [Structure](#structure)
+  * [Wireframes](#wireframes)
   * [Surface](#surface)
 * [Features](#features)
-* [Technologies](#technologies)
+* [Technologies used](#technologies-used)
 * [Testing](#testing)
 * [Deployment](#deployment)
-* [Credits](#credits) -->
-
-
+* [Credits](#credits)
 
 ***
-
-
 ## UX - User Experience
 
 ### User stories
@@ -78,36 +75,36 @@ Each issue expands on the user intent, our Acceptance Criteatia and Tasks to bui
 ![Kanban board in Project](docs/images/kanban_board.PNG)
 
 __Must have features:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/8)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/9)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/1)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/2)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/22)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/4)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/5)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/3)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/6)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/7)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/23)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/24)
+- CLOSED - [USER STORY: draft recipe](https://github.com/dasic002/virtual_recipe_book/issues/8)
+- CLOSED - [USER STORY: Approve recipes to publish](https://github.com/dasic002/virtual_recipe_book/issues/9)
+- CLOSED - [USER STORY: View Paginated list of recipes](https://github.com/dasic002/virtual_recipe_book/issues/1)
+- CLOSED - [USER STORY: Open Recipe](https://github.com/dasic002/virtual_recipe_book/issues/2)
+- CLOSED - [USER STORY: View Comments](https://github.com/dasic002/virtual_recipe_book/issues/22)
+- CLOSED - [USER STORY: User Login](https://github.com/dasic002/virtual_recipe_book/issues/4)
+- CLOSED - [USER STORY: User logout](https://github.com/dasic002/virtual_recipe_book/issues/5)
+- CLOSED - [USER STORY: Account registration](https://github.com/dasic002/virtual_recipe_book/issues/3)
+- CLOSED - [USER STORY: Create a recipe](https://github.com/dasic002/virtual_recipe_book/issues/6)
+- CLOSED - [USER STORY: Private or Public recipes](https://github.com/dasic002/virtual_recipe_book/issues/7)
+- CLOSED - [USER STORY: Update existing recipe ](https://github.com/dasic002/virtual_recipe_book/issues/23)
+- CLOSED - [USER STORY: Delete Recipe](https://github.com/dasic002/virtual_recipe_book/issues/24)
 
 __Should have:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/13)
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/15)
-- IN PROGRESS - [](https://github.com/dasic002/virtual_recipe_book/issues/14)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/11)
+- CLOSED - [USER STORY: Comment on recipe ](https://github.com/dasic002/virtual_recipe_book/issues/13)
+- CLOSED - [USER STORY: Modify or delete comment on a recipe](https://github.com/dasic002/virtual_recipe_book/issues/15)
+- IN PROGRESS - [USER STORY: Approve comments](https://github.com/dasic002/virtual_recipe_book/issues/14)
+- OPEN - [USER STORY: Personalise a Recipe](https://github.com/dasic002/virtual_recipe_book/issues/11)
 
 __Could have:__
-- CLOSED - [](https://github.com/dasic002/virtual_recipe_book/issues/17)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/10)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/12)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/16)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/18)
+- CLOSED - [USER STORY: View rating](https://github.com/dasic002/virtual_recipe_book/issues/17)
+- OPEN - [USER STORY: Approve changed published recipes](https://github.com/dasic002/virtual_recipe_book/issues/10)
+- CLOSED - [USER STORY: Mark recipes as favourites](https://github.com/dasic002/virtual_recipe_book/issues/12)
+- CLOSED - [USER STORY: Add a rating to a recipe](https://github.com/dasic002/virtual_recipe_book/issues/16)
+- OPEN - [USER STORY: Add tags to recipe](https://github.com/dasic002/virtual_recipe_book/issues/18)
 
 __Won't have:__
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/19)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/20)
-- OPEN - [](https://github.com/dasic002/virtual_recipe_book/issues/21)
+- OPEN - [USER STORY: Add a recipe to weekly meal planner](https://github.com/dasic002/virtual_recipe_book/issues/19)
+- OPEN - [USER STORY: Add a meal planner to grocery list](https://github.com/dasic002/virtual_recipe_book/issues/20)
+- OPEN - [USER STORY: Add recipe to grocery list](https://github.com/dasic002/virtual_recipe_book/issues/21)
 
 
 ### Structure
@@ -148,158 +145,484 @@ Google Fonts included:
 - Roboto
 - Lato
 
+#### Icons and images
+Recognisable icons sourced from [FontAwesome](https://fontawesome.com/) were used for [edit](https://fontawesome.com/icons/pen-to-square?f=classic&s=solid), [delete](https://fontawesome.com/icons/trash?f=classic&s=solid), [like](https://fontawesome.com/icons/heart?f=classic&s=regular) and [rating](https://fontawesome.com/icons/star?f=classic&s=regular) buttons as well as an accompanying image for the error pages [403](https://fontawesome.com/icons/ban?f=classic&s=solid), [404](https://fontawesome.com/icons/circle-question?f=classic&s=regular), [405](https://fontawesome.com/icons/circle-xmark?f=classic&s=regular) and [500](https://fontawesome.com/icons/link-slash?f=classic&s=solid).
+
+Regarding images, a [placeholder image](static/images/placeholder.png) and a [mascot image](static/images/placeholder.png) was generated using [Adobe Firefly - AI image generating tool](https://www.adobe.com/uk/products/firefly.html) through Adobe Photoshop, all other images are sourced from the original recipes online.
+Placeholder consists of a muffin with the sort of cyberpunk colouring, whilst the mascot is intended to be a friendly robot chef caricature.
+
 ## Features 
 
-<!-- ### Existing Features
-#### Welcome
-Upon the game loading, the terminal will display a simple Heading "Welcome to Wordle", with only a prompt at the bottom of the interface for the user to enter their name. This is to keep the interface as simply and least daunting as possible before the player begins the game.<br>
-  ![Welcome page](documentation/feat_welcome.PNG)
+### Existing Features
+#### Navigation Menu
+The navigation as standard is set to a relative position and at the top of the page. On narrow displays, the navigational links are collapsed into an expandable hamburger icon menu, otherwise the links are displayed across the top. The Menu includes **Home** and either **Login** and **Register** or **Logout**, **My recipes** and  **My favourites** dependant on user login status. If the link belongs to the current page being viewed, that link is highlighted as active. The virtually white text over the dark background remains contrasting enough and in keeping with the cyberpunk look.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-nav-menu-1.PNG" alt="Nav menu mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-nav-menu-1.PNG" alt="Nav menu desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-#### New game display
-Once the player has input a name the terminal generates the user variables and word selection and presents the game in the CLI after clearing the welcome display away.
+#### Home page
+As viewed by an anonymous user (i.e.: not registered and logged in user) - the landing page will consist of:
+  - __Welcome section__ - A simple Welcome section welcoming the visitor and inviting the user to sign up.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-welcome.PNG" alt="Welcome section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-welcome.PNG" alt="Welcome section desktop" width="750vw"/>
+      </td></tr>
+      </table>
+  - __Sample library__ - 3 sample recipes the visitor is free to explore, without access to rate, save or comment on the recipe.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-sample-recipes.PNG" alt="Sample recipes section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-sample-recipes.PNG" alt="Sample recipes section desktop" width="750vw"/>
+      </td></tr>
+      </table>
+As viewed by a logged in user
+  - __Published Library__ - the landing page turns into the published recipes library displaying all recipes users have chosen to publish including the saved status and average rating of the recipe within the recipe card.
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-library.PNG" alt="Published recipe section mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-library.PNG" alt="Published recipe section desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-__Note:__ If the play simply pressed enter without entering a name, the game will use the default of "Player-1".
+#### My Recipes
+Once a user is logged in, the link is available in the nav menu. It navigates to a library page, listing all of the recipes the current user has created, no matter the state (**DRAFT**, **PRIVATE**, **UNLISTED** and **PUBLISHED**). In this same page, the user has access to manage their library. The page includes the recipe widget and pagination widget just like in the home page.<br>
+![my recipes page](docs/images/feat_my-recipes.png)
+  - __Add recipe__ - Present at the top of the page is a **Add recipe** button, click it will navigate to a blank recipe editor form.<br>
+  ![add recipe button](docs/images/feat_add-btn.PNG)
+  - __Edit recipe__ - Present at the base of each recipe card, the **edit** button will navigate the user to the recipe editor form, pre-populated with the recipe details.<br>
+  ![edit button](docs/images/feat_edit-btn.PNG) 
+  - __Delete recipe__ - Present at the base of each recipe card, the **delete** button will bring up a modal window to confirm the user wants to delete the given recipe from the database. Clicking delete will erase the data from the database and redirect the user to their recipe library with an alert message confirming the recipe has been deleted.<br>
+  ![delete button](docs/images/feat_delete-btn.PNG)
 
-The display will include:
-  1) a personalised message of "Welcome, _player name_".
-  2) an instruction how to bring up the rules of the game.
-  3) blank guess lines shown as a series of asterisks __` *  *  *  *  * `__.
-  4) prompt for player to enter their guess.<br>
-  
-![New game displayed](documentation/feat_game_display.PNG) -->
-  
-<!-- #### Player Prompt
-The game prompts the player to take a guess, provided it passes the validation checks, the game checks the input guess against the randomly selected word for this session. Every time the guess is incorrect the prompt changes to "Oops! That guess is wrong. You have {number} of guess(es) left.".
+#### Recipe editor form
+The form used by the authenticated user to create a new recipe or update an existing one.<br>
+![Recipe editor page](docs/images/feat_recipe-editor.png)
+The form includes the fields for:
+- Title - single line text input field, for recipe title
+- Description - text area input field, for an inticing excerpt describing the recipe
+- Prep (Preparation) time - integer input field, for time taken, in minutes, to prepare ingredients through to the moment the dish is ready to get cooked, frozen or left to set.
+- Cook (cooking) time - integer input field, for time taken, in minutes, for the dish to be cooked, frozen or set.
+- Servings - integer input field, for the number of servings the recipe described supplies.
+- Method - text area input field, for recording the steps taken to prepare the given dish.
+- Listing type - dropdown list, selecting between the options:
+  - **DRAFT** - draft recipe, details are not complete, visible only to author.
+  - **PRIVATE** - ideally a complete recipe, visible only to author.
+  - **UNLISTED** - ideally a complete recipe, visible to any registered user that has the direct URL.
+  - **PUBLISHED** - complete recipe, ready to be shared in the published recipe available to any registered user. Requires the Admin user to approve the recipe before it appears on the published library or the user has the direct URL.
+- Source - single line text input field, so the author can enter details of the origin of the recipe. i.e.: a book, grandmother, tv show.
+- Source url - slug input field, so the author can enter the url for the original recipe if it was sourced online.
+- Ingredient subset form - generated with Django's formsets, it is made visible on clicking "add ingredient", managed via javascript.<br>
+  ![Ingredient formset](docs/images/feat_ingredient-formset.png)
+  - Food item - single line text input field, to enter food item name.
+  - Quantity - float number input field, set to 2 decimal points.
+  - Unit - dropdown list, to select the applicable unit of measure.
+  - Remove ingredient button - run with javascript to delete the ingredient form above to ignore entered data or remove the ingredient from the database.
+- Submit button - to submit new recipe or changes made to existing recipe.
 
-![Prompt after incorrect guess](documentation/feat_prompt-after-wrong-attempt.PNG) -->
+If the user has navigated to this page by clicking **new recipe** the form will open with blank fields ready for data entry. If navigated to by selecting a recipe to **edit**, the form will be prepopulated with the recipe data.
 
-<!-- #### Invalid guess inputs display
-To reduce frustrations over incorrect guesses we have put in place some input validations, as well as adding a `strip()` method to the guess input so should the user enter a whitespace before or after typing their word, it will not trigger the validation checks for a seemingly valid guess.
+On successful submission, the form will create an alert messages to indicate to the user the data was successfully submitted.
 
-##### Invalid data: not exactly 5 characters long
-This first check verifies the guess is only 5 characters long, not shorter or longer. In the chance the player enters a guess that fails this check the game prints out the game display again but with the message advising the guess was invalid and explaining why so.
+#### User Library
+Similarly to the My recipes page, logged in users can navigate to other users' recipe library view, by clicking on the author name of a given recipe card. This page will render all the published recipes by the given author. The title on the page will indicate the current author library in view.<br>
+![User library](docs/images/feat_user-library.png)
 
-![Invalid data: shorter than 5 chars](documentation/feat_invalid-short-input.PNG)
+#### User favourites
+Similar to User Library, logged in users can navigate to **My favourites** page to view a library composed of all the recipes the user has saved. The title on the page will indicate the owner of the collection fo favourites seen. The owner of this collection can remove saved recipes by clicking the save button featuring the solid heart icon.<br>
+![User Favourites](docs/images/feat_user-favourites.png)
 
-![Invalid data: longer than 5 chars](documentation/feat_invalid-long-input.PNG)
+#### Widgets
+##### Recipe widget
+This reusable template renders the recipe card to display in the library views. It consists of image, title, description, Author and timestamp of recipe being added. The author username here is clickable and will take the user to the author's library to view their published recipes, however, this is only visible to logged in users and will redirect the Anonymous user to the log in page.<br>
 
-##### Invalid data: includes characters not in the alphabet
-Should the guess input pass the 5 characters long verification, the next check verifies that no characters other than letters in the alphabet have been used. Should the player enter punctuation marks, numbers or other special characters, the game will refresh and display the error message explaining why the last entered guess was not valid.
+Once the user is logged in, the widget will include the save button and rating. Where the save button indicates whether the user has saved the given recipe or not. The save button will call a url to create the Favourite instance or delete it, then by using a `?next=` parameter in the url, the user will be returned to the page they were, be it the homepage or User library.
 
-![Invalid data: includes a non-alphabetic character](documentation/feat_invalid-non-alpha-input.PNG)
+The rating indicates the average rating given to a recipe and is a button that if clicked, will direct the user to the ratings section in the recipe details page.<br>
 
-##### Invalid data: is not a word in the dictionary used
-Finally, after passing the other checks, the last check verifies that the input is a word included in our dictionary. Should it not be included in the dictionary, it will refresh the game and advise the word is not in the dictionary.
+Finally, if the user has navigated to "My recipes" page, the recipe widget will include the edit and delete buttons as the user expects to have full managemment control of their own recipes here.<br>
+      <table>
+      <tr><th>Anonymous User</th><th>Logged in User</th><th>My recipes views</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_recipe-widget-anon.png" alt="Recipe widget view to Anonymous users" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_recipe-widget-logged-in.png" alt="Recipe widget view to logged in users" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_recipe-widget-my-recipe.png" alt="Recipe widget view in My recipes page" width="300vw"/>
+      </td></tr>
+      </table>
 
-![Invalid data: not in our dictionary](documentation/feat_invalid-not-a-word-input.PNG) -->
+##### Pagination widget
+This reusable template renders the pagination for a given library view. Should the given library contain more than the library template allows to render in a page, in this case 6 recipes per page, the widget will include the following:
+- current page out of the total number of pages available to navigate through.
+- page navigation buttons needed in the current position, i.e.: page 1 of 2 will only include buttons to navigate forward pages.<br>
+      <table>
+      <tr><th>Single page</th><th>First page</th><th>Last page</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_pagination-1of1-page.PNG" alt="Pagination widget view of single page" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_pagination-1of2-page.PNG" alt="Pagination widget view of first page" width="300vw"/>
+      </td><td>
+      <img src="docs/images/feat_pagination-2of2-page.PNG" alt="Pagination widget view of last page" width="300vw"/>
+      </td></tr>
+      </table>
 
-<!-- #### Clues on guesses made
-The objective of wordle is that the player gets given clues on all guesses so the player can deduce what the selected word is. In our version of the game:
-- Blank lines are shown as plain text asterisks ` * `.
-- Letters not existing in the selected word are shown in a dark grey background - these tell the player to avoid using these letters in future guesses.
-- Letters existing in the selected word but in the incorrect place are shown in a bright yellow background - these tell the player to try words where this letter is in another place.
-- Letters existing in the selected word and in the correct place are shown in a green background - these tell the player to try words where this letter is as it is.
+#### Recipe details
+When a logged in user clicks on a recipe, the recipe will be displayed in this template, which consists of photo of the dish, title and publication details at the top, with the save button and rating average over the photo just as in the recipe widget.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-image.png" alt="recipe detail image mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-image.PNG" alt="recipe detail image desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-#### End of Round
-The round ends when the player has either guessed the selected word or has failed to do so after 6 attempts.
-##### Correct guess
-On guessing the word, the terminal prints out "Nicely done, _player name_!" and confirms the word of the day.
+Followed by the recipe description, ingredients and steps.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-ingredients.png" alt="recipe detail ingredients mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-ingredients.PNG" alt="recipe detail ingredients desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-![Game won](documentation/feat_game-won.PNG)
+Then, the ratings section which will display the current user's review before showing the remaining reviews in a collapsible table. If the current user has add a review, it will display edit and delete buttons just below. Should their rating be pending approval, their score is public, but their review text is only visible to the author until approved. If rejected, both score and review will only be visible to the author.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-ratings-1.png" alt="recipe detail ratings mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-ratings-1.PNG" alt="recipe detail ratings desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-##### 6 Wrong guesses
-On 6 failed attempts, the terminal prints out "GAME OVER", reveals the word of the day and "Oh no, _player name_! You've lost this streak!".
+Finally, the comments section, which will display all approved comments on the recipe. If the current user has made comments, they will have edit and delete buttons available on their comments and should their comments be pending approval, a message will indicate so too.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-comments.png" alt="recipe detail comments mobile" width="150vw"/>
+      </td><td>
+      <img src="docs/images/feat_desktop-recipe-detail-comments.PNG" alt="recipe detail comments desktop" width="750vw"/>
+      </td></tr>
+      </table>
 
-![Game lost](documentation/feat_game-lost.PNG)
+- __Anonymous user handling__
+When the recipe details page is viewable by an anonymous user, the forms in ratings and comments sections are disabled and encourage the user to sign up or login.<br>
+      <table>
+      <tr><th>Mobile</th><th>Desktop</th></tr>
+      <tr><td>
+      <img src="docs/images/feat_mobile-recipe-detail-anon-ratings.png" alt="anon user recipe detail ratings mobile" width="450vw"/>
+      </td><td>
+      <img src="docs/images/feat_mobile-recipe-detail-anon-comments.png" alt="anon user recipe detail comments mobile" width="450vw"/>
+      </td></tr>
+      </table>
 
-##### Scores
-In either case the game will keep track of the score, namely the consecutive number of times the player has guessed the word correctly. Should it be the maximum the player has managed to get in this session, the game will record it as a high score. Should the player, win the game, the "Current streak" counter increments by 1, if the game was lost, it resets to 0.
+#### User Authentication
+To add user authentication the Django Allauth package was installed. It provides our app with the capabilities to detect a user and provide real use scenarios for our CRUD functionalities. User registration, login and logout was added to our app using the views and templates provided with Allauth.<br>
+- __Registration__<br>
+![Account registration](docs/images/feat_sign-up.PNG)
+- __Login__<br>
+![Account login](docs/images/feat_login.PNG)
+- __Logout__<br>
+![Account logout](docs/images/feat_logout.PNG)
+- __Further controls__
+  - Only one superuser has been created and has access to the admin control panel, this was to prevent the risk of granting too much access to users and creating a more labour intensive user admin, as with each new user registration, the superuser would need to login and grant access to the new user. Whereas, it is better if all the controls users need are available within the frontend interface.
+  - Django login required mixin was added to limit what access Anonymous users have and redirect them to the login page automatically. This function adds forwards the user to the intended URL once they have logged in. 
+  - Otherwise, our code does verify the user is authenticated and has the rights to access a given page and will redirect to the relevant error responses as appropriate.
 
-The game will also calculate and display the average number of guesses the player has needed to guess the word of the day. It will also look up the player's longest winning streak and rank the player against the other game sessions recorded.
+#### Alert messages
+Alert messages have been enabled to provide the user with feedback on actions taken, be it notify of successful registration, login, logout, recipe or comment created, edited or deleted.<br>
+A javascript file triggers the auto close function of alerts, after 5 seconds, it gently fades the alert out and slides up the div.<br>
+![Confirmation recipe created alert](docs/images/feat_alert-recipe-added.PNG)
 
-![Game scoring](documentation/feat_game-scoring.PNG)
+#### HTTP Error pages
+Bespoke error pages for codes 403, 404, 405 and 500 have been created to fit within the style of the website and provide easy access to the navigation so the user can get back to an accessible page of the site.
+- __403__<br>
+![error 403](docs/images/error_403.PNG)
+- __404__<br>
+![error 404](docs/images/error_404.PNG)
+- __405__<br>
+![error 405](docs/images/error_405.PNG)
+- __500__<br>
+![error 500](docs/images/error_500.PNG)
 
-##### Inviting for a new game
-At the end of the round, the game prompts the player for another game. If the player inputs anything but "n" or "N", a new round will start with a new word of the game. Should the player have had enough, they'll enter "n" or "N" for No to exit the game. On doing so a message thanking the player for playing will be printed out.
+### Features Left to Implement
+Due to personal time constraints the following features were not implemented so I did not get distracted with a feature creep and not deliver on my MVP.
 
-![Game exit](documentation/feat_game-exit.PNG)
+#### <ins>Recipe form - image upload</ins>
+The recipe form was meant to include fields for every detail the recipe creator would expect to include. An enticing picture is often expected to capture the readers' interest, and for ease of creating the recipe, the frontend form should have included a field for this image upload. However, as much as it was tried, every time the field was included in the form, it never uploaded the image and the form this not see the field as valid spite having selected a photo to upload.
 
-#### Game rules display
-Should the player need to be reminded of the rules, the player can enter "help!" as a guess input. This will bypass the usual validations and cause the game to print the rules on a clear terminal and request a prompt just to press 'Enter' when done with the game for when the player feels ready to resume the game.
+A how to guide from Cloudinary was followed, but after spending a few hours trying to implement this feature, the field was removed for now so that at least the recipe could be created. In the meantime, users were granted staff status and access to edit recipes through the admin panel. This is not optimal, as any of these users can modify another creator's recipe, but it would allow the user to upload an image.
 
-![Rules display](documentation/feat_rules.PNG) -->
+>__How might we create this?__<br>
+>I'd need to revisit the how to guide by Cloudinary, perhaps replicate their project exactly to prove it works and further research to see if other users have had a similar struggle and found a solution.
+
+>[Cloudinary Docs - Manage images in a Django app](https://cloudinary.com/documentation/django_helper_methods_tutorial)
+
+#### <ins>Recipe form - Steps/Method recorded as JSON</ins>
+For a cleaner view of the recipe steps, the steps were meant to be recorded as a JSON so it could be easily rendered into as a list view in a table. It is a feature commonly seen in other cooking sites and as a person that often cooks referring to a recipe on my phone, it is very helpful to folllow it this way.<br>
+
+![rendered steps as a list](docs/images/feat_old-steps.PNG)
+
+I got to the point of rendering this in the recipe detail view, by manually entering the steps in a JSON format in the form, but this isn't very user friendly and I ran out of time to implement a better interface. The idea was to create a Steps/Method formset with add and remove buttons, similar to what was done with the ingredients form. The user would be able to simply write the steps in clean text in each separate field and the form would collate and convert it into JSON to save in the model.
+
+>__How might we create this?__<br>
+>I suspect it would involve creating a new inline formset for a textarea field and link it to a Django library to handle JSON files, then having javascript to dynamically add and remove fields as the user creates or edits a recipe. Likely using this python method [json.loads()](https://www.geeksforgeeks.org/json-loads-in-python/).
+
+>A fallback option would be, to keep the Method field in the recipe form, but have javascript hide it from the user. The script still creates the dynamically added and removed fields, but on submit, javascript collates the text entered as JSON and places it into the hidden field to save into the model. When the user wishes to edit the recipe and the prepopulated form is rendered, the script can iterate through the JSON content of the hidden field and render it into the extended step fields. This option does feels labour intensive and believe there must be a library that handles this already and mitigates for converting text that may include apostrophes or double quotes when placing it into the JSON values.
+
+#### <ins>Comment approval within Recipe</ins>
+This feature would allow the recipe creator to navigate to a given recipe of their making and as they scroll down the list of comments, those marked for review would display Approve and Reject buttons.
+
+The Approve button would simply approve and enable public viewing of the comment. Whereas, the Reject button would pop up a form with a text field, to allow the recipe creator to provide feedback as to why the comment was rejected. In the Django view, on rejection, it will manipulate the text entry to include:
+- Original comment.
+- Template message stating the comment was rejected, e.g.: ----REJECTED on {date and time}----
+- Reviewer's response text.
+
+The text field for the reviewer's response would be prepopulated with a standard short reminder for users to be polite and considerate, but the reviewer can opt to erase this if not applicable. The reviewer can only edit their response, not the original comment or the reject template.
+
+The whole text in the comment (including reviewer's text) can be edited by the commenter still and on submission it is set to review status again.
+
+>__How might we create this?__<br>
+>Firstly, every comment made in the given recipe would need to be visible to the recipe author to review, so the recipe detail template would need to check if the current user is the recipe author, and if so display all comments for the recipe. Then, if given comment is pending review add buttons and hidden form, with a data values to recall the comment instance.
+
+> Create a javascript to detect the clicking of the reject button, make the comment review form visible and perhaps bring up a Modal to confirm the reviewer wants to continue with the comment rejection as they will not have a chance to edit their review again.
+
+> On confirming comment rejection, a POST request is made and the form handling in the view will append the template rejection marker text followed by the reviewer response. As well as marking the comment as rejected.
+
+>The django template would also need to be updated to display rejected comments in the same way pending review comments are shown, except include a message that the comment needs to be revised. The comment author can edit it the same way they edit any other comment.
+
+>Similar to the image upload field issue, whilst this feature has not been built, users have been granted access to edit comments in the admin panel, but this seems a little redundant when everyone has access to each others' comments, regardless of recipe authors. I've not had a chance to see if there is a way of filtering access to edit comments in the admin panel by whether the user is the author of a given recipe.
+
+
+<!-- #### <ins>Recipe saving</ins>
+Similar to bookmarking sites as you browse, this feature would allow users to toggle saving a recipe the user likes the sound of and wishes to try making it later, by simply clicking on the heart icon button over the recipe photo. The site has the button to render the sample likes added via the admin page, but it is not setup as frontend form yet.
+
+>__How might we create this?__<br>
+>Essentially as a simplified version of the comment form linked up to the "Favourite" model. Upon visiting a new recipe, the button is set to "not saved" (visible as heart outline icon) after the relevant view has queried the model and found no records of the current user ever liking the given recipe. The save "heart" button would be the submit button of its own form. 
+
+>The code for the POST method in the recipe detail view would need to change to distinguish between the which "submit" button triggered it, then the recipe save form would take current recipe and user as parameters to add entry to the model. The user is redirected back to the page and the save button is changed to solid icon as an entry is visible. 
+
+>Now there is recipe save entry, the button will call a url specific to delete this entry and redirected back to the page to render it back as a heart outline icon button to submit a new recipe save entry should the user change their mind again. -->
+
+<!-- #### <ins>Recipe rating</ins>
+Similar to the recipe save button, the feature would allow the user to select the number of stars they'd like to rate the recipe with, simply clicking on the star would submit their rating.
+
+Additionally, the user could click a button to add or edit a review to make a rating form visible, which would contain simply a text field and a submit button.
+
+A delete button, would delete the whole rating instance, whether it included a text review or not.
+
+A nice touch for User Experience would be to add a script to detect hovering over a star icon button and display lower rating buttons as being hovered too. i.e.: in a row of 5 buttons, when the user hovers over the 3rd button, the buttons on the left for 1-star and 2-stars ratings would highlight too, so the user understands clicking this button will submit a 3-stars rating.
+
+Star ratings would be visible, whilst the rating is marked as review or approved, but not is rejected. The review will only be made visible on approved state. The idea is that users cannot use this feature to bypass verification to be offensive or dishonest.
+
+>__How might we create this?__<br>
+>The django template to render the rating and review has been included already, but to add the function of the frontend form I would have to include:
+>- similar code to the recipe saving to operate the star buttons.
+>- similar form like what has been done for adding comments.
+>- adding the javascript to handle the hover state of multiple buttons and copying the text into the form in the same way comments are edited. -->
+
+#### <ins>Personalise a Recipe</ins>
+This feature would enable users to create a copy of a given recipe to add their own twist, for instance to perhaps make a meat containing dish vegetarian, vegan or easier to make.
+
+When a user navigates to a published recipe, a button to personalise the recipe would be available, it would open the recipe create form prepopulated with the given recipe details ready for the user to modify. On submitting the form, the details are saved in a new instance with the changes made and the current user as the author.
+
+>__How might we create this?__<br>
+>Presumably something like recipe_create but fetching the recipe instance and setting the recipe form and ingredient form to given instance. However, on POST request method being called, it saves as a new instance, just like in the recipe_create. Automatically, adding the referenced recipe details in the model fields for Origin, Source and Source URL. Perhaps even appending a template message at the base of the description that the recipe is based on previous recipe with a link to view original.
+
+#### <ins>Add tags to recipes</ins>
+As many cooking sites include, this feature would present as clickable keywords that describe the recipe, such like vegetarian or lunch. So the user can navigate the library filtering the recipes by a given keyword.
+
+These keywords would be available as buttons in the recipe library or inside the recipe detail page, when the user clicks on them, it redirects the user to the library with a view of all recipes including such tag.
+
+>__How might we create this?__<br>
+>Would need to create 2 new models:
+>- One to keep track of a list of unique tag keywords.
+>- Another to track the links of those keywords to recipes, since it is a many to many relation.
+
+>Then, setting up new URL, probably `/<slug:tag>/` and linking it to the RecipeLibrary view, passing it the keyword used as the tag variable and using it to filter the recipe queryset to those linked to that keyword.
+
+>I suspect that the RecipeLibrary view cannot be reused, so a new one specific for presenting tag filtered library would be created and called upon with the URL.
+
 
 ### Data Models
 Chefs on the Net app uses a relational database to store and manage data. The relational database management system software used was PostgreSQL and was hosted on [Code Institute service](https://dbs.ci-dbs.net/).
 
-#### Entity Relationship Diagram
+#### <ins>Model - Recipe</ins>
+Model to record recipe details.
 
-![Entity Relationship Diagram](docs/images/RecipeBook_ERD.jpg)
+**Title** - CharField, maximum length of 50 characters that must be unique.
 
+**Slug** - SlugField, maximum length of 50 characters that must be unique and not save as Null.
+- To automatically generate the slug from the title created, this article [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real) was followed to implement this function on form submission.
 
-<!-- ### Features Left to Implement
-These features were not implemented just so I did not get distracted with a feature creep and not deliver on my MVP.
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the recipe author will preset to Null, so we avoid deleting recipes other users like and the deleted user doesn't mind leaving them on the site on account deletion.
 
-#### __Alphabet checklist__
-The official Wordle game includes the whole keyboard in the display, highlighting which letters have not been used, which are non-existing in the word of the day and existing or correctly placed. This helps the player visualise which letters they could use on their next guess much like a checklist of the alphabet. It becomes easier to try sounding out words for the next guess without using the letters the game has rules out. 
+**Feature_image** - CloudinaryField, stores the url to the image uploaded to Cloudinary server.
 
-__How might we create this?__
-We have not recreated this feature, but we could potentially use the empty space to the right of the guesses to print out the alphabet and highlighting what letters are still available to use. This would probably be done as dictionary variable, where the alphabet forms the keys and the values are the same as used for listing out the clues in a guess ('-' for unused/unchecked, 'X' for not in word of the day, 'O' for exist in Word of the day, 'C' is in the correct place of the word of the day).
+**Description** - TextField, for user to describe the dish to entice readers.
 
+**Prep_time** - PositiveIntegerField, default of 1, this field records the time taken, in minutes, to prepare ingredients before cooking.
 
-#### __Hard Mode gameplay__
-Wordle includes __Hard Mode__ which tracks letters the player has guessed that exist in the selected word and should the player not use them in the next guess they attempt, wordle will not accept the entry. Should the letter be in the correct place, wordle will only accept words with the correctly guessed letters in the same places. 
+**Cook_time** - PositiveIntegerField, default of 1, this field records the time taken, in minutes, to cook/heat/fry/bake/freeze the meal.
 
-For example, should the word of the day be __LIVER__ and:
-1) the first guess be __PLATE__, then __L__ and __E__ are indicated as exiting but being in the wrong place, the second guess would need to include both __L__ and __E__, so it could __not__ be something like _NERVE_ or _LOUSY_, but could be _LIKED_ or _LOVER_.
-2) Should the second guess in fact be __LIKED__, the letters __L__, __I__ and __E__ will be indicated as correctly guessed and need to be used in the same places for the following guess, something looking like __L I _ E _.__, which could be LIFER, LIMEN, LINEN, LINER, LIVED, LIVER just to name a few. 
+**Servings** - PositiveIntegerField, default of 1, this field records number of servings the recipe described provides.
 
-The aim of this feature is to avoid the player trying completely different words to find other missing letters without the constraints of considering the words that the word of the day could be with the clues given. For instance, without __Hard Mode__ the player's second guess could be __VIRUS__ (after 1st as __PLATE__), it doesn't include __L__ and __E__ that would have been highlighted from _PLATE_, but does include __V__, __I__ and __R__. 
+**Method** - TextField, to write the steps to prepare the dish.
 
-From those 2 guesses, the player should be able to deduce that the word of the day is __LIVER__ on the third guess. 
+**Listing_type** - IntegerField, to take choices 0:Draft, 1:Private, 2:Unlisted, 3:Published.
+- Draft - the user creates a draft recipe, not ready for sharing or in a useful state.
+- Private - the user does not wish to share the recipe with anyone, just for personal use.
+- Unlisted - the user wishes to share the link to their recipe with other users that have the direct URL.
+- Published - the user wishes to share the recipe with all users on the site and have it listed in the common library.
 
-__How might we create this?__
-If we were to implement this feature, we could store the list output from the evaluation of previous guesses to use in a validation of input and comparing the previously correct guessed letter placement matching that in the new guess. 
-For letters existing in the selected word, the function evaluating guesses can output a dictionary of these letters, and the input validation checks that these letters are used in the latest input before it proceeds to evaluating for the game. 
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the recipe has been submitted to be published, the site admin must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin deemed recipe inappropriate to publish on the site.
+- Approved - Site admin approved recipe for publishing on the site.
 
+**Origin** - ForeignKey, links to another recipe on the model that a given recipe is based off. Since recipes may be sourced outside of chefs on the net, this field can be left blank and set to null.
 
-#### __Feedback messages__
-Wordle has a feedback word for correctly guessing the word of the day at each attempt. Specifically, the following messages display guessing correctly at:
-1) first attempt - __Genius__
-2) second attempt - __Magnificent__
-3) third attempt - __Impressive__
-4) fourth attempt - __Splendid__
-5) fifth attempt - __Great__
-6) sixth attempt - __Phew__
+**Source** - CharField, maximum length of 250, but can be left blank. Included so creator can make reference to recipe origin, perhaps from a book or friend.
 
-__How might we create this?__
-These messages could have been a constant variable as a list and upon winning the round, the message is composed calling the list item by index. The index would be calculated with the length of the list of guesses made minus 1.
+**Source_url** - URLField, maximum length of 250, can be left blank. Included so creator can make reference to recipe origin if sourced online.
 
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
 
-#### __Returning players login__
-Playing the official Wordle game the game recognises the devices, so as the player returns day after day it can track the player's stats. For extended features, players can register an account with New York Times to access other games too. The benefit is that a returning player can keep building on their winning streak to overcome their own high score (longest streak) without having to play more rounds in one single session of accessing the game.
-
-__How might we create this?__
-The most feasible way I can think of is to either:
-- provide new players their timestamp based ID after entering their name so that next time they access the game, if it is entered in the name prompt of the welcome page, the game can recognise the input is all numeric and 12 digits long, which makes the game lookup the number as an ID, if it exists in our worksheet it will pull the data into the game and allow the next round, if won to increment the current winning streak as if the player had not closed the previous game.
-- or that when new players enter their name on the welcome page prompt, the game asks the player to provide a unique username and password, with the game confirming that the username is valid and available in the worksheet. Next time the player returns, when prompted for a name, the player can enter their username, the game looks up the usernames in the worksheet and prompts for a password, before it resumes the game with the same stats.  -->
+**Updated_on** - DateTimeField, automatically adds a timestamp at the time a change is made.
 
 
-## Technologies
-- Languages used:
+#### <ins>Model - Ingredient</ins>
+Ingredients were placed in a separate model so it was easier to implement another model later in the project to generate a dictionary of food items and make it easier to consolidate ingredients in a grocery lists when users add recipes to their meal plan.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this ingredient instance belongs to.
+- Should a recipe be deleted, the record of this given Ingredient instance will be deleted.
+
+**Food_item** - CharField, records the name of the food item.
+
+**Quantity** - DecimalField, field to record the number for a food item measure, format set to 999.99, so up to 3 digits whole number and 2 decimal places. Helpful when trying to record halves, quarters and all else in between.
+
+**Unit** - IntegerField to take choices of unit of measurements, with the default set to 0:Piece.
+- 0:piece - PIECE
+- 1:stick - STICK
+- 2:mg - MILLIGRAM
+- 3:g - GRAM
+- 4:kg - KILOGRAM
+- 5:oz - OUNCE
+- 6:lb - POUND
+- 7:ml - MILLILITERS
+- 8:cl - CENTILITERS
+- 9:l - LITERS
+- 10:tsp - TEASPOON
+- 11:tbsp - TABLESPOON
+- 12:floz - FLUID_OUNCE
+- 13:cup - CUP
+- 14:pint - PINT
+- 15:quart - QUART
+- 16:gallon - GALLON
+
+
+#### <ins>Model - Comment</ins>
+Model to record user comments on any given recipe.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this comment instance belongs to.
+- Should a recipe be deleted, the record of this given comment instance will be deleted.
+
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the commenter will preset to Null, so we avoid deleting the comment/recipe feedback other users may find useful.
+
+**Body** - TextField, body of text for the comment.
+
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the comment has been made, the site admin or recipe owner must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin or recipe owner has deemed the comment inappropriate to publish on the site.
+- Approved - Site admin or recipe owner approved comment for publishing on the site.
+
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+
+#### <ins>Model - Rating</ins>
+Model to record the rating and reviews users provide on a given recipe.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this rating instance belongs to.
+- Should a recipe be deleted, the record of this given Rating instance will be deleted.
+
+**Score** - IntegerField, to record a score as a number between 1 and 5. default is 0.
+
+**Review** - CharField, maximum length of 250 and can be left blank.
+
+**Author** - ForeignKey, links up to the built-in User model, can be blank and and set to Null. 
+- Should a User be deleted, the reviewer will preset to Null, so we avoid deleting the recipe rating instance other users may find useful.
+
+**Approved** - IntegerField to take choices 0:Review, 1:Rejected and 2:Approved.
+- Review - when the review has been made, the site admin or recipe owner must review to ensure there is no offensive language used or misleading information.
+- Rejected - Site admin or recipe owner has deemed the review inappropriate to publish on the site.
+- Approved - Site admin or recipe owner approved the review for publishing on the site.
+
+**Created_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+
+#### <ins>Model - Favourite</ins>
+Model to record the instances the user saves a given recipe as a favourite.
+
+**Recipe** - ForeignKey, links to the recipe on the Recipe model to which this favourite instance refers to.
+- Should a recipe be deleted, the record of this given Favourite instance will be deleted.
+
+**Author** - ForeignKey, links up to the built-in User model. 
+- Should a User be deleted, the record of this given Favourite instance will be deleted.
+
+**Added_on** - DateTimeField, automatically adds the timestamp at time of entry.
+
+
+#### <ins>Entity Relationship Diagram</ins>
+In this ERD we can see the models created and how they are related to one another.
+
+![Entity Relationship Diagram](docs/images/RecipeBook_ERD.png)
+
+
+## Technologies used
+- Languages:
   - [HTML5](https://en.wikipedia.org/wiki/HTML5)
   - [CSS3](https://en.wikipedia.org/wiki/CSS)
   - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
   - [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-  - [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
-  - [Django](https://docs.djangoproject.com/en/5.0/)
-- [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
-- [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
-- [GitHub](https://github.com/) - to store and publish the project.
-- [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
-- [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
-- [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code. 
-- [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
+- Frameworks, Libraries and Packages:
+  - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+  - [Django 5.0](https://docs.djangoproject.com/en/5.0/)
+  - [Django-AllAuth](https://docs.allauth.org/en/latest/installation/quickstart.html)
+  - [Django-Crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html)
+  - [Django-Summernote](https://github.com/lqez/django-summernote)
+  - [Google Fonts](https://fonts.google.com/)
+  - [FontAwesome](https://fontawesome.com)
+- Tools:
+  - [Draw.io](https://app.diagrams.net/#) - a free web-based diagram drawing tool.
+  - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
+  - [GitHub](https://github.com/) - to store and publish the project.
+  - [Heroku](https://dashboard.heroku.com/) - for deployment of our web app.
+  - [Cloudinary](https://cloudinary.com/) - to host images on the cloud server.
+  - [Database maker by CodeInstitute](https://dbs.ci-dbs.net) - the PostgreSQL hosting by CodeInstitute.
+  - [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) - Chrome's developer tools to inspect your project as rendered in the browser.
+  - [Favicon](https://favicon.io/) - to generate the favicon for the site.
+  - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
+  - [PEP8 guide](https://peps.python.org/pep-0008/) - for guidance on python formatting standards. 
+  - [W3C Markup Validation](https://validator.w3.org/) - to validate the HTML code.
+  - [W3C CSS Validation](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
+  - [JSHint](https://jshint.com/) - to check JavaScript code.
+  - [Code Institute's Python linter](https://pep8ci.herokuapp.com/) - to validate the Python code.
 
 ## Testing 
 
@@ -321,13 +644,13 @@ The most feasible way I can think of is to either:
 - Accessibility
   - Running the site through lighthouse analysis does show some issues with some insuficient colour contrast and performance suggests I should minimise my JS files for faster loading. Otherwise still rates above 90 on accessibility:
     - Mobile:<br>
-  ![Lighthouse mobile analysis](docs/images/lighthouse-test-mobile.PNG)
+  ![Lighthouse mobile analysis](docs/images/lighthouse-test-mobile-v2-0.PNG)
  
     - Desktop:<br>
-  ![Lighthouse desktop analysis](docs/images/lighthouse-test.PNG)
+  ![Lighthouse desktop analysis](docs/images/lighthouse-test-desktop-v2-0.PNG)
 
-  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/GameOfKings/index.html) showed no obvious errors after some improvements were made.<br>
-  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
+  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://chefs-on-the-net-2-0-d863c6b075c3.herokuapp.com/) showed no obvious errors after some improvements were made.<br>
+  ![Wave accessibility evaluation results](docs/images/test-wave-accessibility.png)
 
 
 
@@ -356,11 +679,46 @@ The most feasible way I can think of is to either:
 |Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays|PASS|
 |Nav Button - hamburger icon|Click Hamburger icon|hamburger icon toggles to reveal and collapse nav menu|PASS|
 |Nav button - Register|Click button "Register" just after loading the site|Loads sign up page|PASS|
-|Nav button - Login|Click button "Login" just after loading the site|Loads login page|PASS|
-|Nav button - Logout|Click button "Logout" after starting a game|Loads logout confirmation page|PASS|
+|Nav button - Login|Click button "Login"|Loads login page|PASS|
+|Nav button - Logout|Click button "Logout"|Loads logout confirmation page|PASS|
 |Nav Button - Logout|Click button "Sign out"|Confirms logging out and returns to Home page|PASS|
 |Nav Button - Home|Click button "Home"|Loads to Home as either welcome or library dependant on login status|PASS|
 |Nav Button - My Recipes|Click button "My Recipes"|Loads Logged in user's recipe library to view and manage their recipes|PASS|
+|Landing page - Welcome section|Loading the page|As an anonymous user, message welcoming the visitor and inviting to signup. Otherwise, as a logged in user, the section does not exist.|PASS|
+|Landing page - Recipe library|Loading the page|As an anonymous user, the user can only view 3 recipes and can click on them to view further details.|PASS|
+|Landing page - Recipe library|Loading the page|As a logged in user,  the user sees a page with the latest 6 recipes and can click on them to view further details.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As an anonymous user, the user can see image, title, description, author and date.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As a logged in user, the user can see the same, but has button for favourite and rating average overlaid on the recipe photo.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As an anonymous user, the user can click on the author name, but will be redirected to the login page.|PASS|
+|Recipe Library - Recipe widget|Loading the page|As a logged in user, the user can click on the author name and see a library of approved published recipes by the same author.|PASS|
+|My recipes - Recipe widget|Loading the page|As a logged in user and author of recipes, in this page, the recipe widget includes edit and delete buttons.|PASS|
+|My recipes - Add recipe button|Click button "Add recipe"|As a logged in user, the user can click the button to add a recipe to the site and opens recipe create form.|PASS|
+|My recipes - Edit recipe button|Click recipe edit button|As a logged in user, the user can click the edit button on a given recipe they authored and opens recipe editor form prepopulated with details.|PASS|
+|My recipes - Delete recipe button|Click recipe delete button|As a logged in user, the user can click the delete button on a given recipe they authored and a confirmation modal pops up.|PASS|
+|My recipes - Delete modal|Click "Delete" button|As a logged in user, the user can click the delete button on the modal to confirm deletion and recipe gets deleted.|PASS|
+|My recipes - Delete modal|Click "Close" button or outside the modal|Delete confirmation modal disappears and action is taken on the database.|PASS|
+|Recipe editor - Recipe form|Submit blank form|Form notifies user fields that are required.|PASS|
+|Recipe editor - Recipe form|Submit with only required fields filled in|Recipe is saved, user is redirected to My recipes page and new recipe is visible.|PASS|
+|Recipe editor - Recipe form|Open the form by selecting a recipe to edit and add ingredient.|Recipe is updated and user is redirected to My recipes again.|PASS|
+|Recipe editor - Recipe form|Open the form by selecting a recipe to edit and remove ingredient.|Recipe is updated and user is redirected to My recipes again.|PASS|
+|Pagination|Loading any library as a logged in user|Page displays number of current page of total number of pages to view. If the library contains more than 6 recipes, page navigating buttons appear along the bottom and users can navigate through more pages to view the rest of the library.|PASS|
+|Recipe widget - Favourite button|Loading the page|If the recipe has been marked as a favourite by the current user, the button will display a solid heart icon.|PASS|
+|Recipe widget - Favourite button|Loading the page|If the recipe has NOT been marked as a favourite by the current user, the button will display an outline heart icon.|PASS|
+|Recipe widget - Rating score button|Loading the page|If the recipe has any ratings, the average score will display here. Otherwise, defaults to "-".|PASS|
+|Recipe widget - Rating score button|Click the rating button on widget|Button navigates the user to the ratings section of the recipe.|PASS|
+|Recipe detail - Header|Loading the page|Header contains same information present on the recipe widget.|PASS|
+|Recipe detail - Description|Loading the page|Full description content is visible.|PASS|
+|Recipe detail - Ingredients and Steps|Loading the page|Headings are visible and if the recipe contains content for these, it is displayed too. Ingredients in a table and Steps as paragraph(s) of text.|PASS|
+|Recipe detail - Ratings|Loading the page|Heading is visible. If current user has not rated the recipe, blank star icon buttons appear. Otherwise, the number of star icons are shown solid to match the score given.|PASS|
+|Recipe detail - Ratings|Loading the page|If current user has written a review, the string of text is visible just below the star icon buttons.|PASS|
+|Recipe detail - Ratings|Loading the page|If other users have rated the given recipe, an expandable section is available to click and display the remaining reviews.|PASS|
+|Recipe detail - Comments|Loading the page|If comments have been made and approved, they are displayed and listed with most recent at the top.|PASS|
+|Recipe detail - Comments|Loading the page|If current user has made comments on the given recipe, they are displayed, listed with most recent at the top and clearly indicated if the comment is still awaiting approval. Edit and delete buttons are available for those comments too.|PASS|
+|Recipe detail - Comments edit|Click edit comment button|Text is copied to the comment form body field, submit button changes to Update and user can edit text.|PASS|
+|Recipe detail - Comments edit|Click Update on comment edit|User is redirect to recipe detail page and comment is updated.|PASS|
+|Recipe detail - Comments delete|Click delete comment button|Delete confirmation modal appears.|PASS|
+|Recipe detail - Comments delete|Click delete button on modal|User is redirected to the recipe detail page and comment has been deleted.|PASS|
+|Recipe detail - Comments delete|Click Close button on modal or outside of modal|Modal closes and comment is not deleted.|PASS|
 |Page scaling - mobile|Viewing the page on mobile display in portrait|Font size is legible and the page does not require scrolling on timed buttons. No overlapping text or images.|PASS|
 |Page scaling - mobile|Viewing the page on mobile display in landscape|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
 |Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
@@ -373,15 +731,15 @@ The most feasible way I can think of is to either:
 |Error 500 page|Click on the Home button|Brings viewer back to main page|PASS|
 
 
-
 ### Bugs
+- __Images uploading to Cloudinary via frontend form - OUTSTANDING__<br>
+After setting up the model to include cloudinary library and field and even following an implementation guide from cloudinary, the recipe editor form would not recognise there was a file selected in the form to upload, so it always failed the form validation on submission. I removed the field from the formset so the form could still be used for MVP until I could figure out how to make it work.
 
-<!-- - __ANSI escape 8-bit colours not visible on Heroku - FIXED__<br>
-Heroku allows for colours in its app, but these are restricted to 3-bit and 4-bit, so have selected colours from that selection instead.
+- __Clicking on edit or delete comment threw errors at times - FIXED__<br>
+On testing the recipe detail page, it was found that clicking the edit comment button would sometimes log an error to the console, or clicking on the delete button would provide 'null' as opposed to a ID number for the given comment to compose the delete-comment URL on the delete modal. The issue appeared to be intermittent until I realised the errors occurred when clicking the icon used on the buttons, rather than clicking on the button space around the icon. This meant the clicked target being used was the icon, rather than the button, as since the icon does not contain the data-comment-id attribute, it returned null. After a quick search online, found a simple solution [here](https://stackoverflow.com/questions/22962386/click-event-on-button-is-sending-an-icon-as-the-target), simply changing my JavaScript file [recipe-detail.js](staticfiles/js/recipe-detail.js), to listen to the clicked target as `e.currentTarget` instead of `e.target`, so it reference the buttons it is listening for rather than components within.
 
-- __Dictionary includes words with the character "ƒ" - FIXED__<br>
-This character appeared on words that should have ended with an accented e (é), like __sauté__. For ease of playing the game this character has been replaced with a plain "e". -->
-
+- __Refreshing a page after creating a comment repeated the same comment - FIXED__<br>
+After adding a comment or review to a recipe, on refresh it either generated an error 500 or repeated the same comment. The fix was just redirecting the user to the same page so it converted the POST request to a GET request.
 
 ## Deployment
 ### Local Development
@@ -433,7 +791,13 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 - Save the file.
 
 #### Create a Database
+##### Via Code Institute's database maker
+If you are a current student of Code Institute, you should have access to their [database maker service](https://dbs.ci-dbs.net)
+- Enter your email address linked to your LMS Portal.
+- The database will be generated and an email with the details will be sent to you.
+- The email will contain a management URL that is unique to you and will offer the options to view details for linking to your project or delete the database.
 
+##### Via ElephantSQL
 - Create an account and log in with ElephantSQL.com.
 - From the dashboard click “Create New Instance”.
 - Set up your plan
@@ -453,7 +817,7 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 
 - Create an account and log in with Cloudinary.com.
 - In the dashboard copy your API Environment variable.
-- In your env.py file replace `<API ENVIRONEMENT VARIABLE>` in the CLOUDINARY_URL environment variable with the copied API Environment variable.
+- In your env.py file replace `<API ENVIRONMENT VARIABLE>` in the CLOUDINARY_URL environment variable with the copied API Environment variable.
 - Save the file.
 
 ### Deployment
@@ -467,7 +831,7 @@ os.environ['CLOUDINARY_URL'] = '<API ENVIRONEMENT VARIABLE>'
 ALLOWED_HOSTS = ["PROJECT_NAME.herokuapp.com", "YOUR_HOSTNAME"]
 ```
 
-- Make surea file named Procfile exists on the top level directory which contans the following code:
+- Make sure a file named Procfile exists on the top level directory which contans the following code:
 
 ```python
 web: gunicorn PROJECT_NAME.wsgi
@@ -493,47 +857,42 @@ web: gunicorn PROJECT_NAME.wsgi
 - Scroll down the page and choose to either Automatically Deploy each time changes are pushed to GitHub, or Manually deploy.
 - The application can be run from the Application Configuration page by clicking on the Open App button.
 
-
 ## Credits 
+
+### Content
+- Recipes - A few sourced from [BBC Good Food](https://www.bbcgoodfood.com/) and some loosely written by the developper.
 
 ### Media
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes as the preview used in this readme file.
+- [Favicon](https://favicon.io/) - to generate the favicon for the site.
+- [Cheese on toast image](https://www.happyveggiekitchen.com/air-fryer-cheese-on-toast/) - sourced a more appealing image of this classic staple dish
 
 ### Code
-
-<!-- - Reference for clearing the screen in python - [Clearing Screen in Linux Operating System](https://www.geeksforgeeks.org/clear-screen-python/)
-- Reference for multiline string to print "pages" - [Multiline Strings](https://www.w3schools.com/python/gloss_python_multi_line_strings.asp)
-- Reference for readlines() method to list words - [readlines() Method](https://www.w3schools.com/python/ref_file_readlines.asp)
-- Validating input - [Love Sandwiches - Validating our data part 1](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/c92755338ef548f28cc31a7c3d5bfb46/?child=first)
-- Reference for alphabetic chars only in a string - [String isalpha() Method](https://www.w3schools.com/python/ref_string_isalpha.asp)
-- Reference to check value exists in list - [Check If List Item Exists](https://www.w3schools.com/python/gloss_python_check_if_list_item_exists.asp)
-- Reference for while loop until valid data - [Creating our User Request Loop](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LS101+1/courseware/293ee9d8ff3542d3b877137ed81b9a5b/c92755338ef548f28cc31a7c3d5bfb46/?child=first)
-- Reference for centering text in string - [String center() Method](https://www.w3schools.com/python/ref_string_center.asp)
-- Reference to create dictionary comprehensions - [Dictionary comprehensions](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+CPP_06_20+3/courseware/f780287e5c3f4e939cd0adb8de45c12a/82a59be9f20a4f36bff58ff4a102d60a/)
-- Formatting text - [How do I print colored text to the terminal?](https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
-- ANSI colours - [ANSI escape code](https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit)
-- Reference for Datetime to use in creating a timestamp based ID - [Datetime](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+CPP_06_20+3/courseware/272f493b4d57445fbd634e7ceca3a98c/4ab3e01af44f4bf2828739c1d0591a45/) and [formatting](https://www.w3schools.com/python/python_datetime.asp#gsc.tab=0)
-- Reference for getting values from a dictionary - [values()](https://www.w3schools.com/python/ref_dictionary_values.asp)
-- Reference for returning a sum of integers in a list - [math.fsum()](https://www.w3schools.com/python/ref_math_fsum.asp)
-- Reference for setup, finding and updating spreadsheet with [gspread](https://docs.gspread.org/en/latest/user-guide.html) -->
+- Article on auto-generating slug from field - [Slugify](https://learndjango.com/tutorials/django-slug-tutorial#:~:text=populated.%20Pretty%20neat!-,Signals%2C%20Lifecycle%20Hooks%2C%20Save%2C%20and%20Forms/Serializers,-In%20the%20real)
+- Forms - using inline forms - [Django Docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#inline-formsets)
+- Forms - dynamically more entries - [YouTube](https://www.youtube.com/watch?v=s3T-w2jhDHE)
+- Forms - dynamically add forms - [Brennan T](https://www.brennantymrak.com/articles/django-dynamic-formsets-javascript)
+- Forms - populate form to update record - [stackoverflow](https://stackoverflow.com/questions/70682238/django-how-to-auto-populate-existing-data-in-django-form-while-updating)
+- Forms - making use of the formset can_delete, using **.deleted_objects** for ingredients in recipe edit view - [django docs](https://docs.djangoproject.com/en/5.0/topics/forms/formsets/#can-delete)
+- Forms - Overriding the default fields, guide for comment form - [django docs](https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#overriding-the-default-fields)
+- Forms - Including multiple forms on a single page, sense check my forms do not conflict with each other - [geeksforgeeks](https://www.geeksforgeeks.org/handle-multiple-forms-on-a-single-page-in-django/)
+- Forms - how to clear forms on editing comments or ratings, using `reset()` method - [w3schools](https://www.w3schools.com/Jsref/met_form_reset.asp)
+- Models - ON_DELETE options - [geeksforgeeks.org](https://www.geeksforgeeks.org/foreign-keys-on_delete-option-in-django-models/)
+- Models - PositiveIntegerField - [stackoverflow](https://stackoverflow.com/questions/42425933/how-do-i-set-a-default-max-and-min-value-for-an-integerfield-django)
+- Models - Referring to another instance, used for recipe Origin field - [stackoverflow](https://stackoverflow.com/questions/4910905/in-django-how-do-you-make-a-model-refer-to-itself)
+- Views - guidance on using Paginator in function based view - [stackoverflow](https://stackoverflow.com/questions/64170923/pagination-in-function-based-view-shows-all-objects)
+- Views - guide on Paginator - [django docs](https://docs.djangoproject.com/en/5.0/topics/pagination/#using-paginator-in-a-view-function)
+- Views - how to exclude an object from a queryset using `exclude()` - [stackoverflow](https://stackoverflow.com/questions/3032104/django-excluding-specific-instances-from-queryset-without-using-field-lookup)
+- Template - guidance on how to iterate over a specified number of turns, used to display the star rating buttons - [stackoverflow](https://stackoverflow.com/questions/48637178/do-django-templates-allow-for-range-in-for-loops)
+- Template language - include function, used to work with repeated widgets - [stackoverflow](https://stackoverflow.com/questions/41397427/can-multiple-templates-be-extended-by-one-template-in-django)
+- Script - managing comments, follows the Codestar blog walkthrough project - in this project it can be seen in [recipe-detail.js](static/js/recipe-detail.js)
+- Favicon - guidance on adding a favicon to django projects - [learnDjango](https://learndjango.com/tutorials/django-favicon-tutorial#:~:text=3.-,Add%20the%20Favicon,can%20help%20with%20higher%20resolution.)
+- CSS Overflow - used to make the recipe cards a consistent size and crop description if too long - [stackoverflow](https://stackoverflow.com/questions/32134117/how-to-set-limit-for-words-in-bootstrap)
+- CSS - customising the details elements used for password advice and ratings conciseness - [sitepoint](https://www.sitepoint.com/style-html-details-element/)
+- Python - how to use statistics.mean() method - [w3schools](https://www.w3schools.com/python/ref_stat_mean.asp)
+- HTML Meta - specify browser head background colour - [Medium](https://medium.com/@evkirkiles/coloring-the-webkit-browser-bars-28d75cd8cf7f)
+- URLs - Using next parameter to redirect user - [geeks for geeks](https://www.geeksforgeeks.org/django-redirect-to-previous-page-after-login/)
+- JS - AutoClose bootstrap alerts - [codehim](https://codehim.com/bootstrap/bootstrap-5-alert-auto-close/)
 
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.
-
-<!--## Other General Project Advice
-
- Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work! 
-
-- One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through [this article](https://chris.beams.io/posts/git-commit/) by Chris Beams on How to Write  a Git Commit Message 
-  - Make sure to keep the messages in the imperative mood 
-
-- When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
-  - For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept. 
-
-- Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
-  - [Writing Your Best Code](https://learn.shayhowe.com/html-css/writing-your-best-code/)
-  - [HTML & CSS Coding Best Practices](https://medium.com/@inceptiondj.info/html-css-coding-best-practice-fadb9870a00f)
-  - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
-
-Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!  -->
-

@@ -12,9 +12,13 @@
             <div class="col-12 col-md-8 col-lg-6 masthead-image">
                 <div class="favourited">
                     {% if user == faved.author %}
-                    <button class="btn btn-save"><i class="fa-solid fa-heart"></i></button>
+                    <a href="{% url 'recipe_unfave' faved.id %}?next={{ request.path }}" class="btn btn-save"><i
+                            class="fa-solid fa-heart"></i></a>
+                    <!-- <button class="btn btn-save"><i class="fa-solid fa-heart"></i></button> -->
                     {% else %}
-                    <button class="btn btn-save"><i class="fa-regular fa-heart"></i></button>
+                    <a href="{% url 'recipe_fave' recipe.id %}?next={{ request.path }}" class="btn btn-save"><i
+                            class="fa-regular fa-heart"></i></a>
+                    <!-- <button class="btn btn-save"><i class="fa-regular fa-heart"></i></button> -->
                     {% endif %}
                 </div>
                 <div class="rating">
@@ -34,6 +38,16 @@
                 <!-- Recipe author goes before the | the recipe's created date goes after -->
                 <p class="recipe-subtitle">{{ recipe.author }} | {{ recipe.created_on }}</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col card">
+            <!-- The recipe description goes here. -->
+            <h2 class="recipe-subtitle">Description</h2>
+            {{ recipe.description | linebreaks }}
         </div>
     </div>
 </div>
@@ -66,45 +80,88 @@
         <div class="col-12 card" id="ratings">
             <!-- Recipe reviews -->
             <h3 class="recipe-subtitle">Ratings</h3>
-            <div class="text-center {% if user.is_anonymous %}dark-bg {% else %}pt-0 {% endif %}p-3">
-                {% if user.is_anonymous %}
+            <!-- No user is logged in -->
+            {% if user.is_anonymous %}
+            <div class="dark-bg p-3 text-center">
                 <p><a href="{% url 'account_login' %}" class="link">Log in</a> or Sign Up to add a review</p>
                 <p><a href="{% url 'account_signup' %}" class="btn btn-lg btn--cta btn-signup">Sign Up</a></p>
-                {% else %}
+            </div>
+
+            {% else %}
+            <!-- Logged in user has reviewed this recipe -->
+            {% if user_rating %}
+            <div id="userRating" class="pb-3 text-center">
                 <p class="card-text">Your review:</p>
+
                 {% with n='*****' %}
                 {% for star in n %}
-                {% if forloop.counter <= user_rating.score %} <button class="btn btn-save"><i
-                        class="fa-solid fa-star"></i></button>
+                {% if forloop.counter <= user_rating.score %} <span><i class="fa-solid fa-star"></i></span>
                     {% else %}
-                    <button class="btn btn-save"><i class="fa-regular fa-star"></i></button>
+                    <span><i class="fa-regular fa-star"></i></span>
                     {% endif %}
                     {% endfor %}
                     {% endwith %}
+                    <p id="userRatingBody" class="card-text {% if user_rating.approved != 2%}faded{% endif %}"
+                        data-score="{{ user_rating.score }}">
+                        {{ user_rating.review }}
+                    </p>
+                    {% if user_rating.approved == 0 %}
+                    <p class="approval">This review is awaiting approval</p>
+                    {% elif user_rating.approved == 1 %}
+                    <p class="approval">
+                        This review has been <strong>REJECTED</strong>, please revise. Remember to keep it
+                        civil and respectful.
+                    </p>
                     {% endif %}
-                    <p class="card-text">{{ user_rating.review }}</p>
+
+                    <span>
+                        <button class="btn btn-edit" data-rating-id="{{ user_rating.id }}"><i
+                                class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-delete" data-rating-id="{{ user_rating.id }}"><i
+                                class="fa-solid fa-trash"></i></button>
+                    </span>
             </div>
-            {% if ratings|length != 0 %}
+            {% endif %}
+
+            <!-- Logged in user has not reviewed the recipe -->
+            <div id="ratingEditor" class="col card mb-4 text-left" {% if user_rating %}hidden{% endif %}>
+                <div class="card-body">
+                    <h4>Leave a review:</h4>
+                    <form id="rating_form" method="post" style="margin-top: 1.3em;">
+                        {{ rating_form | crispy }}
+                        {% csrf_token %}
+                        <button id="ratingSubmitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button id="ratingCancelButton" type="button" class="btn btn-cancel btn-lg"
+                            hidden>Cancel</button>
+                        <span class="ps-3">Rating as: {{ user.username }}</span>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            {% if ratings|length > 0 %}
             <details>
                 <summary>for other user's reviews</summary>
                 <table class="table table-dark table-striped">
                     {% for line in ratings %}
-                    {% if line.author != user %}
                     <tr>
                         <td class="card-text">{{ line.author }}</td>
                         <td class="card-text">
-                            {% with n='*****' %}
-                            {% for star in n %}
-                            {% if forloop.counter <= line.score %} <span><i class="fa-solid fa-star"></i></span>
-                                {% else %}
-                                <span><i class="fa-regular fa-star"></i></span>
+                            <div>
+                                {% with n='*****' %}
+                                {% for star in n %}
+                                {% if forloop.counter <= line.score %} <span><i class="fa-solid fa-star"></i></span>
+                                    {% else %}
+                                    <span><i class="fa-regular fa-star"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endwith %}
+                            </div>
+                            <div>
+                                {% if line.approved == 2 %}
+                                {{ line.review }}
                                 {% endif %}
-                                {% endfor %}
-                                {% endwith %}
-                        </td>
-                        <td class="card-text">{{ line.review }}</td>
+                            </div>
                     </tr>
-                    {% endif %}
                     {% endfor %}
                 </table>
             </details>
@@ -120,7 +177,9 @@
                     <form id="comment_form" method="post" style="margin-top: 1.3em;">
                         {{ comment_form | crispy }}
                         {% csrf_token %}
-                        <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button id="commentSubmitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button id="commentCancelButton" type="button" class="btn btn-cancel btn-lg"
+                            hidden>Cancel</button>
                         <span class="ps-3">Posting as: {{ user.username }}</span>
                     </form>
                     {% else %}
@@ -135,9 +194,9 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="p-2 comments
-                    {% if not comment.approved and comment.author == user %}
+                    {% if comment.approved != 2 and comment.author == user %}
                     faded
-                    {% elif not comment.approved %} d-none{% endif %}">
+                    {% elif comment.approved != 2 %} d-none{% endif %}">
                         <p class="font-weight-bold">
                             {{ comment.author }}
                             <span class="font-weight-normal">
@@ -159,6 +218,11 @@
                         <p class="approval">
                             This comment is awaiting approval
                         </p>
+                        {% elif comment.approved == 1 and comment.author == user %}
+                        <p class="approval">
+                            This comment has been <strong>REJECTED</strong>, please revise. Remember to keep it civil
+                            and respectful.
+                        </p>
                         {% endif %}
                     </div>
                 </div>
@@ -173,11 +237,11 @@
     <div class="modal-dialog">
         <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete <span class="object-type">comment</span>?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete your comment?</p>
+                <p>Are you sure you want to delete your <span class="object-type">comment</span>?</p>
                 <p>This action cannot be undone.</p>
             </div>
             <div class="modal-footer">

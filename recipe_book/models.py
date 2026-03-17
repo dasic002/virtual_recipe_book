@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from django.utils.translation import gettext_lazy as _
 from cloudinary.models import CloudinaryField
 import statistics
 
@@ -19,7 +18,7 @@ STATUS = (
 )
 
 
-# Create your models here.
+# Follows a similar format to the Post model in the walkthrough project
 class Recipe(models.Model):
     """
     Stores a single recipe entry related to :model:`auth.User`.
@@ -54,19 +53,40 @@ class Recipe(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """
+        sets the order fo recipes to list the most recent first
+        """
         ordering = ["-created_on"]
 
     def __str__(self):
+        """
+        set the string of a recipe record to the format of
+        "<recipe title> by <recipe author>"
+        """
         return f"{self.title} by {self.author}"
 
     def save(self, *args, **kwargs):
+        """
+        creates the slug automatically from the title string
+        followed the last example in this link
+        https://learndjango.com/tutorials/django-slug-tutorial
+     """
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
     @property
     def average_score(self):
-        list_score = self.ratings.values_list('score', flat=True)
+        """
+        set as a property we can call, this function will create an iterable
+        list of all the scores for the given recipe. Then using the statistics
+        library mean function, to calculate the average score.
+
+        Average score ignores any ratings that have been rejected.
+        """
+        list_score = self.ratings.exclude(approved=1).values_list(
+            'score', flat=True
+            )
 
         if len(list_score) > 0:
             list_score = round(statistics.mean(list_score), 1)
@@ -77,6 +97,11 @@ class Recipe(models.Model):
 
     @property
     def ingredients(self):
+        """
+        set as a property we can call, this function will collect the
+        ingredients for a given recipe and format it in a human legible list
+        before rendering to the recipe detail page.
+        """
         list_ingredients = self.ingredients_needed.all()
         for line in list_ingredients:
             line.quantity = line.quantity.normalize()
@@ -85,10 +110,17 @@ class Recipe(models.Model):
 
     @property
     def steps(self):
-        # redundant whilst method is stored as text rather than JSON
+        """
+        set as a property we can call, this function will unpack the JSON
+        values as if it were a dictionary into a list of tuples so we can
+        iterate through into the method table.
+
+        Redundant whilst method is stored as a textfield rather than JSON.
+        """
         return self.method.items()
 
 
+# Follows a similar format to the Post model in the walkthrough project
 class Comment(models.Model):
     """
     Stores a single Recipe comment entry related to
@@ -111,9 +143,16 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        """
+        sets the order fo comments to list the most recent first
+        """
         ordering = ["created_on"]
 
     def __str__(self):
+        """
+        set the string of a comment record to the format of
+        "<comment body> by <comment author>"
+        """
         return f"Comment {self.body} by {self.author}"
 
 
@@ -143,9 +182,17 @@ class Rating(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        """
+        sets the order fo ratings to list the most recent first
+        """
         ordering = ["-created_on"]
+        unique_together = [["recipe", "author"]]
 
     def __str__(self):
+        """
+        set the string of a rating record to the format of
+        "<recipe title> - rated by <rating author>"
+        """
         return f"{self.recipe.title} - rated by {self.author}"
 
 
@@ -167,9 +214,16 @@ class Favourite(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        """
+        sets the order fo favourites to list the most recent first
+        """
         ordering = ["-added_on"]
 
     def __str__(self):
+        """
+        set the string of a favourite record to the format of
+        "<recipe title> - saved by <favourite author>"
+        """
         return f"{self.recipe.title} - saved by {self.author}"
 
 
@@ -180,6 +234,9 @@ class Ingredient(models.Model):
     """
 
     class Unit(models.IntegerChoices):
+        """
+        Defines the units of measurement for ingredients.
+        """
         PIECE = 0, "pc"
         STICK = 1, "stick"
         MILLIGRAM = 2, "mg"
@@ -210,6 +267,13 @@ class Ingredient(models.Model):
     )
 
     def __str__(self):
+        """
+        Converts the unit of measurement into a human legible format by
+        calling the Unit class and then sets the string of an ingredient
+        record to the format of
+        "<ingredient quantity><ingredient unit label> <ingredient food_item>
+        used in <recipe title>"
+        """
         self.unit = self.Unit.__call__(self.unit)
-        return (f"{self.quantity}{self.unit.label} {self.food_item}" +
+        return (f"{self.quantity}{self.unit.label} {self.food_item} " +
                 f"used in {self.recipe.title}")
